@@ -6,12 +6,13 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.kotlinParcelise)
 }
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
+        moduleName = "a3"
         browser {
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
@@ -37,7 +38,6 @@ kotlin {
     jvm("desktop")
     
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -49,13 +49,9 @@ kotlin {
     
     sourceSets {
         val desktopMain by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
 
-        androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.activity.compose)
-
-            implementation(libs.appyx.navigation.android)
-        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -64,18 +60,33 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.appyx.navigation)
-
             implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.coroutines.core)
+
+            implementation(libs.bundles.voyager)
+        }
+        androidMain.dependencies {
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.androidx.activity.compose)
+
+            implementation(libs.kotlinx.coroutines.android)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
 
-            implementation(libs.appyx.navigation.destop)
+            implementation(libs.kotlinx.coroutines.desktop)
         }
 
         jsMain.dependencies {
-            implementation(libs.appyx.navigation.js)
+            implementation(libs.kotlinx.coroutines.core.js)
+        }
+
+        iosArm64Main.dependencies {
+
+        }
+
+        iosSimulatorArm64Main.dependencies {
+
         }
     }
 }

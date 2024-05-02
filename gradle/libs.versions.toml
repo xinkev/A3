@@ -14,8 +14,9 @@ compose = "1.6.7"
 compose-plugin = "1.6.2"
 junit = "4.13.2"
 kotlin = "1.9.23"
-appyx = "2.0.1"
 kotlinx-datetime = "0.6.0-RC.2"
+kotlinx-coroutines = "1.8.0"
+voyager = "1.1.0-alpha04"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -31,22 +32,25 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 
-appyx-navigation = { module = "com.bumble.appyx:appyx-navigation", version.ref = "appyx"}
-appyx-navigation-android = { module = "com.bumble.appyx:appyx-navigation-android", version.ref = "appyx"}
-appyx-navigation-destop = { module = "com.bumble.appyx:appyx-navigation-desktop", version.ref = "appyx"}
-appyx-navigation-js = { module = "com.bumble.appyx:appyx-navigation-js", version.ref = "appyx"}
-appyx-navigation-ios-sim = { module = "com.bumble.appyx:appyx-navigation-iossimulatorarm64", version.ref = "appyx"}
-appyx-navigation-ios-arm64 = { module = "com.bumble.appyx:appyx-navigation-iosarm64", version.ref = "appyx"}
-
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime"}
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-core-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-js", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-desktop = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinParcelise = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 [bundles]
-appyx-navigation-ios = [
-    "appyx-navigation-ios-arm64",
-    "appyx-navigation-ios-sim"
-]
+voyager = ["voyager-bottomSheetNavigator", "voyager-navigator", "voyager-screenModel", "voyager-tabNavigator", "voyager-transitions"]
