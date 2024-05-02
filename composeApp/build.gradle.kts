@@ -1,5 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -7,6 +7,15 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinParcelise)
+    alias(libs.plugins.sqldelight)
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.xinkev.a3")
+        }
+    }
 }
 
 kotlin {
@@ -70,23 +79,32 @@ kotlin {
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.kotlinx.coroutines.android)
+
+            implementation(libs.sqldelight.android)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
 
             implementation(libs.kotlinx.coroutines.desktop)
+
+            implementation(libs.sqldelight.jvm)
         }
 
 //        wasmJsMain.dependencies {
 //            implementation(libs.kotlinx.coroutines.core.wasm)
 //        }
 
-        iosArm64Main.dependencies {
-
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native)
         }
 
-        iosSimulatorArm64Main.dependencies {
-
+        all{
+            languageSettings {
+                @OptIn(ExperimentalKotlinGradlePluginApi::class)
+                compilerOptions{
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                }
+            }
         }
     }
 }

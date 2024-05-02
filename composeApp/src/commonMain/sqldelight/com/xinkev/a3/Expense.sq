@@ -1,0 +1,29 @@
+-- Create table
+CREATE TABLE Expenses (
+    uuid TEXT PRIMARY KEY NOT NULL,
+    timezone TEXT ,
+    detail TEXT,
+    datetime TEXT,
+    category TEXT,
+    cost REAL
+);
+
+-- Insert data
+insert:
+INSERT INTO Expenses (uuid, timezone, detail, datetime, category, cost)
+VALUES (?, ?, ?, ?, ?, ?);
+
+-- Read data
+selectAll:
+SELECT * FROM Expenses;
+
+-- Update data
+update:
+UPDATE Expenses
+SET detail = ?
+WHERE uuid = ?;
+
+-- Delete data
+delete:
+DELETE FROM Expenses
+WHERE uuid = ?;
