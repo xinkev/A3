@@ -10,22 +10,21 @@ plugins {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "a3"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
+//    wasmJs {
+//        moduleName = "a3"
+//        browser {
+//            commonWebpackConfig {
+//                outputFileName = "composeApp.js"
+//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                    static = (static ?: mutableListOf()).apply {
+//                        // Serve sources to debug inside browser
+//                        add(project.projectDir.path)
+//                    }
+//                }
+//            }
+//        }
+//        binaries.executable()
+//    }
     
     androidTarget {
         compilations.all {
@@ -51,6 +50,7 @@ kotlin {
         val desktopMain by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
+//        val wasmJsMain by getting
 
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -77,9 +77,9 @@ kotlin {
             implementation(libs.kotlinx.coroutines.desktop)
         }
 
-        jsMain.dependencies {
-            implementation(libs.kotlinx.coroutines.core.js)
-        }
+//        wasmJsMain.dependencies {
+//            implementation(libs.kotlinx.coroutines.core.wasm)
+//        }
 
         iosArm64Main.dependencies {
 
