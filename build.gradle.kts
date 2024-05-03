@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.kotlinParcelise) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.sqldelight) apply false
+    alias(libs.plugins.buildconfig) apply false
 }

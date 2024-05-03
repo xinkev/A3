@@ -1,7 +1,9 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+
+val bundleName = "com.xinkev.a3"
+val bundleVersion = "1.0.0"
+val buildNumber = 1
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,14 +12,7 @@ plugins {
     alias(libs.plugins.kotlinParcelise)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
-}
-
-sqldelight {
-    databases {
-        create("A3Database") {
-            packageName.set("com.xinkev.a3.sqldelight")
-        }
-    }
+    alias(libs.plugins.buildconfig)
 }
 
 kotlin {
@@ -129,7 +124,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.xinkev.a3"
+    namespace = bundleName
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -137,11 +132,11 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.xinkev.a3"
+        applicationId = bundleName
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = buildNumber
+        versionName = bundleVersion
     }
     packaging {
         resources {
@@ -168,12 +163,25 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.xinkev.a3"
-            packageVersion = "1.0.0"
+            packageName = bundleName
+            packageVersion = bundleVersion
         }
     }
 }
 
 compose.experimental {
     web.application {}
+}
+
+sqldelight {
+    databases {
+        create("A3Database") {
+            packageName.set("${bundleName}.sqldelight")
+        }
+    }
+}
+
+buildConfig {
+    buildConfigField("appVersion", bundleVersion)
+    buildConfigField("isDebug", true)
 }
