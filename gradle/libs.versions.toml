@@ -22,6 +22,7 @@ sqldelight = "2.0.2"
 koin-bom =  "3.5.6"
 mpsettings = "1.1.1"
 buildconfig = "5.3.5"
+kermit = "2.0.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -62,6 +63,8 @@ koin-compose = { module = "io.insert-koin:koin-compose" }
 
 mpSettings-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "mpsettings"}
 mpSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "mpsettings"}
+
+kermit = {module = "co.touchlab:kermit", version.ref = "kermit"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

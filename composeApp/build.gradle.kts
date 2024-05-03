@@ -79,6 +79,9 @@ kotlin {
                 // KV storage
                 implementation(libs.mpSettings.noarg)
                 implementation(libs.mpSettings.coroutines)
+
+                // logging
+                implementation(libs.kermit)
             }
         }
 

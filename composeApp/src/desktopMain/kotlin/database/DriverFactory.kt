@@ -4,6 +4,7 @@ import a_.composeApp.BuildConfig
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.xinkev.a3.sqldelight.A3Database
+import util.log
 import java.io.File
 
 class DesktopDriverFactory: DriverFactory {
@@ -20,7 +21,10 @@ class DesktopDriverFactory: DriverFactory {
         }
 
         val dbPath = File(parentFolder, BuildConfig.dbName)
-        println("Database path: ${dbPath.absolutePath}") // Print out the database path
+        if (debug) {
+            // Print out the database path
+            log.i { "Database path: ${dbPath.absolutePath}" }
+        }
 
         val driver: SqlDriver = JdbcSqliteDriver(url = "jdbc:sqlite:${dbPath.absolutePath}")
 
