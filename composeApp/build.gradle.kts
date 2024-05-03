@@ -79,6 +79,10 @@ kotlin {
 
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
+
+                // KV storage
+                implementation(libs.mpSettings.noarg)
+                implementation(libs.mpSettings.coroutines)
             }
         }
 
