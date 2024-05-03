@@ -1,5 +1,6 @@
 package database
 
+import a_.composeApp.BuildConfig
 import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.cash.sqldelight.db.SqlDriver
@@ -10,7 +11,7 @@ class AndroidDriverFactory(private val context: Context): DriverFactory {
     override fun create(): SqlDriver = AndroidSqliteDriver(
         A3Database.Schema,
         context,
-        "a3.db",
+        BuildConfig.dbName,
         callback = object : AndroidSqliteDriver.Callback(A3Database.Schema) {
             override fun onOpen(db: SupportSQLiteDatabase) {
                 db.execSQL("PRAGMA foreign_keys = ON;")

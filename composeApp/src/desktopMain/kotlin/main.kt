@@ -1,3 +1,4 @@
+import a_.composeApp.BuildConfig
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import database.Database
@@ -12,7 +13,7 @@ fun main() = application {
 
     Window(
         onCloseRequest = ::exitApplication,
-        title = "a3",
+        title = BuildConfig.appName,
     ) {
         startKoin {
             App(db)

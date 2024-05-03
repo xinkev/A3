@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 val bundleName = "com.xinkev.a3"
 val bundleVersion = "1.0.0"
 val buildNumber = 1
+val appName = "a3"
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -184,4 +185,6 @@ sqldelight {
 buildConfig {
     buildConfigField("appVersion", bundleVersion)
     buildConfigField("isDebug", true)
+    buildConfigField("appName", appName)
+    buildConfigField("dbName", "$appName.db")
 }
