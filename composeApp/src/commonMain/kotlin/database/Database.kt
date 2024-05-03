@@ -1,14 +1,9 @@
-package data
+package database
 
-import app.cash.sqldelight.db.SqlDriver
-import com.xinkev.a3.Database
+import com.xinkev.a3.sqldelight.A3Database
 
-interface DriverFactory {
-    fun createDriver(): SqlDriver
-}
-
-class AppDatabase(driverFactory: DriverFactory) {
-    private val db = Database(driverFactory.createDriver())
+class Database(driverFactory: DriverFactory) {
+    private val db = A3Database(driverFactory.create())
     private val queries = db.expenseQueries
 
     fun addExpense() {

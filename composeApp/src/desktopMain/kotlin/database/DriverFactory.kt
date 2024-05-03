@@ -1,13 +1,13 @@
-package data
+package database
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
-import com.xinkev.a3.Database
+import com.xinkev.a3.sqldelight.A3Database
 
-class DesktopDriverFactory: DriverFactory{
-    override fun createDriver(): SqlDriver {
+class DesktopDriverFactory: DriverFactory {
+    override fun create(): SqlDriver {
         val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
-        Database.Schema.create(driver)
+        A3Database.Schema.create(driver)
         return driver
     }
 }

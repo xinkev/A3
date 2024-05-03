@@ -1,5 +1,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -8,12 +9,13 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinParcelise)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.ksp)
 }
 
 sqldelight {
     databases {
-        create("Database") {
-            packageName.set("com.xinkev.a3")
+        create("A3Database") {
+            packageName.set("com.xinkev.a3.sqldelight")
         }
     }
 }
@@ -61,19 +63,25 @@ kotlin {
         val iosSimulatorArm64Main by getting
 //        val wasmJsMain by getting
 
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.coroutines.core)
 
-            implementation(libs.bundles.voyager)
+                implementation(libs.bundles.voyager)
+
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
+            }
         }
+
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
@@ -81,7 +89,10 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
 
             implementation(libs.sqldelight.android)
+
+            implementation(libs.koin.android)
         }
+
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
 
@@ -98,7 +109,11 @@ kotlin {
             implementation(libs.sqldelight.native)
         }
 
-        all{
+        all {
+            dependencies {
+                implementation(project.dependencies.platform(libs.koin.bom))
+            }
+
             languageSettings {
                 @OptIn(ExperimentalKotlinGradlePluginApi::class)
                 compilerOptions{

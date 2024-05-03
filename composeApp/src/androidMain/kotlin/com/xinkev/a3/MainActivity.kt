@@ -4,18 +4,24 @@ import App
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.xinkev.a3.data.AndroidDriverFactory
-import data.AppDatabase
+import database.AndroidDriverFactory
+import database.Database
+import di.startKoin
+import org.koin.android.ext.koin.androidContext
 
 class MainActivity : ComponentActivity() {
-    private val database by lazy {
-        AppDatabase(AndroidDriverFactory(context = applicationContext))
+    private val db by lazy {
+        Database(AndroidDriverFactory(this@MainActivity))
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App(database)
+            startKoin(appDeclaration = {
+                androidContext(this@MainActivity)
+            }) {
+                App(db)
+            }
         }
     }
 }

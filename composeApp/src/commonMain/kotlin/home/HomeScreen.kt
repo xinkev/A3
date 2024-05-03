@@ -14,14 +14,13 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import data.AppDatabase
-import data.DriverFactory
+import database.Database
 
-class HomeScreen(private val database: AppDatabase) : Screen {
+class HomeScreen(private val db: Database) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val vm = rememberScreenModel { HomeViewModel(db = database)}
+        val vm = rememberScreenModel { HomeViewModel(db = db)}
         val data = vm.data.collectAsState()
 
         LaunchedEffect(Unit) {

@@ -1,7 +1,11 @@
 import androidx.compose.ui.window.ComposeUIViewController
-import data.AppDatabase
-import data.IosDriverFactory
+import database.Database
+import database.IOSDriverFactory
+import di.startKoin
 
 fun MainViewController() = ComposeUIViewController {
-    App(database = AppDatabase(IosDriverFactory()))
+    val db = Database(IOSDriverFactory())
+    startKoin {
+        App(db)
+    }
 }

@@ -1,14 +1,12 @@
 package home
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
-import data.AppDatabase
+import database.Database
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val db: AppDatabase
+    private val db: Database
 ) : ScreenModel {
     private val _data = MutableStateFlow("")
     val data = _data.asStateFlow()
