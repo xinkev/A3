@@ -1,7 +1,9 @@
+
 package util
 
 import co.touchlab.kermit.Logger
 
+@Suppress("ClassName")
 object log {
     const val TAG = "A3"
 
