@@ -1,7 +1,7 @@
 package feature.theme
 
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
@@ -9,12 +9,12 @@ import androidx.compose.runtime.CompositionLocalProvider
 fun A3Theme(
     content: @Composable () -> Unit
 ) {
-    val colors = lightColors
+//    val colors = lightColors
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = lightColorScheme,
         shapes = shapes,
-        typography = a3Typography,
+//        typography = a3Typography,
         content = {
             CompositionLocalProvider(LocalTextStyle provides a3TextStyle) {
                 content()

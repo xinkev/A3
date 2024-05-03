@@ -1,8 +1,8 @@
 package database
 
-import a_.composeApp.BuildConfig
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
+import com.xinkev.a3.BuildConfig
 import com.xinkev.a3.sqldelight.A3Database
 import util.log
 import java.io.File

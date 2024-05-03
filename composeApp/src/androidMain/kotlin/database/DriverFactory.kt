@@ -1,10 +1,10 @@
 package database
 
-import a_.composeApp.BuildConfig
 import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import com.xinkev.a3.BuildConfig
 import com.xinkev.a3.sqldelight.A3Database
 
 class AndroidDriverFactory(private val context: Context): DriverFactory {

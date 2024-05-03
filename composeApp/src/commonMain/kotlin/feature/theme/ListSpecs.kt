@@ -1,6 +1,6 @@
 package feature.theme
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -8,9 +8,8 @@ import androidx.compose.ui.unit.dp
 object ListSpecs {
     val textStyle: TextStyle
         @Composable
-        get() = MaterialTheme.typography.body1
+        get() = MaterialTheme.typography.bodyLarge
     val iconSize = 24.dp
-    val dividerHeight = 1.dp
     val dividerColour = dividerColor
     val indent = 16.dp
     val height = 56.dp

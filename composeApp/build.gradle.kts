@@ -64,7 +64,9 @@ kotlin {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
+                // Currently, this is needed to be able to build for iOS
                 implementation(compose.material)
+                implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
@@ -196,6 +198,8 @@ sqldelight {
 }
 
 buildConfig {
+    packageName = bundleName
+
     buildConfigField("appVersion", bundleVersion)
     buildConfigField("isDebug", true)
     buildConfigField("appName", appName)

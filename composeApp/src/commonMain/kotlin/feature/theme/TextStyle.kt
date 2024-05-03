@@ -10,5 +10,4 @@ val a3TextStyle: TextStyle = TextStyle(
         alignment = LineHeightStyle.Alignment.Center,
         trim = LineHeightStyle.Trim.Both,
     ),
-    color = textColor
 )

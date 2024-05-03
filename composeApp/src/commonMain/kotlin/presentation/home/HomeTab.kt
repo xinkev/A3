@@ -14,13 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Money
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -76,7 +76,7 @@ object HomeTab : Tab {
             ) {
                 Spacer(modifier = Modifier.weight(1f))
                 Surface(
-                    elevation = 1.dp,
+                    shadowElevation = 1.dp,
                     contentColor = Color.White,
                     shape = RoundedCornerShape(50),
                     modifier = Modifier.height(38.dp)
@@ -104,12 +104,12 @@ object HomeTab : Tab {
                     }
                 }
             }
-            Divider()
+            HorizontalDivider()
             LazyColumn {
                 items(expenses) { expense ->
                     TransactionItem(expense)
 
-                    Divider()
+                    HorizontalDivider()
                 }
             }
         }
