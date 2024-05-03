@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
     alias(libs.plugins.buildconfig)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -70,6 +71,7 @@ kotlin {
 
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.serilization.json)
 
                 implementation(libs.bundles.voyager)
 
