@@ -1,0 +1,999 @@
+{
+  "version": "1.1",
+  "expenses": [
+    {
+      "uuid": "484A730E-F572-4182-A8EC-054C40705006",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Water",
+      "datetime": "2023-10-21 08:40:41",
+      "category": "Food",
+      "cost": "116"
+    },
+    {
+      "uuid": "2FE5442C-95AD-49C6-86D5-2C060ECD44C9",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Curtain",
+      "datetime": "2023-10-22 23:41:43",
+      "category": "Furniture",
+      "cost": "3300"
+    },
+    {
+      "uuid": "2F7AA48D-2A88-4866-8277-F6B29A821D23",
+      "timezone": "Asia\/Tokyo",
+      "detail": "CanDo",
+      "datetime": "2023-10-22 23:59:52",
+      "category": "General",
+      "cost": "775"
+    },
+    {
+      "uuid": "5E700F5B-FBD7-4E80-B74E-8E318710F072",
+      "timezone": "Asia\/Tokyo",
+      "detail": "CanDo",
+      "datetime": "2023-10-22 00:01:11",
+      "category": "General",
+      "cost": "1210"
+    },
+    {
+      "uuid": "B75EBD34-8AF4-415C-BC50-6FBAF4612E78",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Futon+frying pan+cover",
+      "datetime": "2023-10-21 17:22:47",
+      "category": "General",
+      "cost": "15725"
+    },
+    {
+      "uuid": "E0A310BC-175E-4E17-B1FA-5F0BAF838B6D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Vending machine",
+      "datetime": "2023-10-21 00:07:55",
+      "category": "Food",
+      "cost": "140"
+    },
+    {
+      "uuid": "3F04E123-1AC3-42E5-80BE-13C37BFC7101",
+      "timezone": "Asia\/Tokyo",
+      "detail": "CanDo",
+      "datetime": "2023-10-21 15:18:19",
+      "category": "General",
+      "cost": "1760"
+    },
+    {
+      "uuid": "A030BE8C-F3DE-4BBB-AC01-BEDF2F399227",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Fridge+washing machine",
+      "datetime": "2023-10-23 21:43:15",
+      "category": "Furniture",
+      "cost": "42130"
+    },
+    {
+      "uuid": "25399466-780D-4410-9E73-546EA046CA74",
+      "timezone": "Asia\/Tokyo",
+      "detail": "",
+      "datetime": "2023-10-22 17:03:00",
+      "category": "General",
+      "cost": "1510"
+    },
+    {
+      "uuid": "08C08130-1E90-4E78-BCF5-F5FC3BCDF4E3",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Soap+shampoo+socks+laundry detergent+salt",
+      "datetime": "2023-10-23 21:46:30",
+      "category": "General",
+      "cost": "2804"
+    },
+    {
+      "uuid": "1C368C3F-8DDD-4443-886E-3DD3FB3E152F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Hanko",
+      "datetime": "2023-10-24 21:21:25",
+      "category": "General",
+      "cost": "800"
+    },
+    {
+      "uuid": "3AEF6118-6A4E-448C-94FC-69F2FCCC7C69",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Bank account creation ",
+      "datetime": "2023-10-24 21:21:35",
+      "category": "General",
+      "cost": "1300"
+    },
+    {
+      "uuid": "5E3BF0FF-7BE5-4319-B807-372A383B82E5",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Bread and milk tea",
+      "datetime": "2023-10-24 21:21:49",
+      "category": "Food",
+      "cost": "330"
+    },
+    {
+      "uuid": "F03ABC3B-E688-43CE-AC38-2D2CD2CD614D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Oil+soysauce+cha+garbage bag",
+      "datetime": "2023-10-25 20:10:36",
+      "category": "Groceries ",
+      "cost": "1048"
+    },
+    {
+      "uuid": "51C12653-1C87-4BD0-93DD-0F1CB33CA4FD",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Corn dog+ croquette",
+      "datetime": "2023-10-25 13:11:43",
+      "category": "Food",
+      "cost": "238"
+    },
+    {
+      "uuid": "CCE101C3-0178-44CB-9B87-1C88CFCEB26A",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Egg+chicken+bread+vegs",
+      "datetime": "2023-10-26 20:17:01",
+      "category": "Groceries ",
+      "cost": "910"
+    },
+    {
+      "uuid": "D66C627F-3A62-4D6D-AD8D-0B0F27E3525D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "CanDo",
+      "datetime": "2023-10-26 23:19:00",
+      "category": "Groceries ",
+      "cost": "330"
+    },
+    {
+      "uuid": "B74E3BB1-19DE-4051-A56B-3D61C1C238E1",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lemon sour",
+      "datetime": "2023-10-26 23:20:00",
+      "category": "Food",
+      "cost": "138"
+    },
+    {
+      "uuid": "6D347A30-F3A3-4871-A690-7E4D94F507AB",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2023-10-23 23:20:30",
+      "category": "General",
+      "cost": "387"
+    },
+    {
+      "uuid": "2C7196CC-7515-4384-9E8F-F6A9154B70C1",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Knife+cutting board+sandals＋返",
+      "datetime": "2023-10-28 12:18:09",
+      "category": "General",
+      "cost": "4054"
+    },
+    {
+      "uuid": "EAFE1A83-57BA-4776-96AE-5D38D7A64720",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Natto+jam+onion+coffee+saltpepper+choco cream+milk cream+garlic+meat+bread+bentou",
+      "datetime": "2023-10-28 15:24:40",
+      "category": "Food",
+      "cost": "2442"
+    },
+    {
+      "uuid": "AD356979-EB51-43EB-97C0-F0E751F117AA",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Water+cola",
+      "datetime": "2023-10-30 23:10:50",
+      "category": "Food",
+      "cost": "280"
+    },
+    {
+      "uuid": "57D90FFC-3E24-4853-813A-BE2AB51EEB7A",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-10-30 23:12:33",
+      "category": "Groceries ",
+      "cost": "1634"
+    },
+    {
+      "uuid": "AAABF39B-35B3-40F4-9886-5331775B6D80",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Pan and cover",
+      "datetime": "2023-10-26 23:20:45",
+      "category": "General",
+      "cost": "2560"
+    },
+    {
+      "uuid": "807E96E3-E6D6-4806-91E4-E15F719CF036",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cando",
+      "datetime": "2023-10-30 23:21:19",
+      "category": "General",
+      "cost": "330"
+    },
+    {
+      "uuid": "7A2C3176-6CCD-4586-B0CA-A4B3DB01DE51",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Steel pipe",
+      "datetime": "2023-10-30 23:21:35",
+      "category": "General",
+      "cost": "550"
+    },
+    {
+      "uuid": "66197B08-417C-4098-91EF-65453B85E506",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2023-11-03 14:21:50",
+      "category": "Groceries ",
+      "cost": "1544"
+    },
+    {
+      "uuid": "8317D905-6840-49F2-B780-DE8D7E32FD0B",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon express ",
+      "datetime": "2023-11-03 14:22:35",
+      "category": "Food",
+      "cost": "697"
+    },
+    {
+      "uuid": "1A72EEE8-0778-4E06-9FED-9CAD8B71A5D2",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Bike insurance ",
+      "datetime": "2023-11-04 21:48:54",
+      "category": "Payment",
+      "cost": "3220"
+    },
+    {
+      "uuid": "FA1AA133-E51C-4AEE-BE23-4AE2A14F3B1E",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-04 21:49:22",
+      "category": "Groceries ",
+      "cost": "3441"
+    },
+    {
+      "uuid": "0044FF3B-22A0-412A-89E5-B4791A7B2096",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cando",
+      "datetime": "2023-11-04 21:49:50",
+      "category": "General",
+      "cost": "330"
+    },
+    {
+      "uuid": "C76693F6-514E-418F-8FE6-3058681AF477",
+      "timezone": "Asia\/Tokyo",
+      "detail": "GU",
+      "datetime": "2023-11-04 21:50:44",
+      "category": "Clothes",
+      "cost": "2490"
+    },
+    {
+      "uuid": "A766A354-19A7-426B-A77D-C662CAF501F5",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Rice",
+      "datetime": "2023-11-09 23:22:40",
+      "category": "Food",
+      "cost": "1706"
+    },
+    {
+      "uuid": "AD18B85B-27A7-47AD-AF42-A052F908E0DA",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Umbrella + lunch",
+      "datetime": "2023-11-06 14:23:10",
+      "category": "General",
+      "cost": "2015"
+    },
+    {
+      "uuid": "6DC5558F-7321-4EFC-BDDB-5FC992AEB51C",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Snack",
+      "datetime": "2023-11-09 23:24:15",
+      "category": "Food",
+      "cost": "108"
+    },
+    {
+      "uuid": "3571C18C-4611-4DBC-989E-BE9BEDB81D70",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-09 23:25:24",
+      "category": "Groceries ",
+      "cost": "1176"
+    },
+    {
+      "uuid": "3110576F-561F-4818-8ED7-B57B048DA1AD",
+      "timezone": "Asia\/Tokyo",
+      "detail": "",
+      "datetime": "2023-11-09 23:25:59",
+      "category": "Groceries ",
+      "cost": "338"
+    },
+    {
+      "uuid": "840B46DE-67BF-4E2F-BCD4-4C1FAC54E563",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Used",
+      "datetime": "2023-11-09 23:26:21",
+      "category": "Clothes",
+      "cost": "1870"
+    },
+    {
+      "uuid": "4B21533C-EF33-42A3-A8FD-DAE5774B55DD",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2023-11-11 23:38:00",
+      "category": "General",
+      "cost": "2528"
+    },
+    {
+      "uuid": "F3AFBCA7-685B-4169-84E6-3874D7320638",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Electric blanket",
+      "datetime": "2023-11-12 22:27:45",
+      "category": "General",
+      "cost": "4150"
+    },
+    {
+      "uuid": "B4A120F0-173F-45D6-9B16-71A2000D3425",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Microwave",
+      "datetime": "2023-11-12 22:30:02",
+      "category": "General",
+      "cost": "7980"
+    },
+    {
+      "uuid": "A7A13E99-348C-4341-9E52-D6CBE94C5938",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cando",
+      "datetime": "2023-11-15 16:57:06",
+      "category": "General",
+      "cost": "1430"
+    },
+    {
+      "uuid": "915510BC-B4DA-4119-B4EA-3E4EDE20F39E",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-15 21:31:27",
+      "category": "General",
+      "cost": "3448"
+    },
+    {
+      "uuid": "9958F9DA-94D9-4280-B64E-0E9EF2914DC0",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Electricity ",
+      "datetime": "2023-11-18 22:18:21",
+      "category": "Bill ",
+      "cost": "3991"
+    },
+    {
+      "uuid": "D3620C21-7882-4275-8D25-5F7427BA38F7",
+      "timezone": "Asia\/Tokyo",
+      "detail": "GU",
+      "datetime": "2023-11-17 09:13:06",
+      "category": "Clothes",
+      "cost": "4980"
+    },
+    {
+      "uuid": "BE749D67-5EB0-4C80-B5E0-BF1EA9F2D3BD",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Bug spray",
+      "datetime": "2023-11-06 09:19:43",
+      "category": "General",
+      "cost": "279"
+    },
+    {
+      "uuid": "1A964E1F-8988-4BAD-A965-5837388A421F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lapin",
+      "datetime": "2023-11-20 20:27:07",
+      "category": "Food",
+      "cost": "1201"
+    },
+    {
+      "uuid": "33DDF3C4-E7DC-4375-BCFA-5BF2633E6C76",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Moisturizer ",
+      "datetime": "2023-11-22 20:27:38",
+      "category": "General",
+      "cost": "767"
+    },
+    {
+      "uuid": "63DC3031-D422-4FC2-9914-6E5205B4EF58",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cando",
+      "datetime": "2023-11-22 20:28:21",
+      "category": "General",
+      "cost": "330"
+    },
+    {
+      "uuid": "A438E371-C1E9-49B0-9361-AFDFCD7A4321",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2023-11-22 20:28:45",
+      "category": "Food",
+      "cost": "399"
+    },
+    {
+      "uuid": "C08DBF64-F80D-4C7D-917D-6D80746A6AA4",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-22 20:29:00",
+      "category": "Groceries ",
+      "cost": "3097"
+    },
+    {
+      "uuid": "4907B0A3-8A16-41CC-9FD8-E50BA535E4AF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lemon sour",
+      "datetime": "2023-11-22 20:29:39",
+      "category": "Food",
+      "cost": "138"
+    },
+    {
+      "uuid": "6C07F2B5-F2EB-475D-A4B0-F8470E4A393A",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Croquettes ",
+      "datetime": "2023-11-25 17:23:10",
+      "category": "Food",
+      "cost": "501"
+    },
+    {
+      "uuid": "208000ED-7AF7-432A-96E7-369EBBC1C1BF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-22 17:23:21",
+      "category": "Groceries ",
+      "cost": "3097"
+    },
+    {
+      "uuid": "8B19ED04-B45E-48A1-BD61-BAF3B5AB62DE",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2023-11-23 17:24:43",
+      "category": "General",
+      "cost": "1210"
+    },
+    {
+      "uuid": "207B82D2-4B35-42D4-A771-50CBC2D13A16",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Points",
+      "datetime": "2023-11-24 17:25:02",
+      "category": "Food",
+      "cost": "758"
+    },
+    {
+      "uuid": "7C79C4C9-A119-46E6-B878-8EF144243778",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-27 19:32:00",
+      "category": "Groceries ",
+      "cost": "2596"
+    },
+    {
+      "uuid": "AA7FF05A-E3E4-46F0-B179-49C59737964F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "GU",
+      "datetime": "2023-11-24 19:34:06",
+      "category": "Clothes",
+      "cost": "9040"
+    },
+    {
+      "uuid": "554E74C6-6A1E-43ED-9F8D-2AAF53E0BC30",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Flask",
+      "datetime": "2023-11-25 19:34:57",
+      "category": "General",
+      "cost": "2163"
+    },
+    {
+      "uuid": "C8C9A1B2-3EC6-4A77-8BF9-5DB36BF05F4F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cashew nuts ",
+      "datetime": "2023-11-26 19:38:07",
+      "category": "Food",
+      "cost": "1584"
+    },
+    {
+      "uuid": "B4430CD0-862A-4EE3-8D1E-3531BE0D4EE5",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Undersink rack",
+      "datetime": "2023-11-26 19:39:41",
+      "category": "Furniture",
+      "cost": "1790"
+    },
+    {
+      "uuid": "DC8B04EE-BF4C-41C4-B602-55F0F812DD2E",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Almonds",
+      "datetime": "2023-11-26 19:40:30",
+      "category": "Food",
+      "cost": "1395"
+    },
+    {
+      "uuid": "872C9F04-A9FD-49AE-AEF8-AFEE95CCD2E4",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Rice cooker",
+      "datetime": "2023-10-28 19:42:22",
+      "category": "Furniture",
+      "cost": "8033"
+    },
+    {
+      "uuid": "776A8ACF-9C89-4F27-BFDF-B74243280CCF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2023-12-01 09:09:00",
+      "category": "General",
+      "cost": "990"
+    },
+    {
+      "uuid": "9D1F8483-118E-47C5-9B1F-D63011A1E6AF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Milk tea(used points)",
+      "datetime": "2023-12-02 09:10:00",
+      "category": "Food",
+      "cost": "214"
+    },
+    {
+      "uuid": "9F91F2A7-E769-4B85-A94B-9DB07D075538",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lemon sour (points)",
+      "datetime": "2023-12-01 09:11:00",
+      "category": "General",
+      "cost": "276"
+    },
+    {
+      "uuid": "2106FBFD-FF28-4D73-856A-C3586848BC3A",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-11-29 19:46:23",
+      "category": "General",
+      "cost": "1530"
+    },
+    {
+      "uuid": "23BA6863-E101-41EA-87B4-496329A59130",
+      "timezone": "Asia\/Tokyo",
+      "detail": "ダイレックス",
+      "datetime": "2023-11-29 19:46:57",
+      "category": "General",
+      "cost": "737"
+    },
+    {
+      "uuid": "9C92E56A-45D1-4ABE-844E-3A05716D9355",
+      "timezone": "Asia\/Tokyo",
+      "detail": "lunch",
+      "datetime": "2023-12-06 10:48:15",
+      "category": "Food",
+      "cost": "194"
+    },
+    {
+      "uuid": "90B10689-ABBC-4C11-87F7-5F7208A13A94",
+      "timezone": "Asia\/Tokyo",
+      "detail": "CanDo",
+      "datetime": "2023-12-16 14:08:58",
+      "category": "Furniture",
+      "cost": "990"
+    },
+    {
+      "uuid": "4A88815B-CA5A-46B7-A615-8EA5ABAB9F8C",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2023-11-15 14:09:48",
+      "category": "Food",
+      "cost": "549"
+    },
+    {
+      "uuid": "B50243C7-548C-48DE-BBA8-539AE8515BC8",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-12-13 14:10:34",
+      "category": "Groceries ",
+      "cost": "1364"
+    },
+    {
+      "uuid": "8EF6BF73-295D-48E8-BA76-B68CAF124204",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-12-16 14:11:00",
+      "category": "Groceries ",
+      "cost": "1409"
+    },
+    {
+      "uuid": "B791C275-F127-4ACE-A803-5998F555CDFC",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2023-12-13 14:12:07",
+      "category": "Food",
+      "cost": "430"
+    },
+    {
+      "uuid": "74A373B5-B119-4967-BB61-BF9B2308B89D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon express",
+      "datetime": "2023-12-18 20:50:40",
+      "category": "Groceries ",
+      "cost": "2225"
+    },
+    {
+      "uuid": "A0F91313-1F1F-4D29-B050-14F4FDD7F31F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Electric ",
+      "datetime": "2023-12-18 20:51:33",
+      "category": "Bill ",
+      "cost": "7895"
+    },
+    {
+      "uuid": "EA7DB42E-A205-4429-AAE8-479F10BD4E6C",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Uniqlo",
+      "datetime": "2023-12-21 17:41:16",
+      "category": "Clothes",
+      "cost": "5460"
+    },
+    {
+      "uuid": "BCB57401-75FD-4EA3-B1E0-8385ACB61E8D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2023-11-29 20:42:42",
+      "category": "General",
+      "cost": "266"
+    },
+    {
+      "uuid": "6859FFE5-773E-4BC8-9918-52E5D80CF5AF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-12-20 20:43:10",
+      "category": "Groceries ",
+      "cost": "1185"
+    },
+    {
+      "uuid": "03765EDF-B2F1-4642-9CFB-7BEAE26F4849",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2023-12-20 20:43:36",
+      "category": "Food",
+      "cost": "267"
+    },
+    {
+      "uuid": "5C007682-89CF-4298-8B63-CE02E89BC3F9",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Amazon ",
+      "datetime": "2023-12-22 20:46:07",
+      "category": "Groceries ",
+      "cost": "2913"
+    },
+    {
+      "uuid": "4EABF06C-5FAF-46C1-9E76-8225ED2B18B1",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Mikan",
+      "datetime": "2023-12-05 20:48:37",
+      "category": "Food",
+      "cost": "1988"
+    },
+    {
+      "uuid": "FF7795E5-F09F-4FC6-A572-9C26B4916D64",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2023-12-23 22:41:37",
+      "category": "General",
+      "cost": "3410"
+    },
+    {
+      "uuid": "320FCDB4-C9E8-4E4D-84C0-4122CD068C44",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Croquettes ",
+      "datetime": "2023-12-23 15:37:00",
+      "category": "Food",
+      "cost": "298"
+    },
+    {
+      "uuid": "B426496F-34DC-4F25-9B9B-69DCC5A37DBC",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2023-12-23 15:38:00",
+      "category": "Groceries ",
+      "cost": "3410"
+    },
+    {
+      "uuid": "A1FAEDA8-D3A1-4DB5-BB2B-69417B39C74C",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Rice",
+      "datetime": "2023-12-24 15:39:02",
+      "category": "Food",
+      "cost": "1706"
+    },
+    {
+      "uuid": "6A76724E-2E7B-4EA5-B3B0-3B70F62A054F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lip balm",
+      "datetime": "2023-12-29 09:57:33",
+      "category": "General",
+      "cost": "328"
+    },
+    {
+      "uuid": "0E75F7A8-CB33-4E1B-9F70-B197378724FF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-12-26 09:58:33",
+      "category": "Groceries ",
+      "cost": "3508"
+    },
+    {
+      "uuid": "1EB210CA-745A-4E03-95C0-59CEB05FB627",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-12-29 09:59:05",
+      "category": "Groceries ",
+      "cost": "2057"
+    },
+    {
+      "uuid": "8A2B02F8-89BF-4145-9DB5-A54355FBE84D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2023-12-31 09:59:00",
+      "category": "Food",
+      "cost": "524"
+    },
+    {
+      "uuid": "68231EF0-AB9F-4189-BBDF-28E656C7365B",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Dinner indian ",
+      "datetime": "2023-12-30 10:00:58",
+      "category": "General",
+      "cost": "1680"
+    },
+    {
+      "uuid": "98FC0491-2405-421B-9063-771CFF439D75",
+      "timezone": "Asia\/Tokyo",
+      "detail": "New year…",
+      "datetime": "2023-12-31 21:08:00",
+      "category": "Food",
+      "cost": "2049"
+    },
+    {
+      "uuid": "45FA3040-93B1-4FA7-AE45-08BCFD1EE619",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Amazon",
+      "datetime": "2023-12-30 21:09:03",
+      "category": "Groceries ",
+      "cost": "2329"
+    },
+    {
+      "uuid": "B8FEA88D-2617-4311-8197-6AAE1C6F3F5D",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-02 19:24:57",
+      "category": "Groceries ",
+      "cost": "1591"
+    },
+    {
+      "uuid": "83CCE3A9-616E-4803-8DD6-8A022FACDDFF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "amazon(flour+baking powder)",
+      "datetime": "2024-01-06 12:37:25",
+      "category": "Groceries ",
+      "cost": "1584"
+    },
+    {
+      "uuid": "52C19C29-527E-455F-B6F0-48CF4083A6E6",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Daiso",
+      "datetime": "2024-01-07 18:19:45",
+      "category": "General",
+      "cost": "2310"
+    },
+    {
+      "uuid": "FDEBCBC8-FB29-4E7E-B122-20212D29A70F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-07 18:20:01",
+      "category": "Food",
+      "cost": "906"
+    },
+    {
+      "uuid": "20345671-C05D-4C97-8FD1-DE4B16D6419C",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lawson",
+      "datetime": "2023-12-27 18:20:00",
+      "category": "Food",
+      "cost": "286"
+    },
+    {
+      "uuid": "75CA69E5-D7C5-4249-807A-9B115A478CFF",
+      "timezone": "Asia\/Tokyo",
+      "detail": "エブリイ",
+      "datetime": "2024-01-05 18:21:51",
+      "category": "Groceries ",
+      "cost": "4569"
+    },
+    {
+      "uuid": "FBCE9CE3-83C9-47F3-B83B-23EB5324A015",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2024-01-01 18:22:46",
+      "category": "General",
+      "cost": "287"
+    },
+    {
+      "uuid": "FA52D755-78B0-499F-88F6-8FFD3D8225DC",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Lunch",
+      "datetime": "2024-01-10 20:34:57",
+      "category": "Food",
+      "cost": "1178"
+    },
+    {
+      "uuid": "F3E8E521-45BA-486C-88A1-3019184B6644",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Shampoo coz dandruff ",
+      "datetime": "2024-01-10 20:35:03",
+      "category": "Medical",
+      "cost": "469"
+    },
+    {
+      "uuid": "2E0F7CF1-1F3B-4267-A4AD-B438B18CF772",
+      "timezone": "Asia\/Tokyo",
+      "detail": "ダイレックス",
+      "datetime": "2024-01-10 20:35:35",
+      "category": "Groceries ",
+      "cost": "1431"
+    },
+    {
+      "uuid": "9F95ED3F-D809-4412-AE06-E8B4D95CF892",
+      "timezone": "Asia\/Tokyo",
+      "detail": "GU",
+      "datetime": "2024-01-05 20:37:50",
+      "category": "Clothes",
+      "cost": "5970"
+    },
+    {
+      "uuid": "364410CE-8981-4A2C-A817-A345AE9FD600",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-14 19:38:00",
+      "category": "Groceries ",
+      "cost": "3555"
+    },
+    {
+      "uuid": "EA3F7740-9EBD-4F90-925A-A590B7753F07",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Danish",
+      "datetime": "2024-01-10 19:38:29",
+      "category": "Food",
+      "cost": "149"
+    },
+    {
+      "uuid": "16550EE4-8BA8-4097-B0AA-B19E5E170433",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-17 09:16:00",
+      "category": "Food",
+      "cost": "689"
+    },
+    {
+      "uuid": "E71BA1EA-C1F8-49E3-BAEF-392F898A185F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cola",
+      "datetime": "2024-01-17 09:17:00",
+      "category": "General",
+      "cost": "172"
+    },
+    {
+      "uuid": "3AC9C129-1EAC-40FA-9E1D-646EFB7CFF3F",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-17 09:17:42",
+      "category": "Groceries ",
+      "cost": "384"
+    },
+    {
+      "uuid": "D9FC95A3-7E34-4AA8-8068-416448AE7EBE",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-17 09:18:00",
+      "category": "Groceries ",
+      "cost": "170"
+    },
+    {
+      "uuid": "B983F52C-9F97-4C41-90E2-0FCC15A1EB20",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Cando",
+      "datetime": "2024-01-19 09:18:27",
+      "category": "General",
+      "cost": "438"
+    },
+    {
+      "uuid": "C8330C31-01FF-425D-8FE1-2AD4E83559DA",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-22 19:10:23",
+      "category": "Groceries ",
+      "cost": "2228"
+    },
+    {
+      "uuid": "D8D185DB-472A-4C77-B2DC-37D3041EA420",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Aeon",
+      "datetime": "2024-01-19 19:10:52",
+      "category": "Groceries ",
+      "cost": "902"
+    },
+    {
+      "uuid": "A6FC5BB2-AE27-4A17-B399-4A67CC8A98C6",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Indian food",
+      "datetime": "2024-01-20 19:11:07",
+      "category": "Food",
+      "cost": "2195"
+    },
+    {
+      "uuid": "5D8127FC-A807-4AD5-B30B-0A4900AC19C0",
+      "timezone": "Asia\/Tokyo",
+      "detail": "Electric",
+      "datetime": "2024-01-17 16:12:11",
+      "category": "Bill ",
+      "cost": "9582"
+    }
+  ],
+  "categories": [
+    {
+      "name": "General",
+      "icon": "tag"
+    },
+    {
+      "name": "Food",
+      "icon": "food"
+    },
+    {
+      "name": "Snack",
+      "icon": "snack"
+    },
+    {
+      "name": "Transport",
+      "icon": "bus"
+    },
+    {
+      "name": "Groceries ",
+      "icon": "shopping"
+    },
+    {
+      "name": "Clothes",
+      "icon": "tshirt"
+    },
+    {
+      "name": "Digital",
+      "icon": "iphone"
+    },
+    {
+      "name": "Book",
+      "icon": "book"
+    },
+    {
+      "name": "Gift",
+      "icon": "gift"
+    },
+    {
+      "name": "Payment",
+      "icon": "credit-card"
+    },
+    {
+      "name": "Rental",
+      "icon": "house"
+    },
+    {
+      "name": "Bill ",
+      "icon": "house"
+    },
+    {
+      "name": "Travel",
+      "icon": "map"
+    },
+    {
+      "name": "Medical",
+      "icon": "medical"
+    },
+    {
+      "name": "Education",
+      "icon": "mortar-board"
+    },
+    {
+      "name": "Coffee",
+      "icon": "coffee"
+    },
+    {
+      "name": "Furniture",
+      "icon": "office-chair"
+    },
+    {
+      "name": "Baby",
+      "icon": "stroller"
+    }
+  ]
+}

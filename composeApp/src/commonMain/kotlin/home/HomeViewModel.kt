@@ -10,16 +10,17 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import model.Backup
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import util.log
 
 class HomeViewModel(
     private val db: Database,
     private val kvStorage: KVStorage,
 ) : ScreenModel {
-    private val _data = MutableStateFlow("")
+    private val _data = MutableStateFlow(emptyList<Backup.Expense>())
     val data = _data.asStateFlow()
-    
+
     @OptIn(ExperimentalResourceApi::class)
     fun onStart() {
         screenModelScope.launch(Dispatchers.IO) {
@@ -27,7 +28,7 @@ class HomeViewModel(
             val json = Res.readBytes("files/sample.json")
             // convert the byte array to json
             val jsonString = json.decodeToString()
-            _data.value = db.getExpenses()
+            _data.value = Json { ignoreUnknownKeys = true }.decodeFromString<Backup>(jsonString).expenses
         }
     }
 
@@ -37,6 +38,6 @@ class HomeViewModel(
             db.addExpense()
             kvStorage.seeded = true
         }
-        _data.value = db.getExpenses()
+//        _data.value = db.getExpenses()
     }
 }
