@@ -22,6 +22,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Money
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +33,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
@@ -58,13 +59,9 @@ object HomeTab : Tab {
     @Composable
     override fun Content() {
         val vm = koinScreenModel<HomeViewModel>()
-//        val data = vm.data.collectAsState()
+        val data by vm.expenses.collectAsState()
 
-        LifecycleEffect(
-//            onStarted = vm::onStart
-        )
-
-//        Body(data.value)
+        Body(data)
     }
 
     @Composable
@@ -111,6 +108,7 @@ object HomeTab : Tab {
             LazyColumn {
                 items(expenses) { expense ->
                     TransactionItem(expense)
+
                     Divider()
                 }
             }
@@ -137,6 +135,7 @@ object HomeTab : Tab {
         }
     }
 }
+
 private fun previewExpense(detail: String, cost: Double): Expense {
     return Expense(
         uuid = "",
