@@ -7,7 +7,6 @@ import feature.backup.A3BackupManager
 import feature.backup.ExpenseTaiyakiBackupAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -29,7 +28,6 @@ class SettingsViewModel(
         screenModelScope.launch(Dispatchers.IO) {
             _loading.update { true }
             val json = Res.readBytes("files/sample.json")
-            delay(3000)
             backupManager.restore(json.decodeToString())
             _loading.update { false }
         }
