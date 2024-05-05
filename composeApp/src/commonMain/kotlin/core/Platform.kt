@@ -1,3 +1,5 @@
+package core
+
 interface Platform {
     val name: String
 }

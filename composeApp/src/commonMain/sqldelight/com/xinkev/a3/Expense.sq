@@ -1,16 +1,16 @@
 -- Create table
 CREATE TABLE Expenses (
     uuid TEXT PRIMARY KEY NOT NULL,
-    timezone TEXT ,
+    timezone TEXT NOT NULL ,
     detail TEXT,
-    datetime TEXT,
-    category TEXT,
-    cost REAL
+    datetime TEXT NOT NULL,
+    category TEXT NOT NULL,
+    cost REAL NOT NULL
 );
 
 -- Insert data
 insert:
-INSERT INTO Expenses (uuid, timezone, detail, datetime, category, cost)
+INSERT OR IGNORE INTO Expenses (uuid, timezone, detail, datetime, category, cost)
 VALUES (?, ?, ?, ?, ?, ?);
 
 -- Read data

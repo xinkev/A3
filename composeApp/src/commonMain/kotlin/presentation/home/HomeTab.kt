@@ -1,4 +1,4 @@
-package feature.home
+package presentation.home
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
@@ -22,7 +22,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Money
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +35,10 @@ import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import model.Backup.Expense
+import feature.theme.A3Theme
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import model.Expense
 
 object HomeTab : Tab {
     override val options: TabOptions
@@ -56,13 +58,13 @@ object HomeTab : Tab {
     @Composable
     override fun Content() {
         val vm = koinScreenModel<HomeViewModel>()
-        val data = vm.data.collectAsState()
+//        val data = vm.data.collectAsState()
 
         LifecycleEffect(
-            onStarted = vm::onStart
+//            onStarted = vm::onStart
         )
 
-        Body(data.value)
+//        Body(data.value)
     }
 
     @Composable
@@ -81,13 +83,14 @@ object HomeTab : Tab {
                     contentColor = Color.White,
                     shape = RoundedCornerShape(50),
                     modifier = Modifier.height(38.dp)
-                        .clickable(role = Role.Button){
+                        .clickable(role = Role.Button) {
 
                         }
                 ) {
-                    Row(modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .weight(1f),
+                    Row(
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .weight(1f),
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -121,7 +124,7 @@ object HomeTab : Tab {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = expense.detail,
+                text = expense.detail ?: "",
                 modifier = Modifier.weight(0.7f),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -134,15 +137,29 @@ object HomeTab : Tab {
         }
     }
 }
+private fun previewExpense(detail: String, cost: Double): Expense {
+    return Expense(
+        uuid = "",
+        category = "",
+        cost = cost,
+        detail = detail,
+        datetime = LocalDateTime(2024, 5, 5, 16, 27, 30),
+        timezone = TimeZone.of("Asia/Tokyo")
+    )
+}
+
 @Preview
 @Composable
 private fun PreviewHomeTab() {
-    HomeTab.Body(
-        expenses = listOf(
-            Expense(detail = "Gift", cost = 62.33),
-            Expense(detail = "GitHub Payment", cost = 7.00),
-            Expense(detail = "Inboard", cost = 19.99),
-            Expense(detail = "Chipotle", cost = 9.50)
+    A3Theme {
+        HomeTab.Body(
+            expenses = listOf(
+                previewExpense(detail = "Gift", cost = 62.33),
+                previewExpense(detail = "GitHub Payment", cost = 7.00),
+                previewExpense(detail = "Inboard", cost = 19.99),
+                previewExpense(detail = "Chipotle", cost = 9.50)
+            )
         )
-    )
+    }
 }
+

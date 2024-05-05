@@ -1,6 +1,7 @@
 import a_.composeApp.BuildConfig
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import core.App
 import di.desktopModules
 import di.startKoin
 

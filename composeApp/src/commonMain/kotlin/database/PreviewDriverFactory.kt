@@ -6,16 +6,17 @@ import app.cash.sqldelight.db.QueryResult
 import app.cash.sqldelight.db.SqlCursor
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.db.SqlPreparedStatement
+import com.xinkev.a3.sqldelight.A3Database
 
-internal val previewDriverFactory = Database(object : DriverFactory {
-    override fun create(): SqlDriver {
-        return object : SqlDriver {
+internal val previewDatabaseFactory = object : DatabaseFactory {
+    override fun create(): A3Database {
+        return A3Database(object : SqlDriver {
             override fun close() {
+                TODO("Not yet implemented")
             }
 
-            override fun addListener(
-                vararg queryKeys: String, listener: Query.Listener
-            ) {
+            override fun addListener(vararg queryKeys: String, listener: Query.Listener) {
+                TODO("Not yet implemented")
             }
 
             override fun currentTransaction(): Transacter.Transaction? {
@@ -49,12 +50,9 @@ internal val previewDriverFactory = Database(object : DriverFactory {
                 TODO("Not yet implemented")
             }
 
-            override fun removeListener(
-                vararg queryKeys: String, listener: Query.Listener
-            ) {
+            override fun removeListener(vararg queryKeys: String, listener: Query.Listener) {
                 TODO("Not yet implemented")
             }
-
-        }
+        })
     }
-})
+}

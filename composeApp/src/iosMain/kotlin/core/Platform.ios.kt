@@ -1,3 +1,5 @@
+package core
+
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {

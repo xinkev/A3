@@ -1,10 +1,10 @@
 package com.xinkev.a3
 
-import App
+import core.App
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import di.androidModules
+import com.xinkev.a3.di.androidModules
 import di.startKoin
 import org.koin.android.ext.koin.androidContext
 

@@ -1,11 +1,12 @@
 package di
 
-import database.Database
+import database.DatabaseFactory
+import database.DatabaseFactoryImpl
 import database.IOSDriverFactory
 import org.koin.dsl.module
 
 val iosDbModule = module {
-    single { Database(IOSDriverFactory()) }
+    single<DatabaseFactory> { DatabaseFactoryImpl(IOSDriverFactory()) }
 }
 
 val iosModules = iosDbModule + commonModule

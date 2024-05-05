@@ -75,6 +75,7 @@ kotlin {
                 implementation(libs.kotlinx.serilization.json)
 
                 implementation(libs.bundles.voyager)
+                implementation(libs.sqldelight.extension.coroutines)
 
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
@@ -113,6 +114,12 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.sqldelight.native)
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
 
         all {

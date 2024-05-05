@@ -1,0 +1,24 @@
+CREATE TABLE Category (
+    name TEXT PRIMARY KEY NOT NULL,
+    icon TEXT NOT NULL
+);
+
+-- Insert data
+insert:
+INSERT OR IGNORE INTO Category (name, icon)
+VALUES (?, ?);
+
+-- Update data
+update:
+UPDATE Category
+SET name = ?, icon = ?
+WHERE name = ?;
+
+-- Delete
+delete:
+DELETE FROM Category
+WHERE name = ?;
+
+-- Select All
+selectAll:
+SELECT * FROM Category;

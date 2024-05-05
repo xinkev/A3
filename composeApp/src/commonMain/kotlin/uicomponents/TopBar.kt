@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -52,7 +51,8 @@ fun TopBar(
 //            .then(modifier),
         modifier = modifier,
         title = { Text(title) },
-        backgroundColor = Color.Transparent,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = 0.dp,
         navigationIcon = {
             if (!navigationIconHidden) {
@@ -77,9 +77,10 @@ fun CenteredTopBar(
     val topBarHeight = 32.dp
 
     TopAppBar(
-        backgroundColor = Color.Transparent,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = 0.dp,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier
     ) {
         //TopAppBar Content
         Box(Modifier.height(topBarHeight)) {
@@ -97,7 +98,6 @@ fun CenteredTopBar(
                 Modifier.fillMaxSize(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 ProvideTextStyle(value = MaterialTheme.typography.h6) {
                     CompositionLocalProvider(
                         LocalContentAlpha provides ContentAlpha.high,
@@ -106,7 +106,8 @@ fun CenteredTopBar(
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             maxLines = 1,
-                            text = title
+                            text = title,
+                            color = MaterialTheme.colors.onPrimary
                         )
                     }
                 }

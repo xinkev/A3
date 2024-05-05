@@ -24,6 +24,7 @@ koin-bom =  "3.5.6"
 mpsettings = "1.1.1"
 buildconfig = "5.3.5"
 kermit = "2.0.3"
+jetbrainsKotlinJvm = "1.9.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -57,6 +58,7 @@ voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voy
 sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-extension-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
 koin-core = { module = "io.insert-koin:koin-core" }
@@ -78,6 +80,7 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig"}
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 [bundles]
 voyager = ["voyager-bottomSheetNavigator", "voyager-navigator", "voyager-screenModel", "voyager-tabNavigator", "voyager-transitions", "voyager-koin"]

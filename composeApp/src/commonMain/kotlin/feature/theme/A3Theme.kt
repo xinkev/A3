@@ -1,4 +1,4 @@
-package theme
+package feature.theme
 
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
@@ -14,7 +14,7 @@ fun A3Theme(
     MaterialTheme(
         colors = colors,
         shapes = shapes,
-        typography = MaterialTheme.typography,
+        typography = a3Typography,
         content = {
             CompositionLocalProvider(LocalTextStyle provides a3TextStyle) {
                 content()

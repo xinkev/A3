@@ -1,8 +1,11 @@
+package core
+
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
@@ -10,13 +13,14 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import database.previewDriverFactory
+import database.previewDatabaseFactory
 import di.commonModule
 import di.startKoin
-import feature.home.HomeTab
-import feature.settings.SettingsTab
+import feature.theme.A3Theme
+import feature.theme.bottomBarColor
 import org.koin.dsl.module
-import theme.A3Theme
+import presentation.home.HomeTab
+import presentation.settings.SettingsTab
 
 @Composable
 fun App() {
@@ -27,7 +31,11 @@ fun App() {
                     CurrentTab()
                 },
                 bottomBar = {
-                    BottomNavigation(elevation = 4.dp) {
+                    BottomNavigation(
+                        elevation = 4.dp,
+                        backgroundColor = bottomBarColor,
+                        contentColor = MaterialTheme.colors.primary
+                    ) {
                         TabNavigationItem(HomeTab)
                         TabNavigationItem(SettingsTab)
                     }
@@ -51,7 +59,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
 @Preview
 @Composable
 private fun PreviewApp() {
-    val dbModule = module { single { previewDriverFactory } }
+    val dbModule = module { single { previewDatabaseFactory } }
     startKoin(modules = listOf(), appDeclaration = {
         modules(commonModule + dbModule)
     }) {

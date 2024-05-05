@@ -1,18 +1,13 @@
 package model
 
-import kotlinx.serialization.Serializable
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
 
-@Serializable
-data class Backup(
-    val expenses: List<Expense>
-) {
-    @Serializable
-    data class Expense(
-        val uuid: String = "",
-        val timezone: String = "",
-        val detail: String,
-        val datetime: String = "",
-        val category: String = "",
-        val cost: Double
-    )
-}
+data class Expense(
+    val uuid: String,
+    val timezone: TimeZone,
+    val detail: String?,
+    val datetime: LocalDateTime,
+    val category: String,
+    val cost: Double
+)

@@ -1,4 +1,4 @@
-package theme
+package feature.theme
 
 import androidx.compose.ui.unit.dp
 
