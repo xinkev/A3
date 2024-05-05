@@ -2,7 +2,7 @@ package di
 
 import data.KVStorage
 import data.KVStorageImpl
-import home.di.homeModule
+import feature.home.di.homeModule
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

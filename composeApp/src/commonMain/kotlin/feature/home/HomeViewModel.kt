@@ -1,9 +1,8 @@
-package home
+package feature.home
 
 import a3.composeapp.generated.resources.Res
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import data.KVStorage
 import database.Database
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -16,7 +15,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 class HomeViewModel(
     private val db: Database,
-    private val kvStorage: KVStorage,
 ) : ScreenModel {
     private val _data = MutableStateFlow(emptyList<Backup.Expense>())
     val data = _data.asStateFlow()
@@ -28,16 +26,8 @@ class HomeViewModel(
             val json = Res.readBytes("files/sample.json")
             // convert the byte array to json
             val jsonString = json.decodeToString()
-            _data.value = Json { ignoreUnknownKeys = true }.decodeFromString<Backup>(jsonString).expenses
+            _data.value =
+                Json { ignoreUnknownKeys = true }.decodeFromString<Backup>(jsonString).expenses
         }
-    }
-
-    fun onClick() {
-        val seeded = kvStorage.seeded ?: false
-        if (!seeded) {
-            db.addExpense()
-            kvStorage.seeded = true
-        }
-//        _data.value = db.getExpenses()
     }
 }
