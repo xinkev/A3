@@ -10,4 +10,5 @@ plugins {
     alias(libs.plugins.sqldelight) apply false
     alias(libs.plugins.buildconfig) apply false
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
