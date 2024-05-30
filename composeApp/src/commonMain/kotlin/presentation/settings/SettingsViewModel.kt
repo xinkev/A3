@@ -1,8 +1,8 @@
 package presentation.settings
 
 import a3.composeapp.generated.resources.Res
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import feature.backup.A3BackupManager
 import feature.backup.ExpenseTaiyakiBackupAdapter
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 class SettingsViewModel(
     private val backupManager: A3BackupManager
-) : ScreenModel {
+) : ViewModel() {
     private val _loading = MutableStateFlow<Boolean>(false)
     val loading = _loading.asStateFlow()
 
@@ -25,7 +25,7 @@ class SettingsViewModel(
 
     @OptIn(ExperimentalResourceApi::class)
     fun onClickRestore() {
-        screenModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             _loading.update { true }
             val json = Res.readBytes("files/sample.json")
             backupManager.restore(json.decodeToString())

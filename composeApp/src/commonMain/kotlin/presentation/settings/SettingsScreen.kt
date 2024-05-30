@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
@@ -22,31 +20,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import cafe.adriel.voyager.koin.koinScreenModel
-import cafe.adriel.voyager.navigator.tab.Tab
-import cafe.adriel.voyager.navigator.tab.TabOptions
 import feature.theme.ListSpecs
 import feature.theme.brownDarker
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 import uicomponents.CenteredTopBar
 
-object SettingsTab : Tab {
-    override val options: TabOptions
-        @Composable get() {
-            val icon = rememberVectorPainter(Icons.Default.Settings)
-            return remember {
-                TabOptions(
-                    title = "Settings", icon = icon, index = 6u
-                )
-            }
-        }
+object SettingsScreen{
 
+    @OptIn(KoinExperimentalAPI::class)
     @Composable
-    override fun Content() {
+    fun Content(
+        vm: SettingsViewModel = koinViewModel()
+    ) {
         val scrollState = rememberScrollState()
-        val vm = koinScreenModel<SettingsViewModel>()
         val loading by vm.loading.collectAsState()
 
         Scaffold(topBar = {
@@ -105,6 +93,6 @@ object SettingsTab : Tab {
 
 @Preview
 @Composable
-private fun PreviewSettingsTab() {
-    SettingsTab.Content()
+private fun PreviewSettingsScreen() {
+    SettingsScreen.Content()
 }

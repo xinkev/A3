@@ -65,23 +65,24 @@ kotlin {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
-                // Currently, this is needed to be able to build for iOS
-                implementation(compose.material)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
 
+                implementation(libs.jetbrainsNavigationCompose)
+
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serilization.json)
 
-                implementation(libs.bundles.voyager)
+//                implementation(libs.bundles.voyager)
                 implementation(libs.sqldelight.extension.coroutines)
 
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
+                implementation(libs.koin.compose.vm)
 
                 // KV storage
                 implementation(libs.mpSettings.noarg)
