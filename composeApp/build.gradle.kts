@@ -187,10 +187,6 @@ compose.desktop {
     }
 }
 
-compose.experimental {
-    web.application {}
-}
-
 sqldelight {
     databases {
         create("A3Database") {
