@@ -163,7 +163,8 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles("desktop.pro")
         }
     }
     compileOptions {
@@ -180,9 +181,16 @@ compose.desktop {
         mainClass = "MainKt"
 
         nativeDistributions {
+            includeAllModules = true
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = bundleName
             packageVersion = bundleVersion
+
+            buildTypes.release {
+                proguard {
+                    configurationFiles.from("desktop.pro")
+                }
+            }
         }
     }
 }
