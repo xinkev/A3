@@ -1,3 +1,4 @@
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
@@ -207,7 +208,9 @@ buildConfig {
     packageName = bundleName
 
     buildConfigField("appVersion", bundleVersion)
-    buildConfigField("isDebug", true)
     buildConfigField("appName", appName)
     buildConfigField("dbName", "$appName.db")
+    buildConfigField("isDebug", true)
+
 }
+

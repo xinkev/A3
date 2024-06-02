@@ -2,7 +2,7 @@ package mapper
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
-import model.Expense
+import presentation.model.Expense
 
 fun mapSqlResultToExpense(
     uuid: String,

@@ -26,15 +26,14 @@ import androidx.navigation.compose.rememberNavController
 import database.previewDatabaseFactory
 import di.commonModule
 import di.startKoin
-import feature.theme.A3Theme
+import presentation.theme.A3Theme
 import navigation.Route
-import navigation.Route.Home
-import navigation.Route.Settings
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.dsl.module
-import presentation.home.HomeScreen
-import presentation.settings.SettingsScreen
+import presentation.feature.home.HomeScreen
+import presentation.feature.home.expense.ExpenseEditorScreen
+import presentation.feature.settings.SettingsScreen
 
 @Composable
 fun App(
@@ -46,16 +45,25 @@ fun App(
         ) {
             NavHost(
                 navController,
-                startDestination = Home.name,
+                startDestination = Route.Home.name,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(it)
             ) {
-                composable(Home.name) {
-                    HomeScreen.Content()
+                composable(Route.Home.name) {
+                    HomeScreen.View(
+                        navigateToExpenseEditor = {
+                            navController.navigate(Route.ExpenseEditor.name)
+                        }
+                    )
                 }
-                composable(Settings.name) {
-                    SettingsScreen.Content()
+                composable(Route.Settings.name) {
+                    SettingsScreen.View()
+                }
+                composable(Route.ExpenseEditor.name) {
+                    ExpenseEditorScreen.View(
+                        navigateUp = navController::navigateUp
+                    )
                 }
             }
         }

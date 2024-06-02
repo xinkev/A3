@@ -2,7 +2,7 @@
 CREATE TABLE Expenses (
     uuid TEXT PRIMARY KEY NOT NULL,
     timezone TEXT NOT NULL ,
-    detail TEXT,
+    detail TEXT NOT NULL,
     datetime TEXT NOT NULL,
     category TEXT NOT NULL,
     cost REAL NOT NULL
