@@ -18,22 +18,27 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import presentation.theme.A3Theme
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
-import presentation.model.Expense
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import presentation.model.Category
+import presentation.model.Expense
+import presentation.theme.A3Theme
+import presentation.theme.Dimen
 
 object HomeScreen {
     @OptIn(KoinExperimentalAPI::class)
@@ -43,9 +48,11 @@ object HomeScreen {
         navigateToExpenseEditor: () -> Unit,
     ) {
         val expenses by vm.expenses.collectAsState()
+        val categories by vm.categories.collectAsState()
 
         Content(
             expenses = expenses,
+            categories = categories,
             onTapAdd = navigateToExpenseEditor
         )
     }
@@ -53,6 +60,7 @@ object HomeScreen {
     @Composable
     fun Content(
         expenses: List<Expense>,
+        categories: List<Category>,
         onTapAdd: () -> Unit
     ) {
         Column {
@@ -72,17 +80,18 @@ object HomeScreen {
                     onClick = onTapAdd
                 )
             }
-            ExpenseList(expenses)
+            ExpenseList(expenses, categories)
         }
     }
 
     @Composable
     fun ColumnScope.ExpenseList(
-        expenses: List<Expense>
+        expenses: List<Expense>,
+        categories: List<Category>
     ) {
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(expenses) { expense ->
-                TransactionItem(expense)
+                TransactionItem(expense, categories)
 
                 HorizontalDivider()
             }
@@ -90,17 +99,30 @@ object HomeScreen {
     }
 
     @Composable
-    fun TransactionItem(expense: Expense) {
+    fun TransactionItem(expense: Expense, categories: List<Category>) {
+        val category = remember { categories.firstOrNull { it.name == expense.category } }
         Row(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = expense.detail ?: "",
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
                 modifier = Modifier.weight(0.7f),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            ) {
+                category?.icon?.let {
+                    Icon(
+                        imageVector = it.vector(),
+                        contentDescription = category.name,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Text(
+                    text = expense.detail ?: "",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
             Text(
                 text = "${expense.cost}",
                 modifier = Modifier.weight(0.3f),
@@ -121,7 +143,8 @@ private fun PreviewHomeScreen() {
                 previewExpense(detail = "Inboard", cost = 19.99),
                 previewExpense(detail = "Chipotle", cost = 9.50)
             ),
-            onTapAdd = {}
+            onTapAdd = {},
+            categories = emptyList()
         )
     }
 }

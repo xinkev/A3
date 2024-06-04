@@ -1,6 +1,7 @@
 package presentation.model
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.vectorResource
@@ -14,7 +15,7 @@ sealed interface A3Icon {
 @JvmInline
 value class MaterialIcon(val icon: ImageVector) : A3Icon {
     @Composable
-    override fun vector(): ImageVector = icon
+    override fun vector(): ImageVector = remember { icon }
 }
 
 @JvmInline
