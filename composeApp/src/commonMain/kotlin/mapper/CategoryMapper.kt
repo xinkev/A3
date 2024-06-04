@@ -40,7 +40,7 @@ private fun mapIcon(icon: String): A3Icon? = when (icon) {
     "house" -> MaterialIcon(Icons.Outlined.WbIridescent)
     "map" -> MaterialIcon(Icons.AutoMirrored.Outlined.AirplaneTicket)
     "medical" -> MaterialIcon(Icons.Outlined.MedicalServices)
-    "education" -> MaterialIcon(Icons.Outlined.School)
+    "mortar-board" -> MaterialIcon(Icons.Outlined.School)
     "coffee" -> MaterialIcon(Icons.Outlined.Coffee)
     "gift" -> ResourceIcon(Res.drawable.gift_box)
     "office-chair" -> MaterialIcon(Icons.Outlined.Chair)
