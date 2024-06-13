@@ -5,7 +5,6 @@ import kotlinx.datetime.TimeZone
 
 data class Expense(
     val uuid: String,
-    val timezone: TimeZone,
     val detail: String?,
     val datetime: LocalDateTime,
     val category: String,

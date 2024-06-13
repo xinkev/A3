@@ -1,9 +1,8 @@
 -- Create table
 CREATE TABLE Expenses (
     uuid TEXT PRIMARY KEY NOT NULL,
-    timezone TEXT NOT NULL ,
     detail TEXT NOT NULL,
-    datetime TEXT NOT NULL,
+    datetime TEXT NOT NULL, -- ISO 8601
     category TEXT NOT NULL,
     cost REAL NOT NULL
 );

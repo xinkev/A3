@@ -1,4 +1,4 @@
-package presentation.feature.home.expense
+package presentation.feature.expenseEditor
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

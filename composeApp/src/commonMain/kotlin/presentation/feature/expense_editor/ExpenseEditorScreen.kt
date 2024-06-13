@@ -1,4 +1,4 @@
-package presentation.feature.home.expense
+package presentation.feature.expenseEditor
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.add

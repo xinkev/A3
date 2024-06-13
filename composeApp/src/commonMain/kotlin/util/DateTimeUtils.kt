@@ -20,10 +20,13 @@ private val dateTimeFormat = LocalDateTime.Format {
     second()
 }
 
-fun parseDateTime(dateTime: String): LocalDateTime {
+fun parseDateTime(
+    dateTime: String,
+    format: A3DateFormat = A3DateFormat.ISO8601
+): LocalDateTime {
     return LocalDateTime.parse(
         dateTime,
-        format = dateTimeFormat
+        format = format.value,
     )
 }
 

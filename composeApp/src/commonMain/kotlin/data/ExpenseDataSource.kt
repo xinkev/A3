@@ -6,7 +6,6 @@ import core.Dispatchers
 import core.randomUUID
 import database.DatabaseFactory
 import kotlinx.coroutines.flow.Flow
-import kotlinx.datetime.TimeZone
 import mapper.mapSqlResultToExpense
 import presentation.model.Expense
 
@@ -27,7 +26,6 @@ class ExpenseDataSource(
         amount: Double,
         notes: String,
         dateTime: String,
-        timeZone: String = TimeZone.currentSystemDefault().id,
         category: String,
         uuid: String = randomUUID(),
     ) {
@@ -37,7 +35,6 @@ class ExpenseDataSource(
                 detail = notes,
                 datetime = dateTime,
                 category = category,
-                timezone = timeZone,
                 uuid = uuid
             )
         }

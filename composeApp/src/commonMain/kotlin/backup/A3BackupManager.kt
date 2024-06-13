@@ -29,7 +29,6 @@ class A3BackupManager(
         for (expense in data) {
             expenseQueries.insert(
                 uuid = expense.uuid,
-                timezone = expense.timezoneId,
                 category = expense.category,
                 cost = expense.cost,
                 datetime = expense.datetimeISO8601,

@@ -1,9 +1,10 @@
 package backup
 
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import util.A3DateFormat
+import util.localDateTimeToString
 
 @Serializable
 data class Backup(
@@ -19,7 +20,6 @@ data class Backup(
     @Serializable
     data class Expense(
         val uuid: String,
-        val timezone: TimeZone,
         val detail: String,
         @Contextual
         val datetime: LocalDateTime,
@@ -27,9 +27,7 @@ data class Backup(
         val cost: Double
     ) {
         val datetimeISO8601: String
-            get() = datetime.toString()
-        val timezoneId
-            get() = timezone.id
+            get() = localDateTimeToString(datetime, A3DateFormat.ISO8601)
     }
 
     @Serializable

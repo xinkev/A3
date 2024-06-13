@@ -1,18 +1,17 @@
 package mapper
 
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
 import presentation.model.Expense
+import util.A3DateFormat
 
 fun mapSqlResultToExpense(
     uuid: String,
-    timezone: String,
     detail: String?,
     datetime: String,
     category: String,
     cost: Double,
 ): Expense {
-    val parsedDateTime = LocalDateTime.parse(datetime)
+    val parsedDateTime = LocalDateTime.parse(datetime, format = A3DateFormat.ISO8601.value)
 
     return Expense(
         uuid = uuid,
@@ -20,6 +19,5 @@ fun mapSqlResultToExpense(
         detail = detail,
         datetime = parsedDateTime,
         cost = cost,
-        timezone = TimeZone.of(timezone)
     )
 }

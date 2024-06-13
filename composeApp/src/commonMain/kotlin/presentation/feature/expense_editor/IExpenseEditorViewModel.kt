@@ -1,4 +1,4 @@
-package presentation.feature.home.expense
+package presentation.feature.expenseEditor
 
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.flow.StateFlow

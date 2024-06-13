@@ -9,6 +9,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
+import util.A3DateFormat
 import util.parseDateTime
 
 class ExpenseTaiyakiBackupAdapter : BackupAdapter {
@@ -32,7 +33,7 @@ object TaiyakiLocalDateTimeCustomSerializer : KSerializer<LocalDateTime> {
         PrimitiveSerialDescriptor("kotlinx.datetime.LocalDateTime", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): LocalDateTime =
-        parseDateTime(decoder.decodeString())
+        parseDateTime(decoder.decodeString(), format = A3DateFormat.YYYY_MM_DD_HH_MM_SS)
 
     override fun serialize(encoder: Encoder, value: LocalDateTime) {
         encoder.encodeString(value.toString())
