@@ -8,6 +8,7 @@ import database.DatabaseFactory
 import kotlinx.coroutines.flow.Flow
 import mapper.mapSqlResultToExpense
 import presentation.model.Expense
+import util.log
 
 class ExpenseDataSource(
     dbFactory: DatabaseFactory,
@@ -18,6 +19,18 @@ class ExpenseDataSource(
 
     fun getAll(): Flow<List<Expense>> {
         return queries.selectAll(mapper = ::mapSqlResultToExpense)
+            .asFlow()
+            .mapToList(dispatchers.io)
+    }
+
+    fun getByDateTime(
+        dateTime: String,
+    ): Flow<List<Expense>> {
+        log.i { "getByDateTime: $dateTime" }
+        return queries.selectByDateTime(
+            value = dateTime,
+            mapper = ::mapSqlResultToExpense
+        )
             .asFlow()
             .mapToList(dispatchers.io)
     }

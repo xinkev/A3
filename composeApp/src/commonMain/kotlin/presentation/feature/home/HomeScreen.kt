@@ -30,11 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import presentation.composables.A3DatePicker
 import presentation.model.Category
 import presentation.model.Expense
 import presentation.theme.A3Theme
@@ -47,20 +46,15 @@ object HomeScreen {
         vm: HomeViewModel = koinViewModel(),
         navigateToExpenseEditor: () -> Unit,
     ) {
-        val expenses by vm.expenses.collectAsState()
-        val categories by vm.categories.collectAsState()
-
         Content(
-            expenses = expenses,
-            categories = categories,
+            vm = vm,
             onTapAdd = navigateToExpenseEditor
         )
     }
 
     @Composable
     fun Content(
-        expenses: List<Expense>,
-        categories: List<Category>,
+        vm: IHomeViewModel,
         onTapAdd: () -> Unit
     ) {
         Column {
@@ -69,26 +63,26 @@ object HomeScreen {
                     .background(Color.Gray.copy(alpha = 0.1f))
                     .padding(8.dp)
             ) {
-                Spacer(modifier = Modifier.weight(1f))
-                FilledTonalIconButton(
-                    content = {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(Res.string.add_expenses)
-                        )
-                    },
-                    onClick = onTapAdd
+                A3DatePicker(
+                    modifier = Modifier.padding(horizontal = Dimen.mediumPadding),
+                    onDateSelected = vm::setDate,
+                    value = vm.dateMillis.collectAsState().value
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                AddButton(onClick = onTapAdd)
             }
-            ExpenseList(expenses, categories)
+            ExpenseList(vm)
         }
     }
 
+
     @Composable
-    fun ColumnScope.ExpenseList(
-        expenses: List<Expense>,
-        categories: List<Category>
+    private fun ColumnScope.ExpenseList(
+        vm: IHomeViewModel
     ) {
+        val expenses by vm.expenses.collectAsState()
+        val categories by vm.categories.collectAsState()
+
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(expenses) { expense ->
                 TransactionItem(expense, categories)
@@ -99,7 +93,21 @@ object HomeScreen {
     }
 
     @Composable
-    fun TransactionItem(expense: Expense, categories: List<Category>) {
+    private fun AddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+        FilledTonalIconButton(
+            modifier = modifier,
+            content = {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = stringResource(Res.string.add_expenses)
+                )
+            },
+            onClick = onClick
+        )
+    }
+
+    @Composable
+    private fun TransactionItem(expense: Expense, categories: List<Category>) {
         val category = remember { categories.firstOrNull { it.name == expense.category } }
         Row(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
@@ -137,25 +145,8 @@ object HomeScreen {
 private fun PreviewHomeScreen() {
     A3Theme {
         HomeScreen.Content(
-            expenses = listOf(
-                previewExpense(detail = "Gift", cost = 62.33),
-                previewExpense(detail = "GitHub Payment", cost = 7.00),
-                previewExpense(detail = "Inboard", cost = 19.99),
-                previewExpense(detail = "Chipotle", cost = 9.50)
-            ),
             onTapAdd = {},
-            categories = emptyList()
+            vm = PreviewHomeViewModel
         )
     }
-}
-
-private fun previewExpense(detail: String, cost: Double): Expense {
-    return Expense(
-        uuid = "",
-        category = "",
-        cost = cost,
-        detail = detail,
-        datetime = LocalDateTime(2024, 5, 5, 16, 27, 30),
-        timezone = TimeZone.of("Asia/Tokyo")
-    )
 }

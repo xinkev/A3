@@ -9,12 +9,21 @@ CREATE TABLE Expenses (
 
 -- Insert data
 insert:
-INSERT OR IGNORE INTO Expenses (uuid, timezone, detail, datetime, category, cost)
-VALUES (?, ?, ?, ?, ?, ?);
+INSERT OR IGNORE INTO Expenses (uuid, detail, datetime, category, cost)
+VALUES (?, ?, ?, ?, ?);
 
 -- Read data
 selectAll:
-SELECT * FROM Expenses;
+SELECT *
+FROM Expenses
+ORDER BY datetime ASC ;
+
+selectByDateTime:
+SELECT *
+FROM Expenses
+WHERE
+    date(datetime) = date(?)
+ORDER BY datetime ASC ;
 
 -- Update data
 update:

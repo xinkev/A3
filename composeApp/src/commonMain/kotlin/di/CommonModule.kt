@@ -9,7 +9,7 @@ import database.DatabaseFactory
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import presentation.feature.home.di.homeModule
-import presentation.feature.home.expense.di.expenseEditorModule
+import presentation.feature.expense_editor.di.expenseEditorModule
 import presentation.feature.settings.di.settingsModule
 
 val appModule = module {

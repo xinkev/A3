@@ -6,4 +6,5 @@
     <string name="expense_editor">Expense Editor</string>
     <string name="add_notes">Add notes…</string>
     <string name="add">Add</string>
+    <string name="today">Today</string>
 </resources>

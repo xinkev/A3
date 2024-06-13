@@ -32,7 +32,7 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.dsl.module
 import presentation.feature.home.HomeScreen
-import presentation.feature.home.expense.ExpenseEditorScreen
+import presentation.feature.expense_editor.ExpenseEditorScreen
 import presentation.feature.settings.SettingsScreen
 
 @Composable
