@@ -10,10 +10,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import presentation.model.Category
+import util.A3DateFormat
+import util.dateTimeMilliToString
 
 class ExpenseEditorViewModel(
     private val dataSource: ExpenseDataSource
@@ -56,12 +55,11 @@ class ExpenseEditorViewModel(
 
     override fun onClickAdd() {
         // convert dateMillis to date
-        val instant = Instant.fromEpochMilliseconds(_dateMillis.value)
-        val date = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+        val date = dateTimeMilliToString(_dateMillis.value, A3DateFormat.ISO8601)
         dataSource.insert(
             amount = _amount.value.toDouble(),
             notes = _notes.value,
-            dateTime = date.toString(),
+            dateTime = date,
             category = _category.value!!.name
         )
 
