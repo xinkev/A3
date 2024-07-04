@@ -1,6 +1,6 @@
 package backup
 
-interface BackupAdapter {
+interface ImportAdapter {
     //    suspend fun export(backup: Backup)
     suspend fun import(json: String): Backup
 }

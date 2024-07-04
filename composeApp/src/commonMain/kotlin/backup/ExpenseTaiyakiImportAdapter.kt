@@ -12,7 +12,7 @@ import kotlinx.serialization.modules.SerializersModule
 import util.A3DateFormat
 import util.parseDateTime
 
-class ExpenseTaiyakiBackupAdapter : BackupAdapter {
+class ExpenseTaiyakiImportAdapter : ImportAdapter {
     private val json: Json = Json {
         ignoreUnknownKeys = true
         explicitNulls = false
@@ -27,7 +27,7 @@ class ExpenseTaiyakiBackupAdapter : BackupAdapter {
 }
 
 
-object TaiyakiLocalDateTimeCustomSerializer : KSerializer<LocalDateTime> {
+private object TaiyakiLocalDateTimeCustomSerializer : KSerializer<LocalDateTime> {
 
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("kotlinx.datetime.LocalDateTime", PrimitiveKind.STRING)

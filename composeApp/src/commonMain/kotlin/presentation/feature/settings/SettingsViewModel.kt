@@ -4,7 +4,7 @@ import a3.composeapp.generated.resources.Res
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import backup.A3BackupManager
-import backup.ExpenseTaiyakiBackupAdapter
+import backup.ExpenseTaiyakiImportAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ class SettingsViewModel(
     val loading = _loading.asStateFlow()
 
     init {
-        backupManager.setAdapter(ExpenseTaiyakiBackupAdapter())
+        backupManager.setAdapter(ExpenseTaiyakiImportAdapter())
     }
 
     @OptIn(ExperimentalResourceApi::class)

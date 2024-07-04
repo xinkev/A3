@@ -10,17 +10,17 @@ class A3BackupManager(
     private val db: A3Database = databaseFactory.create()
     private val expenseQueries = db.expenseQueries
     private val categoryQueries = db.categoryQueries
-    private lateinit var backupAdapter: BackupAdapter
+    private lateinit var importAdapter: ImportAdapter
 
-    fun setAdapter(adapter: BackupAdapter) {
-        backupAdapter = adapter
+    fun setAdapter(adapter: ImportAdapter) {
+        importAdapter = adapter
     }
 
     suspend fun restore(json: String): Outcome<BackupError, Unit> {
-        val backup = backupAdapter.import(json)
+        val data = importAdapter.import(json)
         db.transaction {
-            writeExpenses(backup.expenses)
-            writeCategories(backup.categories)
+            writeExpenses(data.expenses)
+            writeCategories(data.categories)
         }
         return Outcome.Success(Unit)
     }
