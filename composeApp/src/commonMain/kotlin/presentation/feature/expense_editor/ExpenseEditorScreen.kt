@@ -12,7 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -35,6 +34,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import presentation.composables.A3DatePicker
 import presentation.composables.Categories
 import presentation.composables.TopBar
 import presentation.model.Category
@@ -94,14 +94,14 @@ object ExpenseEditorScreen {
                     value = amount,
                     onChange = vm::onAmountChanged
                 )
+                A3DatePicker(
+                    modifier = Modifier.padding(horizontal = Dimen.largePadding),
+                    value = dateMillis,
+                    onDateSelected = vm::onDateChanged
+                )
                 NoteInput(
                     value = notes,
                     onChange = vm::onNotesChanged
-                )
-
-                DatePicker(
-                    state = datePickerState,
-                    modifier = Modifier.padding(Dimen.largePadding),
                 )
 
                 Categories(
