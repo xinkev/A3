@@ -12,7 +12,7 @@ import kotlinx.serialization.modules.SerializersModule
 import util.A3DateFormat
 import util.parseDateTime
 
-class ExpenseTaiyakiImportAdapter : ImportAdapter {
+class ExpenseTaiyakiRestoreAdapter : RestoreAdapter {
     private val json: Json = Json {
         ignoreUnknownKeys = true
         explicitNulls = false
@@ -21,7 +21,7 @@ class ExpenseTaiyakiImportAdapter : ImportAdapter {
         }
     }
 
-    override suspend fun import(json: String): Backup {
+    override suspend fun restore(json: String): Backup {
         return this.json.decodeFromString<Backup>(json)
     }
 }
