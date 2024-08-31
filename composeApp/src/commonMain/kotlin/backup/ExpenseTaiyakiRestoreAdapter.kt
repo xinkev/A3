@@ -33,7 +33,7 @@ private object TaiyakiLocalDateTimeCustomSerializer : KSerializer<LocalDateTime>
         PrimitiveSerialDescriptor("kotlinx.datetime.LocalDateTime", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): LocalDateTime =
-        parseDateTime(decoder.decodeString(), format = A3DateFormat.YYYY_MM_DD_HH_MM_SS)
+        parseDateTime(decoder.decodeString(), format = A3DateFormat.`yy-mm-dd hh-mm-ss`)
 
     override fun serialize(encoder: Encoder, value: LocalDateTime) {
         encoder.encodeString(value.toString())
