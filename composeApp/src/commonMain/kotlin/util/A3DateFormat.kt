@@ -5,8 +5,7 @@ import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.format.char
 
 enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
-    @Suppress("EnumEntryName")
-    `yy-mm-dd hh-mm-ss`(
+    DisplayDateTime(
         LocalDateTime.Format {
             year()
             char('-')
@@ -39,7 +38,7 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
         }
     ),
 
-    YYYY_MM_DD(
+    DisplayDate(
         LocalDateTime.Format {
             year()
             char('-')
@@ -49,7 +48,7 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
         }
     ),
 
-    YYYY_MM_DD_HH_MM(
+    DisplayDateTimeWithoutSeconds(
         LocalDateTime.Format {
             year()
             char('-')

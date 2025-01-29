@@ -29,7 +29,7 @@ fun A3DatePicker(
         modifier = modifier,
         onClick = { openDialog.value = true },
         content = {
-            Text(dateTimeToDisplay(value, A3DateFormat.YYYY_MM_DD))
+            Text(dateTimeToDisplay(value, A3DateFormat.DisplayDate))
         }
     )
 
