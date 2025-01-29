@@ -32,7 +32,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import presentation.composables.A3DatePicker
 import presentation.model.Category
 import presentation.model.Expense
@@ -40,7 +39,6 @@ import presentation.theme.A3Theme
 import presentation.theme.Dimen
 
 object HomeScreen {
-    @OptIn(KoinExperimentalAPI::class)
     @Composable
     fun View(
         vm: HomeViewModel = koinViewModel(),

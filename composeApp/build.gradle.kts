@@ -1,6 +1,5 @@
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 val bundleName = "com.xinkev.a3"
 val bundleVersion = "1.0.0"
@@ -134,7 +133,6 @@ kotlin {
             }
 
             languageSettings {
-                @OptIn(ExperimentalKotlinGradlePluginApi::class)
                 compilerOptions{
                     freeCompilerArgs.add("-Xexpect-actual-classes")
                 }

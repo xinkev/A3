@@ -1,7 +1,6 @@
 package presentation.model
 
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
 
 data class Expense(
     val uuid: String,

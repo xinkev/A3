@@ -16,7 +16,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 class SettingsViewModel(
     private val backupManager: A3BackupManager
 ) : ViewModel() {
-    private val _loading = MutableStateFlow<Boolean>(false)
+    private val _loading = MutableStateFlow(false)
     val loading = _loading.asStateFlow()
 
     init {

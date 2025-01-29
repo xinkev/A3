@@ -33,7 +33,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import presentation.composables.A3DatePicker
 import presentation.composables.Categories
 import presentation.composables.TopBar
@@ -41,7 +40,7 @@ import presentation.model.Category
 import presentation.theme.Dimen
 
 object ExpenseEditorScreen {
-    @OptIn(KoinExperimentalAPI::class)
+
     @Composable
     fun View(
         vm: ExpenseEditorViewModel = koinViewModel(),
@@ -131,7 +130,7 @@ object ExpenseEditorScreen {
             placeholder = { Text(stringResource(Res.string.add_notes)) },
             onValueChange = onChange,
             keyboardOptions = KeyboardOptions(
-                autoCorrect = false,
+                autoCorrectEnabled = false,
                 imeAction = ImeAction.Done
             ),
         )
@@ -155,7 +154,7 @@ object ExpenseEditorScreen {
                 }
             },
             keyboardOptions = KeyboardOptions(
-                autoCorrect = false,
+                autoCorrectEnabled = false,
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
             ),

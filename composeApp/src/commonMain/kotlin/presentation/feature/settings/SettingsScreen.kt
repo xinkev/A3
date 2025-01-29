@@ -33,13 +33,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import presentation.composables.CenteredTopBar
 import presentation.theme.Dimen
 
 object SettingsScreen {
 
-    @OptIn(KoinExperimentalAPI::class)
     @Composable
     fun View(
         vm: SettingsViewModel = koinViewModel()
