@@ -1,5 +1,8 @@
 package presentation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,8 +15,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -22,18 +27,19 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import database.previewDatabaseFactory
 import di.commonModule
 import di.startKoin
-import presentation.theme.A3Theme
 import navigation.Route
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.dsl.module
-import presentation.feature.home.HomeScreen
 import presentation.feature.expense_editor.ExpenseEditorScreen
+import presentation.feature.home.HomeScreen
 import presentation.feature.settings.SettingsScreen
+import presentation.theme.A3Theme
 
 @Composable
 fun App(
@@ -46,16 +52,12 @@ fun App(
             NavHost(
                 navController,
                 startDestination = Route.Home.name,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(it)
+                modifier = Modifier.fillMaxSize().padding(it)
             ) {
                 composable(Route.Home.name) {
-                    HomeScreen.View(
-                        navigateToExpenseEditor = {
-                            navController.navigate(Route.ExpenseEditor.name)
-                        }
-                    )
+                    HomeScreen.View(navigateToExpenseEditor = {
+                        navController.navigate(Route.ExpenseEditor.name)
+                    })
                 }
                 composable(Route.Settings.name) {
                     SettingsScreen.View()
@@ -74,21 +76,33 @@ fun App(
 private fun BottomBar(controller: NavHostController) {
     var selectedItem by rememberSaveable { mutableStateOf(BottomBarItem.Home) }
 
-    BottomAppBar(
-        actions = {
-            BottomBarItem.entries.forEach { item ->
-                NavigationBarItem(
-                    selected = item == selectedItem,
-                    icon = {
+    val backStackEntry by controller.currentBackStackEntryAsState()
+    val visible by remember {
+        derivedStateOf {
+            backStackEntry?.destination?.route != Route.ExpenseEditor.name
+        }
+    }
+
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically(
+            initialOffsetY = { it },
+        ),
+        exit = slideOutVertically(
+            targetOffsetY = { it },
+        )
+    ) {
+        BottomAppBar(
+            actions = {
+                BottomBarItem.entries.forEach { item ->
+                    NavigationBarItem(selected = item == selectedItem, icon = {
                         Icon(
                             imageVector = item.icon,
                             contentDescription = stringResource(item.label)
                         )
-                    },
-                    label = {
+                    }, label = {
                         Text(stringResource(item.label))
-                    },
-                    onClick = {
+                    }, onClick = {
                         selectedItem = item
                         controller.navigate(item.route.name) {
                             popUpTo(controller.graph.findStartDestination().route!!) {
@@ -97,19 +111,21 @@ private fun BottomBar(controller: NavHostController) {
                             launchSingleTop = true
                             restoreState = true
                         }
-                    }
-                )
-            }
-        }
-    )
+                    })
+                }
+            },
+        )
+    }
 }
 
 private enum class BottomBarItem(
-    val label: StringResource,
-    val icon: ImageVector,
-    val route: Route
+    val label: StringResource, val icon: ImageVector, val route: Route
 ) {
-    Home(label = Route.Home.title, icon = Icons.Filled.Home, route = Route.Home),
+    Home(
+        label = Route.Home.title,
+        icon = Icons.Filled.Home,
+        route = Route.Home
+    ),
     Settings(label = Route.Settings.title, icon = Icons.Filled.Settings, route = Route.Settings)
 }
 
