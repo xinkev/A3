@@ -19,17 +19,12 @@ fun TopBar(
     title: String,
     modifier: Modifier = Modifier,
     navigationIconHidden: Boolean = false,
-    navigateBack: () -> Unit = {}
+    actions: @Composable RowScope.() -> Unit = {},
+    navigateBack: () -> Unit = {},
 ) {
-
     TopAppBar(
         modifier = modifier,
         title = { Text(title) },
-//        colors = TopAppBarDefaults.topAppBarColors(
-//            containerColor = MaterialTheme.colorScheme.primaryContainer
-//        ),
-//        contentColor = MaterialTheme.colors.onPrimary,
-//        elevation = 0.dp,
         navigationIcon = {
             if (!navigationIconHidden) {
                 IconButton(onClick = navigateBack) {
@@ -39,7 +34,8 @@ fun TopBar(
                     )
                 }
             }
-        }
+        },
+        actions = actions
     )
 }
 

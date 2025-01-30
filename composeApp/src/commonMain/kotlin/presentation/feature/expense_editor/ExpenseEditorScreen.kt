@@ -2,22 +2,19 @@ package presentation.feature.expense_editor
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.add
-import a3.composeapp.generated.resources.add_notes
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -27,8 +24,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
@@ -36,6 +31,8 @@ import org.koin.compose.viewmodel.koinViewModel
 import presentation.composables.A3DatePicker
 import presentation.composables.Categories
 import presentation.composables.TopBar
+import presentation.feature.expense_editor.keypad.Keypad
+import presentation.feature.expense_editor.keypad.KeypadInput
 import presentation.model.Category
 import presentation.theme.Dimen
 
@@ -68,6 +65,7 @@ object ExpenseEditorScreen {
             initialDisplayMode = DisplayMode.Input,
             initialSelectedDateMillis = dateMillis
         )
+        val inputState = rememberTextFieldState()
 
         LaunchedEffect(Unit) {
             snapshotFlow { datePickerState.selectedDateMillis }
@@ -76,31 +74,35 @@ object ExpenseEditorScreen {
                 }
         }
 
-
         Scaffold(
             topBar = {
-                TopBar("", navigateBack = navigateUp)
+                TopBar(
+                    title = "New Expense",
+                    navigateBack = navigateUp,
+                    actions = {
+                        AddButton(
+                            enabled = enableAddButton,
+                            onClick = vm::onClickAdd
+                        )
+                    }
+                )
             },
         ) {
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
-                    .padding(vertical = Dimen.largePadding)
                     .padding(it),
                 verticalArrangement = Arrangement.spacedBy(Dimen.mediumSize),
             ) {
-                AmountInput(
-                    value = amount,
-                    onChange = vm::onAmountChanged
+                KeypadInput(
+                    amountState = inputState,
+                    noteState = inputState,
+                    modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
                 )
                 A3DatePicker(
                     modifier = Modifier.padding(horizontal = Dimen.largePadding),
                     value = dateMillis,
                     onDateSelected = vm::onDateChanged
-                )
-                NoteInput(
-                    value = notes,
-                    onChange = vm::onNotesChanged
                 )
 
                 Categories(
@@ -108,6 +110,8 @@ object ExpenseEditorScreen {
                     selected = category,
                     onSelect = vm::onCategoryChanged
                 )
+
+                Keypad { vm.onAmountChanged(amount + it.text) }
 
                 AddButton(
                     enabled = enableAddButton,
@@ -118,59 +122,11 @@ object ExpenseEditorScreen {
     }
 
     @Composable
-    fun NoteInput(
-        value: String,
-        onChange: (String) -> Unit
-    ) {
-        TextField(
-            value,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Dimen.largePadding),
-            placeholder = { Text(stringResource(Res.string.add_notes)) },
-            onValueChange = onChange,
-            keyboardOptions = KeyboardOptions(
-                autoCorrectEnabled = false,
-                imeAction = ImeAction.Done
-            ),
-        )
-    }
-
-    @Composable
-    fun AmountInput(
-        value: String,
-        onChange: (String) -> Unit
-    ) {
-        OutlinedTextField(
-            value,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Dimen.largePadding),
-            placeholder = { Text("0.0") },
-            onValueChange = {
-                val regex = "^\\d*\\.?\\d*$".toRegex()
-                if (regex.matches(it)) {
-                    onChange(it)
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                autoCorrectEnabled = false,
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            singleLine = true,
-        )
-    }
-
-    @Composable
     fun AddButton(
         enabled: Boolean,
         onClick: () -> Unit
     ) {
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Dimen.xLargePadding),
+        TextButton(
             content = {
                 Text(stringResource(Res.string.add))
             },
