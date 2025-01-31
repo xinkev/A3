@@ -5,6 +5,7 @@ import a3.composeapp.generated.resources.add
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -29,8 +30,8 @@ import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.composables.A3DatePicker
-import presentation.composables.Categories
 import presentation.composables.A3DatePickerButtonType
+import presentation.composables.CategoryPicker
 import presentation.composables.TopBar
 import presentation.feature.expense_editor.keypad.Keypad
 import presentation.feature.expense_editor.keypad.KeypadInput
@@ -100,29 +101,22 @@ object ExpenseEditorScreen {
                     noteState = inputState,
                     modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
                 )
-                A3DatePicker(
-                    modifier = Modifier.padding(horizontal = Dimen.largePadding),
-                    value = dateMillis,
-                    onDateSelected = vm::onDateChanged
-                )
-
-                Categories(
-                    modifier = Modifier.padding(horizontal = Dimen.largePadding),
-                    selected = category,
-                    onSelect = vm::onCategoryChanged
-                )
+                Row(
+                    modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     A3DatePicker(
                         value = dateMillis,
                         onDateSelected = vm::onDateChanged,
                         buttonType = A3DatePickerButtonType.Text
                     )
+                    CategoryPicker(
+                        selectedCategory = category,
+                        onSelect = vm::onCategoryChanged
+                    )
+                }
 
                 Keypad { vm.onAmountChanged(amount + it.text) }
-
-                AddButton(
-                    enabled = enableAddButton,
-                    vm::onClickAdd
-                )
             }
         }
     }
