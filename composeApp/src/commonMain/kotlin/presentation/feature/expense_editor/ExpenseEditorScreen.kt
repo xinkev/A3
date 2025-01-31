@@ -25,8 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.composables.A3DatePicker
@@ -35,7 +33,6 @@ import presentation.composables.CategoryPicker
 import presentation.composables.TopBar
 import presentation.feature.expense_editor.keypad.Keypad
 import presentation.feature.expense_editor.keypad.KeypadInput
-import presentation.model.Category
 import presentation.theme.Dimen
 
 object ExpenseEditorScreen {
@@ -142,34 +139,7 @@ private fun Preview() {
     CompositionLocalProvider(LocalInspectionMode provides true) {
         ExpenseEditorScreen.Content(
             navigateUp = {},
-            vm = object : IExpenseEditorViewModel {
-                override val amount: StateFlow<String>
-                    get() = MutableStateFlow("")
-                override val notes: StateFlow<String>
-                    get() = MutableStateFlow("")
-                override val dateMillis: StateFlow<Long>
-                    get() = MutableStateFlow(0)
-                override val category: StateFlow<Category?>
-                    get() = MutableStateFlow(null)
-                override val enableAddButton: StateFlow<Boolean>
-                    get() = MutableStateFlow(false)
-
-                override fun onAmountChanged(amount: String) {
-                }
-
-                override fun onNotesChanged(notes: String) {
-                }
-
-                override fun onDateChanged(dateMillis: Long) {
-                }
-
-                override fun onCategoryChanged(category: Category?) {
-                }
-
-                override fun onClickAdd() {
-                }
-
-            }
+            vm = ExpenseEditorPreviewViewModel
         )
     }
 }
