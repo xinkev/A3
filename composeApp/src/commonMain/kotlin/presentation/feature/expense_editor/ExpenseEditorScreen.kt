@@ -30,6 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.composables.A3DatePicker
 import presentation.composables.Categories
+import presentation.composables.A3DatePickerButtonType
 import presentation.composables.TopBar
 import presentation.feature.expense_editor.keypad.Keypad
 import presentation.feature.expense_editor.keypad.KeypadInput
@@ -110,6 +111,11 @@ object ExpenseEditorScreen {
                     selected = category,
                     onSelect = vm::onCategoryChanged
                 )
+                    A3DatePicker(
+                        value = dateMillis,
+                        onDateSelected = vm::onDateChanged,
+                        buttonType = A3DatePickerButtonType.Text
+                    )
 
                 Keypad { vm.onAmountChanged(amount + it.text) }
 
