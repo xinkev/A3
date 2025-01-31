@@ -1,14 +1,12 @@
 package presentation.feature.home
 
-import androidx.compose.runtime.Stable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime
 import presentation.model.Category
 import presentation.model.Expense
 
-@Stable
-sealed interface IHomeViewModel {
+interface IHomeViewModel {
     val categories: StateFlow<List<Category>>
     val expenses: StateFlow<List<Expense>>
     val dateMillis: StateFlow<Long>
@@ -33,6 +31,7 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
 
     override fun setDate(dateMillis: Long) {
     }
+
     private fun previewExpense(detail: String, cost: Double): Expense {
         return Expense(
             uuid = "",

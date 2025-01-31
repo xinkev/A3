@@ -1,9 +1,8 @@
 package presentation.feature.expense_editor
 
-import androidx.compose.runtime.Stable
 import kotlinx.coroutines.flow.StateFlow
 import presentation.model.Category
-@Stable
+
 interface IExpenseEditorViewModel {
     val amount: StateFlow<String>
     val notes: StateFlow<String>
