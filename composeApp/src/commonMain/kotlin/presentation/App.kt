@@ -58,15 +58,15 @@ fun App(
                     .consumeWindowInsets(it)
             ) {
                 composable(Route.Home.name) {
-                    HomeScreen.View(navigateToExpenseEditor = {
+                    HomeScreen(navigateToExpenseEditor = {
                         navController.navigate(Route.ExpenseEditor.name)
                     })
                 }
                 composable(Route.Settings.name) {
-                    SettingsScreen.View()
+                    SettingsScreen()
                 }
                 composable(Route.ExpenseEditor.name) {
-                    ExpenseEditorScreen.View(
+                    ExpenseEditorScreen(
                         navigateUp = navController::navigateUp
                     )
                 }

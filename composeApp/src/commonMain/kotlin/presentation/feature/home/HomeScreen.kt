@@ -38,103 +38,101 @@ import presentation.model.Expense
 import presentation.theme.A3Theme
 import presentation.theme.Dimen
 
-object HomeScreen {
-    @Composable
-    fun View(
-        vm: HomeViewModel = koinViewModel(),
-        navigateToExpenseEditor: () -> Unit,
-    ) {
-        Content(
-            vm = vm,
-            onTapAdd = navigateToExpenseEditor
-        )
-    }
+@Composable
+fun HomeScreen(
+    vm: HomeViewModel = koinViewModel(),
+    navigateToExpenseEditor: () -> Unit,
+) {
+    HomeScreenContent(
+        vm = vm,
+        onTapAdd = navigateToExpenseEditor
+    )
+}
 
-    @Composable
-    fun Content(
-        vm: IHomeViewModel,
-        onTapAdd: () -> Unit
-    ) {
-        Column {
-            Row(
-                modifier = Modifier.fillMaxWidth()
-                    .background(Color.Gray.copy(alpha = 0.1f))
-                    .padding(8.dp)
-            ) {
-                A3DatePicker(
-                    modifier = Modifier.padding(horizontal = Dimen.mediumPadding),
-                    onDateSelected = vm::setDate,
-                    value = vm.dateMillis.collectAsState().value
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                AddButton(onClick = onTapAdd)
-            }
-            ExpenseList(vm)
-        }
-    }
-
-
-    @Composable
-    private fun ColumnScope.ExpenseList(
-        vm: IHomeViewModel
-    ) {
-        val expenses by vm.expenses.collectAsState()
-        val categories by vm.categories.collectAsState()
-
-        LazyColumn(modifier = Modifier.weight(1f)) {
-            items(expenses) { expense ->
-                TransactionItem(expense, categories)
-
-                HorizontalDivider()
-            }
-        }
-    }
-
-    @Composable
-    private fun AddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
-        FilledTonalIconButton(
-            modifier = modifier,
-            content = {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(Res.string.add_expenses)
-                )
-            },
-            onClick = onClick
-        )
-    }
-
-    @Composable
-    private fun TransactionItem(expense: Expense, categories: List<Category>) {
-        val category = remember { categories.firstOrNull { it.name == expense.category } }
+@Composable
+fun HomeScreenContent(
+    vm: IHomeViewModel,
+    onTapAdd: () -> Unit
+) {
+    Column {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.fillMaxWidth()
+                .background(Color.Gray.copy(alpha = 0.1f))
+                .padding(8.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
-                modifier = Modifier.weight(0.7f),
-            ) {
-                category?.icon?.let {
-                    Icon(
-                        imageVector = it.vector(),
-                        contentDescription = category.name,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-                Text(
-                    text = expense.detail ?: "",
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+            A3DatePicker(
+                modifier = Modifier.padding(horizontal = Dimen.mediumPadding),
+                onDateSelected = vm::setDate,
+                value = vm.dateMillis.collectAsState().value
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            AddButton(onClick = onTapAdd)
+        }
+        ExpenseList(vm)
+    }
+}
+
+
+@Composable
+private fun ColumnScope.ExpenseList(
+    vm: IHomeViewModel
+) {
+    val expenses by vm.expenses.collectAsState()
+    val categories by vm.categories.collectAsState()
+
+    LazyColumn(modifier = Modifier.weight(1f)) {
+        items(expenses) { expense ->
+            TransactionItem(expense, categories)
+
+            HorizontalDivider()
+        }
+    }
+}
+
+@Composable
+private fun AddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+    FilledTonalIconButton(
+        modifier = modifier,
+        content = {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = stringResource(Res.string.add_expenses)
+            )
+        },
+        onClick = onClick
+    )
+}
+
+@Composable
+private fun TransactionItem(expense: Expense, categories: List<Category>) {
+    val category = remember { categories.firstOrNull { it.name == expense.category } }
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
+            modifier = Modifier.weight(0.7f),
+        ) {
+            category?.icon?.let {
+                Icon(
+                    imageVector = it.vector(),
+                    contentDescription = category.name,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
             Text(
-                text = "${expense.cost}",
-                modifier = Modifier.weight(0.3f),
-                textAlign = TextAlign.End
+                text = expense.detail ?: "",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
+        Text(
+            text = "${expense.cost}",
+            modifier = Modifier.weight(0.3f),
+            textAlign = TextAlign.End
+        )
     }
 }
 
@@ -142,7 +140,7 @@ object HomeScreen {
 @Composable
 private fun PreviewHomeScreen() {
     A3Theme {
-        HomeScreen.Content(
+        HomeScreenContent(
             onTapAdd = {},
             vm = PreviewHomeViewModel
         )

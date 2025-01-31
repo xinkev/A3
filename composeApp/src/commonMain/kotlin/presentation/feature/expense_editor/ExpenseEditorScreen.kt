@@ -35,109 +35,106 @@ import presentation.feature.expense_editor.keypad.Keypad
 import presentation.feature.expense_editor.keypad.KeypadInput
 import presentation.theme.Dimen
 
-object ExpenseEditorScreen {
+@Composable
+fun ExpenseEditorScreen(
+    vm: ExpenseEditorViewModel = koinViewModel(),
+    navigateUp: () -> Unit
+) {
+    ExpenseEditorScreenContent(
+        vm = vm,
+        navigateUp = navigateUp,
+    )
+}
 
-    @Composable
-    fun View(
-        vm: ExpenseEditorViewModel = koinViewModel(),
-        navigateUp: () -> Unit
-    ) {
-        Content(
-            vm = vm,
-            navigateUp = navigateUp,
-        )
-    }
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ExpenseEditorScreenContent(
+    vm: IExpenseEditorViewModel,
+    navigateUp: () -> Unit,
+) {
+    val dateMillis by vm.dateMillis.collectAsState()
+    val amount by vm.amount.collectAsState()
+    val notes by vm.notes.collectAsState()
+    val category by vm.category.collectAsState()
+    val enableAddButton by vm.enableAddButton.collectAsState()
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun Content(
-        vm: IExpenseEditorViewModel,
-        navigateUp: () -> Unit,
-    ) {
-        val dateMillis by vm.dateMillis.collectAsState()
-        val amount by vm.amount.collectAsState()
-        val notes by vm.notes.collectAsState()
-        val category by vm.category.collectAsState()
-        val enableAddButton by vm.enableAddButton.collectAsState()
+    val datePickerState = rememberDatePickerState(
+        initialDisplayMode = DisplayMode.Input,
+        initialSelectedDateMillis = dateMillis
+    )
+    val inputState = rememberTextFieldState()
 
-        val datePickerState = rememberDatePickerState(
-            initialDisplayMode = DisplayMode.Input,
-            initialSelectedDateMillis = dateMillis
-        )
-        val inputState = rememberTextFieldState()
-
-        LaunchedEffect(Unit) {
-            snapshotFlow { datePickerState.selectedDateMillis }
-                .collect {
-                    vm.onDateChanged(it!!)
-                }
-        }
-
-        Scaffold(
-            topBar = {
-                TopBar(
-                    title = "New Expense",
-                    navigateBack = navigateUp,
-                    actions = {
-                        AddButton(
-                            enabled = enableAddButton,
-                            onClick = vm::onClickAdd
-                        )
-                    }
-                )
-            },
-        ) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(it),
-                verticalArrangement = Arrangement.spacedBy(Dimen.mediumSize),
-            ) {
-                KeypadInput(
-                    amountState = inputState,
-                    noteState = inputState,
-                    modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
-                )
-                Row(
-                    modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    A3DatePicker(
-                        value = dateMillis,
-                        onDateSelected = vm::onDateChanged,
-                        buttonType = A3DatePickerButtonType.Text
-                    )
-                    CategoryPicker(
-                        selectedCategory = category,
-                        onSelect = vm::onCategoryChanged
-                    )
-                }
-
-                Keypad { vm.onAmountChanged(amount + it.text) }
+    LaunchedEffect(Unit) {
+        snapshotFlow { datePickerState.selectedDateMillis }
+            .collect {
+                vm.onDateChanged(it!!)
             }
-        }
     }
 
-    @Composable
-    fun AddButton(
-        enabled: Boolean,
-        onClick: () -> Unit
+    Scaffold(
+        topBar = {
+            TopBar(
+                title = "New Expense",
+                navigateBack = navigateUp,
+                actions = {
+                    AddButton(
+                        enabled = enableAddButton,
+                        onClick = vm::onClickAdd
+                    )
+                }
+            )
+        },
     ) {
-        TextButton(
-            content = {
-                Text(stringResource(Res.string.add))
-            },
-            onClick = onClick,
-            enabled = enabled
-        )
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(it),
+            verticalArrangement = Arrangement.spacedBy(Dimen.mediumSize),
+        ) {
+            KeypadInput(
+                amountState = inputState,
+                noteState = inputState,
+                modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
+            )
+            Row(
+                modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                A3DatePicker(
+                    value = dateMillis,
+                    onDateSelected = vm::onDateChanged,
+                    buttonType = A3DatePickerButtonType.Text
+                )
+                CategoryPicker(
+                    selectedCategory = category,
+                    onSelect = vm::onCategoryChanged
+                )
+            }
+
+            Keypad { vm.onAmountChanged(amount + it.text) }
+        }
     }
+}
+
+@Composable
+private fun AddButton(
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    TextButton(
+        content = {
+            Text(stringResource(Res.string.add))
+        },
+        onClick = onClick,
+        enabled = enabled
+    )
 }
 
 @Preview
 @Composable
 private fun Preview() {
     CompositionLocalProvider(LocalInspectionMode provides true) {
-        ExpenseEditorScreen.Content(
+        ExpenseEditorScreenContent(
             navigateUp = {},
             vm = ExpenseEditorPreviewViewModel
         )

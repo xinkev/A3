@@ -36,125 +36,124 @@ import org.koin.compose.viewmodel.koinViewModel
 import presentation.composables.CenteredTopBar
 import presentation.theme.Dimen
 
-object SettingsScreen {
 
-    @Composable
-    fun View(
-        vm: SettingsViewModel = koinViewModel()
-    ) {
-        val scrollState = rememberScrollState()
-        val loading by vm.loading.collectAsState()
+@Composable
+fun SettingsScreen(
+    vm: SettingsViewModel = koinViewModel()
+) {
+    val scrollState = rememberScrollState()
+    val loading by vm.loading.collectAsState()
 
-        Scaffold(topBar = {
-            CenteredTopBar("Settings")
-        }) {
-            Column(
-                modifier = Modifier
-                    .padding(it)
-                    .verticalScroll(scrollState)
-            ) {
-                AnimatedVisibility(visible = loading) {
-                    LinearProgressIndicator(
-                        Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.primary)
-                }
-                Group("Backup") {
-                    Import(onClick = vm::onClickRestore)
-                }
-            }
-        }
-    }
-
-    @Composable
-    private fun Import(onClick: () -> Unit) {
-        SettingsEntry(
-            onClick,
-            leftContent = {
-                LabelWithIcon(Icons.Default.Restore, "Restore")
-            }
-        )
-    }
-
-    @Composable
-    private fun SettingsEntry(
-        onClick: () -> Unit,
-        modifier: Modifier = Modifier,
-        leftContent: @Composable RowScope.() -> Unit,
-        rightContent: @Composable RowScope.() -> Unit = {}
-    ) {
-        Box(
+    Scaffold(topBar = {
+        CenteredTopBar("Settings")
+    }) {
+        Column(
             modifier = Modifier
-                .height(56.dp)
-                .clickable(onClick = onClick)
-                .then(modifier)
+                .padding(it)
+                .verticalScroll(scrollState)
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(
-                        horizontal = Dimen.largePadding, vertical = Dimen.smallPadding
-                    )
-                    .fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(Dimen.mediumPadding),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                leftContent()
-                Spacer(Modifier.weight(1f))
-                rightContent()
+            AnimatedVisibility(visible = loading) {
+                LinearProgressIndicator(
+                    Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+            Group("Backup") {
+                Import(onClick = vm::onClickRestore)
             }
         }
     }
+}
 
+@Composable
+private fun Import(onClick: () -> Unit) {
+    SettingsEntry(
+        onClick,
+        leftContent = {
+            LabelWithIcon(Icons.Default.Restore, "Restore")
+        }
+    )
+}
 
-    @Composable
-    private fun LabelWithIcon(
-        icon: ImageVector,
-        label: String,
+@Composable
+private fun SettingsEntry(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    leftContent: @Composable RowScope.() -> Unit,
+    rightContent: @Composable RowScope.() -> Unit = {}
+) {
+    Box(
+        modifier = Modifier
+            .height(56.dp)
+            .clickable(onClick = onClick)
+            .then(modifier)
     ) {
         Row(
-            modifier = Modifier.padding(vertical = Dimen.smallPadding)
+            modifier = Modifier
+                .padding(
+                    horizontal = Dimen.largePadding, vertical = Dimen.smallPadding
+                )
                 .fillMaxSize(),
+            horizontalArrangement = Arrangement.spacedBy(Dimen.mediumPadding),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = label,
-                modifier = Modifier.padding(end = Dimen.largePadding)
-            )
-            Text(
-                label,
-                style = LocalTextStyle.current.merge(
-                    TextStyle(
-                        lineHeightStyle = LineHeightStyle(
-                            alignment = LineHeightStyle.Alignment.Center,
-                            trim = LineHeightStyle.Trim.FirstLineTop,
-                        ),
-                    )
-                ),
-            )
+            leftContent()
+            Spacer(Modifier.weight(1f))
+            rightContent()
         }
     }
+}
 
-    @Composable
-    private fun Group(
-        title: String,
-        modifier: Modifier = Modifier,
-        content: @Composable () -> Unit
+
+@Composable
+private fun LabelWithIcon(
+    icon: ImageVector,
+    label: String,
+) {
+    Row(
+        modifier = Modifier.padding(vertical = Dimen.smallPadding)
+            .fillMaxSize(),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(modifier) {
-            Text(
-                text = title.uppercase(),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(horizontal = Dimen.largePadding)
-            )
-            Spacer(Modifier.height(Dimen.mediumPadding))
-            content()
-        }
+        Icon(
+            imageVector = icon,
+            contentDescription = label,
+            modifier = Modifier.padding(end = Dimen.largePadding)
+        )
+        Text(
+            label,
+            style = LocalTextStyle.current.merge(
+                TextStyle(
+                    lineHeightStyle = LineHeightStyle(
+                        alignment = LineHeightStyle.Alignment.Center,
+                        trim = LineHeightStyle.Trim.FirstLineTop,
+                    ),
+                )
+            ),
+        )
+    }
+}
+
+@Composable
+private fun Group(
+    title: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(modifier) {
+        Text(
+            text = title.uppercase(),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(horizontal = Dimen.largePadding)
+        )
+        Spacer(Modifier.height(Dimen.mediumPadding))
+        content()
     }
 }
 
 @Preview
 @Composable
 private fun PreviewSettingsScreen() {
-    SettingsScreen.View()
+    SettingsScreen()
 }
