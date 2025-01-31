@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -52,7 +53,9 @@ fun App(
             NavHost(
                 navController,
                 startDestination = Route.Home.name,
-                modifier = Modifier.fillMaxSize().padding(it)
+                modifier = Modifier.fillMaxSize()
+                    .padding(it)
+                    .consumeWindowInsets(it)
             ) {
                 composable(Route.Home.name) {
                     HomeScreen.View(navigateToExpenseEditor = {
