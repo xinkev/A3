@@ -1,7 +1,9 @@
 package backup
 
-import backup.Backup.Category
-import backup.Backup.Expense
+import feature.backup.data.ExpenseTaiyakiRestoreAdapter
+import feature.backup.domain.models.Backup
+import feature.backup.domain.models.Backup.Category
+import feature.backup.domain.models.Backup.Expense
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerializationException

@@ -30,3 +30,5 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":commonMainTest")
+include(":keypad")
+include(":kmp-compose-preview")

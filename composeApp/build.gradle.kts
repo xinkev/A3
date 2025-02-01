@@ -69,7 +69,6 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
 
                 implementation(libs.jetbrainsNavigationCompose)
 
@@ -90,6 +89,9 @@ kotlin {
 
                 // logging
                 implementation(libs.kermit)
+
+                implementation(projects.keypad)
+                implementation(projects.kmpComposePreview)
             }
         }
 
@@ -174,6 +176,9 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+dependencies {
+    implementation(project(":"))
 }
 
 compose.desktop {

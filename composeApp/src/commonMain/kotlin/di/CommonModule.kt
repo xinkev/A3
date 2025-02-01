@@ -1,16 +1,16 @@
 package di
 
+import common.data.CategoryDataSource
+import common.data.KVStorage
+import common.data.KVStorageImpl
 import core.Dispatchers
 import core.DispatchersImpl
-import data.CategoryDataSource
-import data.KVStorage
-import data.KVStorageImpl
 import database.DatabaseFactory
+import feature.expense.editor.di.expenseEditorModule
+import feature.home.di.homeModule
+import feature.settings.di.settingsModule
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import presentation.feature.home.di.homeModule
-import presentation.feature.expense_editor.di.expenseEditorModule
-import presentation.feature.settings.di.settingsModule
 
 val appModule = module {
     single<KVStorage> { KVStorageImpl() }

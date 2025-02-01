@@ -5,9 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.xinkev.a3.di.androidModules
+import core.App
 import di.startKoin
 import org.koin.android.ext.koin.androidContext
-import presentation.App
 
 class MainActivity : ComponentActivity() {
 

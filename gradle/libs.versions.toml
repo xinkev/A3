@@ -26,6 +26,7 @@ buildconfig = "5.5.1"
 kermit = "2.0.5"
 jetbrainsKotlinJvm = "2.1.10"
 jetbrainsNavigationCompose = "2.8.0-alpha10"
+uiToolingPreviewAndroid = "1.7.7"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,6 +56,7 @@ mpSettings-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", ver
 mpSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "mpsettings" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 jetbrainsNavigationCompose = { module= "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigationCompose"}
+androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
