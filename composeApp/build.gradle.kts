@@ -1,5 +1,6 @@
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val bundleName = "com.xinkev.a3"
 val bundleVersion = "1.0.0"
@@ -36,13 +37,11 @@ kotlin {
 //    }
     
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "11"
-            }
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     jvm("desktop")
     
     listOf(
