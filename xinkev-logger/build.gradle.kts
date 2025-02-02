@@ -3,12 +3,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.jetbrainsCompose)
 }
 
-val packageName = "com.xinkev.keypad"
-val packageVersion = "0.0.1"
+val packageName = "com.xinkev.logger"
+val packageVersion = "1.0.0"
 
 group = packageName
 version = packageVersion
@@ -25,22 +23,16 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "keypad"
+            baseName = packageName
             isStatic = true
         }
     }
 
     sourceSets {
-        val desktopMain by getting
-        commonMain.dependencies {
-            //put your multiplatform dependencies here
-            implementation(compose.material3)
-            implementation(compose.components.resources)
-            implementation(projects.kmpComposePreview)
-            implementation(projects.xinkevLogger)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.kermit)
+            }
         }
     }
 }
@@ -53,4 +45,3 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
-

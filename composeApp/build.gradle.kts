@@ -87,8 +87,7 @@ kotlin {
                 implementation(libs.mpSettings.coroutines)
 
                 // logging
-                implementation(libs.kermit)
-
+                implementation(projects.xinkevLogger)
                 implementation(projects.keypad)
                 implementation(projects.kmpComposePreview)
             }
@@ -175,9 +174,6 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
-}
-dependencies {
-    implementation(project(":"))
 }
 
 compose.desktop {
