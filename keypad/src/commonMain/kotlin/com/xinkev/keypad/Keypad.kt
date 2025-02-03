@@ -11,20 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 private val keys = listOf(
-    OperatorKey("("),
-    OperatorKey(")"),
-    OperatorKey("-"),
-    OperatorKey("+"),
+    BracketKey.Open,
+    BracketKey.Close,
+    OperatorKey.Minus,
+    OperatorKey.Plus,
 
     StandardKey("7"),
     StandardKey("8"),
     StandardKey("9"),
-    OperatorKey("÷"),
+    OperatorKey.Divide,
 
     StandardKey("4"),
     StandardKey("5"),
     StandardKey("6"),
-    OperatorKey("×"),
+    OperatorKey.Multiply,
 
     StandardKey("1"),
     StandardKey("2"),

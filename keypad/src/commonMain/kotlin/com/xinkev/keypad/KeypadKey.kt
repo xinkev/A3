@@ -37,9 +37,27 @@ data class StandardKey(
         @Composable get() = MaterialTheme.colorScheme.surfaceVariant
 }
 
-data class OperatorKey(
+enum class OperatorKey(
     override val text: String,
+    val value: String,
 ) : KeypadKey {
+    Plus("+", "+"),
+    Minus("‒", "-"),
+    Multiply("×", "*"),
+    Divide("÷", "/");
+
+    override val backgroundColor: Color
+        @Composable get() = MaterialTheme.colorScheme.secondary
+    override val color: Color
+        @Composable get() = MaterialTheme.colorScheme.onSecondary
+}
+
+
+enum class BracketKey(
+    override val text: String
+) : KeypadKey {
+    Open("("), Close(")");
+
     override val backgroundColor: Color
         @Composable get() = MaterialTheme.colorScheme.secondary
     override val color: Color
