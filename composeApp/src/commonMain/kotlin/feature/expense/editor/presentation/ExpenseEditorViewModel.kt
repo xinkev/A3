@@ -1,11 +1,16 @@
 package feature.expense.editor.presentation
 
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xinkev.keypad.KeypadKey
+import com.xinkev.logger.log
 import common.domain.model.Category
 import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
 import feature.expense.data.ExpenseDataSource
+import feature.expense.domain.AmountInputHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -17,33 +22,23 @@ import kotlinx.datetime.Clock
 class ExpenseEditorViewModel(
     private val dataSource: ExpenseDataSource
 ) : ViewModel(), IExpenseEditorViewModel {
-    private val _amount = MutableStateFlow("")
-    override val amount = _amount.asStateFlow()
-
-    private val _notes = MutableStateFlow("")
-    override val notes = _notes.asStateFlow()
-
+    override val amount = TextFieldState()
+    override val notes = TextFieldState()
     private val _dateMillis = MutableStateFlow(Clock.System.now().toEpochMilliseconds())
     override val dateMillis = _dateMillis.asStateFlow()
-
     private val _category = MutableStateFlow<Category?>(null)
     override val category = _category.asStateFlow()
 
+    private val amountInputHandler = AmountInputHandler(
+        coroutineScope = viewModelScope,
+        state = amount,
+    )
     override val enableAddButton: StateFlow<Boolean> = combine(
-        amount,
+        amountInputHandler.stateFlow,
         category
     ) { amount, category ->
         amount.isNotBlank() && category != null
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
-
-
-    override fun onAmountChanged(amount: String) {
-        _amount.value = amount
-    }
-
-    override fun onNotesChanged(notes: String) {
-        _notes.value = notes
-    }
 
     override fun onDateChanged(dateMillis: Long) {
         _dateMillis.value = dateMillis
@@ -54,11 +49,13 @@ class ExpenseEditorViewModel(
     }
 
     override fun onClickAdd() {
+        // TODO: Handle it more graciously
+        val amountInDouble = amount.text.toString().toDoubleOrNull() ?: return
         // convert dateMillis to date
         val date = dateTimeMilliToString(_dateMillis.value, A3DateFormat.ISO8601)
         dataSource.insert(
-            amount = _amount.value.toDouble(),
-            notes = _notes.value,
+            amount = amountInDouble,
+            notes = notes.text.toString(),
             dateTime = date,
             category = _category.value!!.name
         )
@@ -66,9 +63,13 @@ class ExpenseEditorViewModel(
         resetState()
     }
 
+    override fun onKeyPressed(key: KeypadKey) {
+        log.i { key }
+    }
+
     private fun resetState() {
-        _amount.value = ""
-        _notes.value = ""
+        amount.clearText()
+        notes.clearText()
         _dateMillis.value = Clock.System.now().toEpochMilliseconds()
         _category.value = null
     }

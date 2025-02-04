@@ -3,6 +3,7 @@
 package com.xinkev.keypad
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,7 +32,6 @@ import com.xinkev.keypad.keypad.generated.resources.Res
 import com.xinkev.keypad.keypad.generated.resources.add_notes
 import kotlinx.coroutines.awaitCancellation
 import org.jetbrains.compose.resources.stringResource
-
 
 @Composable
 fun KeypadInput(
@@ -62,6 +62,21 @@ fun KeypadInput(
     }
 }
 
+private val DisplayReplacements = mapOf(
+    '-' to "‒",
+    '*' to "×",
+    '/' to "÷"
+)
+
+private val InputReplacements = DisplayReplacements.entries.associate { (k, v) -> v.first() to k.toString() }
+
+private fun CharSequence.replaceCharacters(replacements: Map<Char, String>): String {
+    val regex = "[${replacements.keys.joinToString("")}]".toRegex()
+    return regex.replace(this) { match ->
+        replacements[match.value.first()] ?: match.value
+    }
+}
+
 @ExperimentalComposeUiApi
 @Composable
 private fun AmountInput(
@@ -88,7 +103,16 @@ private fun AmountInput(
                     horizontal = KeypadDimens.keypadInputHorizontalPadding,
                     vertical = KeypadDimens.keypadInputVerticalPadding,
                 )
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            outputTransformation = {
+                val transformed = asCharSequence().replaceCharacters( DisplayReplacements)
+                replace(0, length, transformed)
+            },
+            inputTransformation = {
+                val transformed = asCharSequence().replaceCharacters(InputReplacements)
+                replace(0, length, transformed)
+                print(asCharSequence())
+            }
         )
     }
 }
@@ -125,7 +149,7 @@ private fun NoteInput(
 
 @Preview
 @Composable
-private fun KeypadInput() {
+private fun KeypadInputPreview() {
     val textState = rememberTextFieldState("")
     KeypadInput(amountState = textState, noteState = textState)
 }

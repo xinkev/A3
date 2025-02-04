@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,8 +52,6 @@ private fun ExpenseEditorScreenContent(
     navigateUp: () -> Unit,
 ) {
     val dateMillis by vm.dateMillis.collectAsState()
-    val amount by vm.amount.collectAsState()
-    val notes by vm.notes.collectAsState()
     val category by vm.category.collectAsState()
     val enableAddButton by vm.enableAddButton.collectAsState()
 
@@ -62,7 +59,6 @@ private fun ExpenseEditorScreenContent(
         initialDisplayMode = DisplayMode.Input,
         initialSelectedDateMillis = dateMillis
     )
-    val inputState = rememberTextFieldState()
 
     LaunchedEffect(Unit) {
         snapshotFlow { datePickerState.selectedDateMillis }
@@ -92,8 +88,8 @@ private fun ExpenseEditorScreenContent(
             verticalArrangement = Arrangement.spacedBy(Dimen.mediumSize),
         ) {
             KeypadInput(
-                amountState = inputState,
-                noteState = inputState,
+                amountState = vm.amount,
+                noteState = vm.notes,
                 modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
             )
             Row(
@@ -111,7 +107,7 @@ private fun ExpenseEditorScreenContent(
                 )
             }
 
-            Keypad { vm.onAmountChanged(amount + it.text) }
+            Keypad(onClickKey = vm::onKeyPressed)
         }
     }
 }
