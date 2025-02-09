@@ -40,7 +40,7 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 kotlinx-serilization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core-wasm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref="kotlinx-coroutines"}
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-desktop = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
@@ -55,8 +55,7 @@ koin-compose-vm = { module = "io.insert-koin:koin-compose-viewmodel" }
 mpSettings-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "mpsettings" }
 mpSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "mpsettings" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
-jetbrainsNavigationCompose = { module= "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigationCompose"}
-androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
+jetbrainsNavigationCompose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigationCompose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

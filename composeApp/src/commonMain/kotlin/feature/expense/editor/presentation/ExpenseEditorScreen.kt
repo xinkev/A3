@@ -84,12 +84,12 @@ private fun ExpenseEditorScreenContent(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(it),
+                .padding(it)
+                .padding(bottom = Dimen.largePadding),
             verticalArrangement = Arrangement.spacedBy(Dimen.mediumSize),
         ) {
             KeypadInput(
-                amountState = vm.amount,
-                noteState = vm.notes,
+                keypadState = vm.keypadState,
                 modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
             )
             Row(
@@ -107,7 +107,7 @@ private fun ExpenseEditorScreenContent(
                 )
             }
 
-            Keypad(onClickKey = vm::onKeyPressed)
+            Keypad(vm.keypadState)
         }
     }
 }

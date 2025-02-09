@@ -38,6 +38,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(projects.kmpComposePreview)
             implementation(projects.xinkevLogger)
+            implementation(projects.keval)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

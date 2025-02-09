@@ -18,6 +18,8 @@ object KeypadDimens {
 
     val keyPadInnerPadding = 12.dp
 
+    val errorPadding = 8.dp
+
     val keypadInputCornerRadius = 24.dp
     val keypadInputHorizontalPadding = 16.dp
     val keypadInputVerticalPadding = 8.dp

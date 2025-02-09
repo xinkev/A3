@@ -2,8 +2,13 @@
 
 package com.xinkev.keypad
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +19,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
@@ -35,10 +39,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun KeypadInput(
-    // TODO: Create a custom state class
-    amountState: TextFieldState,
+    keypadState: KeypadState,
     modifier: Modifier = Modifier,
-    noteState: TextFieldState,
     amountTextStyle: TextStyle = MaterialTheme.typography.displayMedium,
     noteTextStyle: TextStyle = MaterialTheme.typography.titleMedium,
 ) {
@@ -48,32 +50,33 @@ fun KeypadInput(
                 Modifier.clip(KeypadInputShape)
                     .background(MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp))
                     .width(IntrinsicSize.Max)
+                    .animateContentSize()
             ),
     ) {
-        AmountInput(
-            state = amountState,
-            textStyle = amountTextStyle
-        )
+        Column {
+            AmountInput(
+                state = keypadState.amount,
+                textStyle = amountTextStyle
+            )
+            AnimatedVisibility(
+                visible = keypadState.amountEvalError.isNotEmpty(),
+                enter = slideInVertically { it } + fadeIn(),
+                exit = slideOutVertically { it } + fadeOut(),
+                modifier = Modifier.padding(KeypadDimens.errorPadding)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(
+                    keypadState.amountEvalError,
+                    color = Color.Red,
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            }
+        }
         NoteInput(
-            state = noteState,
+            state = keypadState.note,
             textStyle = noteTextStyle,
             placeholder = stringResource(Res.string.add_notes),
         )
-    }
-}
-
-private val DisplayReplacements = mapOf(
-    '-' to "‒",
-    '*' to "×",
-    '/' to "÷"
-)
-
-private val InputReplacements = DisplayReplacements.entries.associate { (k, v) -> v.first() to k.toString() }
-
-private fun CharSequence.replaceCharacters(replacements: Map<Char, String>): String {
-    val regex = "[${replacements.keys.joinToString("")}]".toRegex()
-    return regex.replace(this) { match ->
-        replacements[match.value.first()] ?: match.value
     }
 }
 
@@ -104,15 +107,6 @@ private fun AmountInput(
                     vertical = KeypadDimens.keypadInputVerticalPadding,
                 )
                 .fillMaxWidth(),
-            outputTransformation = {
-                val transformed = asCharSequence().replaceCharacters( DisplayReplacements)
-                replace(0, length, transformed)
-            },
-            inputTransformation = {
-                val transformed = asCharSequence().replaceCharacters(InputReplacements)
-                replace(0, length, transformed)
-                print(asCharSequence())
-            }
         )
     }
 }
@@ -150,6 +144,5 @@ private fun NoteInput(
 @Preview
 @Composable
 private fun KeypadInputPreview() {
-    val textState = rememberTextFieldState("")
-    KeypadInput(amountState = textState, noteState = textState)
+    KeypadInput(keypadState = KeypadState())
 }

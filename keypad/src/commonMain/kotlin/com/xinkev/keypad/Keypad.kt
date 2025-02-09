@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
 private val keys = listOf(
@@ -34,19 +35,21 @@ private val keys = listOf(
     StandardKey("000"),
     StandardKey("."),
     StandardKey("0"),
-    EqualsKey,
+    EqualKey,
 )
 
 private const val CELLS_PER_ROW = 4
 
 @Composable
 fun Keypad(
+    keypadState: KeypadState,
     modifier: Modifier = Modifier,
-    onClickKey: (KeypadKey) -> Unit
 ) {
+    val keyPressHandler = remember { KeyPressHandler(keypadState) }
+
     Column(
         modifier = Modifier
-            .padding(KeypadDimens.keyPadInnerPadding)
+            .padding(horizontal = KeypadDimens.keyPadInnerPadding)
             .sizeIn(maxWidth = KeypadDimens.maxKeypadWidth)
             .then(modifier),
         verticalArrangement = Arrangement.spacedBy(KeypadDimens.rowGap)
@@ -59,7 +62,9 @@ fun Keypad(
                         text = key.text,
                         backgroundColor = key.backgroundColor,
                         textColor = key.color,
-                        onClick = { onClickKey(key) }
+                        onClick = {
+                            keyPressHandler.onKeyPress(key)
+                        }
                     )
                 }
             }
@@ -71,6 +76,6 @@ fun Keypad(
 @Composable
 private fun KeypadPreview() {
     MaterialTheme {
-        Keypad {}
+        Keypad(KeypadState())
     }
 }

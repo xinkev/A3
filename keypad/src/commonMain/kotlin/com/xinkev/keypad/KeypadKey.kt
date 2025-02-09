@@ -20,7 +20,7 @@ data object BackspaceKey : KeypadKey {
         @Composable get() = MaterialTheme.colorScheme.error
 }
 
-data object EqualsKey : KeypadKey {
+data object EqualKey : KeypadKey {
     override val text: String = "="
     override val color: Color
         @Composable get() = MaterialTheme.colorScheme.onPrimaryContainer
@@ -39,12 +39,11 @@ data class StandardKey(
 
 enum class OperatorKey(
     override val text: String,
-    val value: String,
 ) : KeypadKey {
-    Plus("+", "+"),
-    Minus("‒", "-"),
-    Multiply("×", "*"),
-    Divide("÷", "/");
+    Plus("+"),
+    Minus("‒"),
+    Multiply("×"),
+    Divide("÷");
 
     override val backgroundColor: Color
         @Composable get() = MaterialTheme.colorScheme.secondary
