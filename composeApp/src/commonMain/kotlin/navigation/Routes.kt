@@ -1,13 +1,13 @@
 package navigation
 
-import a3.composeapp.generated.resources.Res
-import a3.composeapp.generated.resources.expense_editor
-import a3.composeapp.generated.resources.home
-import a3.composeapp.generated.resources.settings
-import org.jetbrains.compose.resources.StringResource
+import kotlinx.serialization.Serializable
 
-enum class Route(val title: StringResource) {
-    Home(Res.string.home),
-    Settings(Res.string.settings),
-    ExpenseEditor(Res.string.expense_editor)
+sealed interface Route {
+    @Serializable
+    data object Home : Route
+    @Serializable
+    data object Settings: Route
+    @Serializable
+    data object ExpenseEditor: Route
 }
+

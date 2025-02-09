@@ -1,5 +1,8 @@
 package core
 
+import a3.composeapp.generated.resources.Res
+import a3.composeapp.generated.resources.home
+import a3.composeapp.generated.resources.settings
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -24,6 +27,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -52,20 +56,22 @@ fun App(
         ) {
             NavHost(
                 navController,
-                startDestination = Route.Home.name,
+                startDestination = Route.Home,
                 modifier = Modifier.fillMaxSize()
                     .padding(it)
                     .consumeWindowInsets(it)
             ) {
-                composable(Route.Home.name) {
+                composable<Route.Home> {
                     HomeScreen(navigateToExpenseEditor = {
-                        navController.navigate(Route.ExpenseEditor.name)
+                        navController.navigate(Route.ExpenseEditor)
                     })
                 }
-                composable(Route.Settings.name) {
-                    SettingsScreen()
+                composable<Route.Settings> {
+                    SettingsScreen(navigateToAddCategory = {
+                        navController.navigate(Route.Home)
+                    })
                 }
-                composable(Route.ExpenseEditor.name) {
+                composable<Route.ExpenseEditor> {
                     ExpenseEditorScreen(
                         navigateUp = navController::navigateUp
                     )
@@ -82,7 +88,9 @@ private fun BottomBar(controller: NavHostController) {
     val backStackEntry by controller.currentBackStackEntryAsState()
     val visible by remember {
         derivedStateOf {
-            backStackEntry?.destination?.route != Route.ExpenseEditor.name
+            BottomBarItem.entries.any {
+                backStackEntry?.destination?.hasRoute(it.route::class) == true
+            }
         }
     }
 
@@ -107,7 +115,7 @@ private fun BottomBar(controller: NavHostController) {
                         Text(stringResource(item.label))
                     }, onClick = {
                         selectedItem = item
-                        controller.navigate(item.route.name) {
+                        controller.navigate(item.route) {
                             popUpTo(controller.graph.findStartDestination().route!!) {
                                 saveState = true
                             }
@@ -125,11 +133,11 @@ private enum class BottomBarItem(
     val label: StringResource, val icon: ImageVector, val route: Route
 ) {
     Home(
-        label = Route.Home.title,
+        label = Res.string.home,
         icon = Icons.Filled.Home,
         route = Route.Home
     ),
-    Settings(label = Route.Settings.title, icon = Icons.Filled.Settings, route = Route.Settings)
+    Settings(label = Res.string.settings, icon = Icons.Filled.Settings, route = Route.Settings)
 }
 
 @Preview
