@@ -102,8 +102,8 @@ private fun ExpenseEditorScreenContent(
                     buttonType = A3DatePickerButtonType.Text
                 )
                 CategoryPicker(
-                    selectedCategory = category,
-                    onSelect = vm::onCategoryChanged
+                    initialSelectedCategory = category,
+                    onSelected = vm::onCategoryChanged
                 )
             }
 

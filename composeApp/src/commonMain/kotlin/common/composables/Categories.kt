@@ -29,19 +29,18 @@ import common.domain.model.Category
 import org.koin.compose.koinInject
 import theme.Dimen
 
-// TODO: Make onSelect only invokable when a category is selected
 @Composable
 fun Categories(
     modifier: Modifier = Modifier,
     selected: Category? = null,
     hasBorder: Boolean = true,
-    onSelect: (Category?) -> Unit,
+    onSelectionChange: (Category?) -> Unit,
 ) {
     val isPreview = LocalInspectionMode.current
     if (isPreview) {
         PreviewableContent(modifier)
     } else {
-        Content(modifier, selected, hasBorder, onSelect)
+        Content(modifier, selected, hasBorder, onSelectionChange)
     }
 }
 

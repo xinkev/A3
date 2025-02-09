@@ -38,22 +38,51 @@ import theme.Dimen
 @Composable
 fun CategoryPicker(
     modifier: Modifier = Modifier,
-    onSelect: (Category?) -> Unit,
-    selectedCategory: Category?
+    onSelected: (Category?) -> Unit,
+    initialSelectedCategory: Category?
 ) {
     var openDialog by remember { mutableStateOf(false) }
+    var newSelection by remember { mutableStateOf(initialSelectedCategory) }
+    // Remember the current selection to restore it if the user cancels the dialog.
+    // Set initialSelectedCategory as the key to refresh the value when it changes.
+    val currentSelection = remember(initialSelectedCategory) { initialSelectedCategory }
 
     if (openDialog) {
         CategoryPickerDialog(
-            onSelect = onSelect,
-            onDismissRequest = { openDialog = false },
-            selectedCategory = selectedCategory
+            onDismissRequest = {
+                openDialog = false
+                onSelected(newSelection)
+            },
+            onSelectionChange = {
+                newSelection = it
+            },
+            onClickOk = {
+                onSelected(newSelection)
+            },
+            onClickCancel = {
+                newSelection = currentSelection
+            },
+            selectedCategory = newSelection
         )
     }
 
-    OutlinedButton(
+    CategoryPickerButton(
         modifier = modifier,
         onClick = { openDialog = true },
+        // The button should always show the current selection, even if the dialog is open.
+        selectedCategory = currentSelection
+    )
+}
+
+@Composable
+fun CategoryPickerButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    selectedCategory: Category?
+) {
+    OutlinedButton(
+        modifier = modifier,
+        onClick = onClick,
     ) {
         if (selectedCategory != null) {
             Row(
@@ -61,7 +90,10 @@ fun CategoryPicker(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (selectedCategory.icon != null) {
-                    Icon(imageVector = selectedCategory.icon.vector(), contentDescription = null)
+                    Icon(
+                        imageVector = selectedCategory.icon.vector(),
+                        contentDescription = null
+                    )
                 }
                 Text(selectedCategory.name)
             }
@@ -74,8 +106,10 @@ fun CategoryPicker(
 @Composable
 private fun CategoryPickerDialog(
     onDismissRequest: () -> Unit,
-    selectedCategory: Category?,
-    onSelect: (Category?) -> Unit
+    onSelectionChange: (Category?) -> Unit,
+    onClickOk: () -> Unit,
+    onClickCancel: () -> Unit,
+    selectedCategory: Category?
 ) {
     Dialog(
         onDismissRequest = onDismissRequest
@@ -89,22 +123,24 @@ private fun CategoryPickerDialog(
                 Categories(
                     modifier = Modifier.padding(Dimen.largePadding),
                     selected = selectedCategory,
-                    onSelect = onSelect,
+                    onSelectionChange = onSelectionChange,
                     hasBorder = false
                 )
                 Row(modifier = Modifier.align(Alignment.End)) {
                     TextButton(
-                        onClick = onDismissRequest
-                    ) {
-                        Text(stringResource(Res.string.cancel))
-                    }
+                        onClick = {
+                            onClickCancel.invoke()
+                            onDismissRequest.invoke()
+                        },
+                        content = { Text(stringResource(Res.string.cancel)) }
+                    )
                     TextButton(
                         onClick = {
+                            onClickOk.invoke()
                             onDismissRequest.invoke()
-                        }
-                    ) {
-                        Text(stringResource(Res.string.ok))
-                    }
+                        },
+                        content = { Text(stringResource(Res.string.ok)) }
+                    )
                 }
             }
         }
@@ -119,7 +155,9 @@ private fun CategoryPickerDialogPreview() {
         CategoryPickerDialog(
             onDismissRequest = {},
             selectedCategory = null,
-            onSelect = {}
+            onSelectionChange = {},
+            onClickOk = {},
+            onClickCancel = {}
         )
     }
 }
@@ -129,8 +167,8 @@ private fun CategoryPickerDialogPreview() {
 private fun CategoryPickerPreview() {
     CompositionLocalProvider(LocalInspectionMode provides true) {
         CategoryPicker(
-            selectedCategory = Category("Test", icon = MaterialIcon(Icons.Default.Info)),
-            onSelect = {}
+            initialSelectedCategory = Category("Test", icon = MaterialIcon(Icons.Default.Info)),
+            onSelected = {}
         )
     }
 }
