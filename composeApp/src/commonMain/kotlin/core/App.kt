@@ -33,6 +33,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import database.previewDatabaseFactory
 import di.commonModule
@@ -56,25 +57,33 @@ fun App(
         ) {
             NavHost(
                 navController,
-                startDestination = Route.Home,
+                startDestination = Route.HomeGraph,
                 modifier = Modifier.fillMaxSize()
                     .padding(it)
                     .consumeWindowInsets(it)
             ) {
-                composable<Route.Home> {
-                    HomeScreen(navigateToExpenseEditor = {
-                        navController.navigate(Route.ExpenseEditor)
-                    })
+                navigation<Route.HomeGraph>(startDestination = Route.HomeGraph.Home) {
+                    composable<Route.HomeGraph.Home> {
+                        HomeScreen(navigateToExpenseEditor = {
+                            navController.navigate(Route.HomeGraph.ExpenseEditor)
+                        })
+                    }
+                    composable<Route.HomeGraph.ExpenseEditor> {
+                        ExpenseEditorScreen(
+                            navigateUp = navController::navigateUp
+                        )
+                    }
                 }
-                composable<Route.Settings> {
-                    SettingsScreen(navigateToAddCategory = {
-                        navController.navigate(Route.Home)
-                    })
-                }
-                composable<Route.ExpenseEditor> {
-                    ExpenseEditorScreen(
-                        navigateUp = navController::navigateUp
-                    )
+
+                navigation<Route.SettingsGraph>(startDestination = Route.SettingsGraph.Settings) {
+                    composable<Route.SettingsGraph.Settings> {
+                        SettingsScreen(navigateToAddCategory = {
+                            navController.navigate(Route.SettingsGraph.AddCategory)
+                        })
+                    }
+                    composable<Route.SettingsGraph.AddCategory> {
+                        Text("AddCategory")
+                    }
                 }
             }
         }
@@ -135,9 +144,13 @@ private enum class BottomBarItem(
     Home(
         label = Res.string.home,
         icon = Icons.Filled.Home,
-        route = Route.Home
+        route = Route.HomeGraph.Home
     ),
-    Settings(label = Res.string.settings, icon = Icons.Filled.Settings, route = Route.Settings)
+    Settings(
+        label = Res.string.settings,
+        icon = Icons.Filled.Settings,
+        route = Route.SettingsGraph.Settings
+    )
 }
 
 @Preview
