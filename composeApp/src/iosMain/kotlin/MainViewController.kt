@@ -1,5 +1,5 @@
 import androidx.compose.ui.window.ComposeUIViewController
-import core.App
+import app.App
 import di.iosModules
 import di.startKoin
 
