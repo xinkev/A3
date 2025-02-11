@@ -72,9 +72,9 @@ kotlin {
                 implementation(libs.jetbrainsNavigationCompose)
 
                 implementation(libs.kotlinx.datetime)
-                implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serilization.json)
 
+                implementation(libs.kotlinx.coroutines.core)
 //                implementation(libs.bundles.voyager)
                 implementation(libs.sqldelight.extension.coroutines)
 
@@ -124,6 +124,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(libs.kotlinx.coroutines.test)
+                implementation(libs.turbine)
             }
         }
 

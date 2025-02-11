@@ -37,11 +37,9 @@ import theme.Dimen
 @Composable
 fun ExpenseEditorScreen(
     vm: ExpenseEditorViewModel = koinViewModel(),
-    navigateUp: () -> Unit
 ) {
     ExpenseEditorScreenContent(
         vm = vm,
-        navigateUp = navigateUp,
     )
 }
 
@@ -49,7 +47,6 @@ fun ExpenseEditorScreen(
 @Composable
 private fun ExpenseEditorScreenContent(
     vm: IExpenseEditorViewModel,
-    navigateUp: () -> Unit,
 ) {
     val dateMillis by vm.dateMillis.collectAsState()
     val category by vm.category.collectAsState()
@@ -71,7 +68,6 @@ private fun ExpenseEditorScreenContent(
         topBar = {
             TopBar(
                 title = "New Expense",
-                navigateBack = navigateUp,
                 actions = {
                     AddButton(
                         enabled = enableAddButton,
@@ -131,7 +127,6 @@ private fun AddButton(
 private fun Preview() {
     CompositionLocalProvider(LocalInspectionMode provides true) {
         ExpenseEditorScreenContent(
-            navigateUp = {},
             vm = ExpenseEditorPreviewViewModel
         )
     }

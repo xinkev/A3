@@ -11,6 +11,7 @@ interface IHomeViewModel {
     val expenses: StateFlow<List<Expense>>
     val dateMillis: StateFlow<Long>
     fun setDate(dateMillis: Long)
+    fun onClickAddExpense()
 }
 
 internal data object PreviewHomeViewModel : IHomeViewModel {
@@ -30,6 +31,9 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
         get() = MutableStateFlow(0L)
 
     override fun setDate(dateMillis: Long) {
+    }
+
+    override fun onClickAddExpense() {
     }
 
     private fun previewExpense(detail: String, cost: Double): Expense {

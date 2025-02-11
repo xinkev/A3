@@ -41,18 +41,13 @@ import theme.Dimen
 @Composable
 fun HomeScreen(
     vm: HomeViewModel = koinViewModel(),
-    navigateToExpenseEditor: () -> Unit,
 ) {
-    HomeScreenContent(
-        vm = vm,
-        onTapAdd = navigateToExpenseEditor
-    )
+    HomeScreenContent(vm = vm)
 }
 
 @Composable
 fun HomeScreenContent(
     vm: IHomeViewModel,
-    onTapAdd: () -> Unit
 ) {
     Column {
         Row(
@@ -66,7 +61,7 @@ fun HomeScreenContent(
                 value = vm.dateMillis.collectAsState().value
             )
             Spacer(modifier = Modifier.weight(1f))
-            AddButton(onClick = onTapAdd)
+            AddButton(onClick = vm::onClickAddExpense)
         }
         ExpenseList(vm)
     }
@@ -141,7 +136,6 @@ private fun TransactionItem(expense: Expense, categories: List<Category>) {
 private fun PreviewHomeScreen() {
     A3Theme {
         HomeScreenContent(
-            onTapAdd = {},
             vm = PreviewHomeViewModel
         )
     }

@@ -35,6 +35,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import common.util.HandleEvents
+import core.event.NavigationEvent
 import database.previewDatabaseFactory
 import di.commonModule
 import di.startKoin
@@ -51,6 +53,14 @@ import theme.A3Theme
 fun App(
     navController: NavHostController = rememberNavController()
 ) {
+    HandleEvents<NavigationEvent> {
+        if (it is NavigationEvent.NavigateUp) {
+            navController.navigateUp()
+        } else {
+            navController.navigate(it.destination!!)
+        }
+    }
+
     A3Theme {
         Scaffold(
             bottomBar = { BottomBar(navController) },
@@ -64,22 +74,16 @@ fun App(
             ) {
                 navigation<Route.HomeGraph>(startDestination = Route.HomeGraph.Home) {
                     composable<Route.HomeGraph.Home> {
-                        HomeScreen(navigateToExpenseEditor = {
-                            navController.navigate(Route.HomeGraph.ExpenseEditor)
-                        })
+                        HomeScreen()
                     }
                     composable<Route.HomeGraph.ExpenseEditor> {
-                        ExpenseEditorScreen(
-                            navigateUp = navController::navigateUp
-                        )
+                        ExpenseEditorScreen()
                     }
                 }
 
                 navigation<Route.SettingsGraph>(startDestination = Route.SettingsGraph.Settings) {
                     composable<Route.SettingsGraph.Settings> {
-                        SettingsScreen(navigateToAddCategory = {
-                            navController.navigate(Route.SettingsGraph.AddCategory)
-                        })
+                        SettingsScreen()
                     }
                     composable<Route.SettingsGraph.AddCategory> {
                         Text("AddCategory")

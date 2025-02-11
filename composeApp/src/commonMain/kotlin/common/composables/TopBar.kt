@@ -10,7 +10,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import core.event.EventBus
+import core.event.NavigationEvent
+import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -20,14 +25,21 @@ fun TopBar(
     modifier: Modifier = Modifier,
     navigationIconHidden: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {},
-    navigateBack: () -> Unit = {},
+    onClickBack: () -> Unit = {},
+    eventBus: EventBus = koinInject()
 ) {
+    val coroutineScope = rememberCoroutineScope()
     TopAppBar(
         modifier = modifier,
         title = { Text(title) },
         navigationIcon = {
             if (!navigationIconHidden) {
-                IconButton(onClick = navigateBack) {
+                IconButton(onClick = {
+                    onClickBack()
+                    coroutineScope.launch {
+                        eventBus.send(NavigationEvent.NavigateUp)
+                    }
+                }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         contentDescription = "Navigate back"

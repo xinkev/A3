@@ -7,7 +7,6 @@ import navigation.Route
 
 interface ISettingsViewModel {
     val loading: StateFlow<Boolean>
-    val navigation: Flow<Route?>
 
     fun onClickRestore()
     fun onClickAddCategory()
@@ -16,8 +15,6 @@ interface ISettingsViewModel {
 internal object PreviewSettingsViewModel : ISettingsViewModel {
     override val loading: StateFlow<Boolean>
         get() = MutableStateFlow(false)
-    override val navigation: Flow<Route?>
-        get() = MutableStateFlow(null)
 
     override fun onClickRestore() {}
 
