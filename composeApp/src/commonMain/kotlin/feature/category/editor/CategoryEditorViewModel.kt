@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import common.util.textAsFlow
 import core.event.EventBus
 import core.event.NavigationEvent
-import feature.category.data.CategoryDataSource
-import feature.category.domain.model.CategoryIconName
+import feature.category.common.data.CategoryDataSource
+import feature.category.common.domain.model.CategoryIconName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

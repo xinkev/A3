@@ -1,7 +1,7 @@
 package feature.category.editor
 
 import androidx.compose.foundation.text.input.TextFieldState
-import feature.category.domain.model.CategoryIconName
+import feature.category.common.domain.model.CategoryIconName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

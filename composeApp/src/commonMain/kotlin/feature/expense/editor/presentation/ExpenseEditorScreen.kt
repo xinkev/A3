@@ -28,11 +28,11 @@ import com.xinkev.keypad.Keypad
 import com.xinkev.keypad.KeypadInput
 import common.composables.A3DatePicker
 import common.composables.A3DatePickerButtonType
-import feature.category.presentation.composables.CategoryPicker
+import feature.category.categories.composables.CategoryPicker
 import common.composables.TopBar
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import theme.Dimen
+import app.theme.Dimen
 
 @Composable
 fun ExpenseEditorScreen(

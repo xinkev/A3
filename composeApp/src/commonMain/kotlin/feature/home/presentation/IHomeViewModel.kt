@@ -1,7 +1,7 @@
 package feature.home.presentation
 
-import feature.category.domain.model.Category
-import feature.expense.domain.model.Expense
+import feature.category.common.domain.model.Category
+import feature.expense.common.domain.model.Expense
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime

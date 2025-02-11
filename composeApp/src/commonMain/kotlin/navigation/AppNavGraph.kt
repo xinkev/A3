@@ -14,7 +14,7 @@ import androidx.navigation.compose.navigation
 import common.util.HandleEvents
 import core.event.NavigationEvent
 import feature.category.editor.CategoryEditorScreen
-import feature.category.presentation.CategoriesScreen
+import feature.category.categories.CategoriesScreen
 import feature.expense.editor.presentation.ExpenseEditorScreen
 import feature.home.presentation.HomeScreen
 import feature.settings.SettingsScreen

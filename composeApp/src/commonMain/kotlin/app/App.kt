@@ -9,12 +9,12 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import database.previewDatabaseFactory
+import app.theme.A3Theme
+import core.database.previewDatabaseFactory
 import di.commonModule
 import di.startKoin
 import navigation.AppNavGraph
 import org.koin.dsl.module
-import theme.A3Theme
 
 @Composable
 fun App() {

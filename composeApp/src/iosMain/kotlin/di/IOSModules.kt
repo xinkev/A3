@@ -1,7 +1,7 @@
 package di
 
-import database.DatabaseFactory
-import database.DatabaseFactoryImpl
+import core.database.DatabaseFactory
+import core.database.DatabaseFactoryImpl
 import database.IOSDriverFactory
 import org.koin.dsl.module
 

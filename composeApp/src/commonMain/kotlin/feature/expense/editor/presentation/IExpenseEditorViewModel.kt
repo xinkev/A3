@@ -1,7 +1,7 @@
 package feature.expense.editor.presentation
 
 import com.xinkev.keypad.KeypadState
-import feature.category.domain.model.Category
+import feature.category.common.domain.model.Category
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

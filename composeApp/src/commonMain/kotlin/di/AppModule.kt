@@ -1,12 +1,12 @@
 package di
 
-import feature.category.data.CategoryDataSource
+import feature.category.common.data.CategoryDataSource
 import common.data.KVStorage
 import common.data.KVStorageImpl
 import core.Dispatchers
 import core.DispatchersImpl
 import core.event.EventBus
-import database.DatabaseFactory
+import core.database.DatabaseFactory
 import org.koin.dsl.module
 
 val appModule = module {

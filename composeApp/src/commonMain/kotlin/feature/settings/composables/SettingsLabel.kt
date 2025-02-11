@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.LineHeightStyle
-import theme.Dimen
+import app.theme.Dimen
 
 @Composable
 fun RowScope.SettingsLabel(

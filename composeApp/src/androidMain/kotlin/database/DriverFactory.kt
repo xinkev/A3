@@ -6,6 +6,7 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.xinkev.a3.BuildConfig
 import com.xinkev.a3.sqldelight.A3Database
+import core.database.DriverFactory
 
 class AndroidDriverFactory(private val context: Context): DriverFactory {
     override fun create(): SqlDriver = AndroidSqliteDriver(

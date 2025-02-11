@@ -5,6 +5,7 @@ import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.xinkev.a3.BuildConfig
 import com.xinkev.a3.sqldelight.A3Database
 import com.xinkev.logger.log
+import core.database.DriverFactory
 import java.io.File
 
 class DesktopDriverFactory : DriverFactory {

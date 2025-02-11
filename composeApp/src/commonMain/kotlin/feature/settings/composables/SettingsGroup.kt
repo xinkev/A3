@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import theme.Dimen
+import app.theme.Dimen
 
 @Composable
 fun SettingsGroup(

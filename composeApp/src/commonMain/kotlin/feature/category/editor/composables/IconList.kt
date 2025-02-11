@@ -11,9 +11,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.category.domain.model.CategoryIconName
-import feature.category.presentation.categoryIcons
-import theme.Dimen
+import feature.category.common.domain.model.CategoryIconName
+import feature.category.categories.categoryIcons
+import app.theme.Dimen
 
 @Composable
 fun ColumnScope.CategoryIcons(

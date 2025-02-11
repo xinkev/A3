@@ -2,7 +2,7 @@ package feature.backup.data
 
 import com.xinkev.a3.sqldelight.A3Database
 import core.Outcome
-import database.DatabaseFactory
+import core.database.DatabaseFactory
 import feature.backup.domain.adapter.RestoreAdapter
 import feature.backup.domain.models.Backup
 import feature.backup.domain.models.BackupError

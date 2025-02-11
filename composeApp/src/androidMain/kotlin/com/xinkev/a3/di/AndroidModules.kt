@@ -1,8 +1,8 @@
 package com.xinkev.a3.di
 
 import database.AndroidDriverFactory
-import database.DatabaseFactory
-import database.DatabaseFactoryImpl
+import core.database.DatabaseFactory
+import core.database.DatabaseFactoryImpl
 import di.commonModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module

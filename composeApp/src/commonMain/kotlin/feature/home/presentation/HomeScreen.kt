@@ -31,12 +31,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import common.composables.A3DatePicker
-import feature.category.domain.model.Category
-import feature.expense.domain.model.Expense
+import feature.category.common.domain.model.Category
+import feature.expense.common.domain.model.Expense
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import theme.A3Theme
-import theme.Dimen
+import app.theme.A3Theme
+import app.theme.Dimen
 
 @Composable
 fun HomeScreen(

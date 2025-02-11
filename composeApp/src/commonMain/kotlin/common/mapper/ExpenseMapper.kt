@@ -1,7 +1,7 @@
 package common.mapper
 
 import common.util.A3DateFormat
-import feature.expense.domain.model.Expense
+import feature.expense.common.domain.model.Expense
 import kotlinx.datetime.LocalDateTime
 
 fun mapSqlResultToExpense(

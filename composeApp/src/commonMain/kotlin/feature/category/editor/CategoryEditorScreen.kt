@@ -18,7 +18,7 @@ import feature.category.editor.composables.CategoryEditorScreenTopBar
 import feature.category.editor.composables.CategoryIcons
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import theme.Dimen
+import app.theme.Dimen
 
 @Composable
 fun CategoryEditorScreen(
