@@ -18,7 +18,10 @@ sealed interface Route {
         data object Settings : Route
 
         @Serializable
-        data object AddCategory : Route
+        data object Categories : Route
+
+        @Serializable
+        data object CategoryEditor: Route
     }
 }
 

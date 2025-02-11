@@ -1,4 +1,4 @@
-package common.composables
+package feature.category.presentation.composables
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSizeIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -22,10 +21,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.unit.dp
-import common.data.CategoryDataSource
 import common.domain.model.A3Icon.MaterialIcon
-import common.domain.model.Category
+import feature.category.data.CategoryDataSource
+import feature.category.domain.model.Category
 import org.koin.compose.koinInject
 import theme.Dimen
 
@@ -72,7 +70,6 @@ private fun Impl(
         FlowRow(
             Modifier.padding(Dimen.mediumPadding)
                 .fillMaxWidth()
-                .requiredSizeIn(maxHeight = 300.dp)
                 .verticalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(Dimen.smallSize)
         ) {

@@ -38,7 +38,7 @@ class SettingsViewModel(
 
     override fun onClickAddCategory() {
         viewModelScope.launch {
-            eventBus.send(NavigationEvent.NavigateToAddCategory)
+            eventBus.send(NavigationEvent.NavigateToCategories)
         }
     }
 }

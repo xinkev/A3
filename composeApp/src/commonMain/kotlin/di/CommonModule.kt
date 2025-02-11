@@ -1,5 +1,6 @@
 package di
 
+import feature.category.di.categoriesModule
 import feature.expense.editor.di.expenseEditorModule
 import feature.home.di.homeModule
 import feature.settings.di.settingsModule
@@ -10,5 +11,6 @@ val commonModule: List<Module> = listOf(
     dataSourceModule,
     homeModule,
     settingsModule,
-    expenseEditorModule
+    expenseEditorModule,
+    categoriesModule,
 )

@@ -12,4 +12,5 @@ object Dimen {
     val xSmallSize = 4.dp
     val smallSize = 8.dp
     val mediumSize = 16.dp
+    val largeSize = 24.dp
 }

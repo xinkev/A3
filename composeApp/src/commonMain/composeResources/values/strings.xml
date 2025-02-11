@@ -14,4 +14,6 @@
     <string name="data">Data</string>
     <string name="import">Import</string>
     <string name="general">General</string>
+    <string name="category_name">Category Name</string>
+    <string name="new_category">New Category</string>
 </resources>

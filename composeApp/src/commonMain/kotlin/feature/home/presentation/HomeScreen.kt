@@ -31,7 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import common.composables.A3DatePicker
-import common.domain.model.Category
+import feature.category.domain.model.Category
 import feature.expense.domain.model.Expense
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel

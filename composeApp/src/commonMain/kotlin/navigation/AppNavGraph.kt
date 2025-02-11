@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -14,6 +13,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import common.util.HandleEvents
 import core.event.NavigationEvent
+import feature.category.editor.CategoryEditorScreen
+import feature.category.presentation.CategoriesScreen
 import feature.expense.editor.presentation.ExpenseEditorScreen
 import feature.home.presentation.HomeScreen
 import feature.settings.SettingsScreen
@@ -65,8 +66,11 @@ fun AppNavGraph(
             composable<Route.SettingsGraph.Settings> {
                 SettingsScreen()
             }
-            composable<Route.SettingsGraph.AddCategory> {
-                Text("AddCategory")
+            composable<Route.SettingsGraph.Categories> {
+                CategoriesScreen()
+            }
+            composable<Route.SettingsGraph.CategoryEditor> {
+                CategoryEditorScreen()
             }
         }
     }

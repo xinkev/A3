@@ -1,6 +1,6 @@
 package di
 
-import common.data.CategoryDataSource
+import feature.category.data.CategoryDataSource
 import common.data.KVStorage
 import common.data.KVStorageImpl
 import core.Dispatchers

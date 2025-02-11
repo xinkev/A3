@@ -1,6 +1,6 @@
 package feature.home.presentation
 
-import common.domain.model.Category
+import feature.category.domain.model.Category
 import feature.expense.domain.model.Expense
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

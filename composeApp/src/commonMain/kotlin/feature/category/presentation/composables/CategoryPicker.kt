@@ -1,4 +1,4 @@
-package common.composables
+package feature.category.presentation.composables
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.cancel
@@ -30,7 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.window.Dialog
 import common.domain.model.A3Icon.MaterialIcon
-import common.domain.model.Category
+import feature.category.domain.model.Category
 import org.jetbrains.compose.resources.stringResource
 import theme.Dimen
 

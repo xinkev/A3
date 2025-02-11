@@ -28,7 +28,7 @@ import com.xinkev.keypad.Keypad
 import com.xinkev.keypad.KeypadInput
 import common.composables.A3DatePicker
 import common.composables.A3DatePickerButtonType
-import common.composables.CategoryPicker
+import feature.category.presentation.composables.CategoryPicker
 import common.composables.TopBar
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
