@@ -1,5 +1,11 @@
 package feature.settings
 
+import a3.composeapp.generated.resources.Res
+import a3.composeapp.generated.resources.categories
+import a3.composeapp.generated.resources.data
+import a3.composeapp.generated.resources.general
+import a3.composeapp.generated.resources.import
+import a3.composeapp.generated.resources.settings
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -8,9 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowCircleDown
+import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.Restore
-import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +29,7 @@ import common.composables.CenteredTopBar
 import feature.settings.composables.SettingsEntry
 import feature.settings.composables.SettingsGroup
 import feature.settings.composables.SettingsLabel
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -42,7 +49,7 @@ fun SettingsScreenContent(
     val loading by vm.loading.collectAsState()
 
     Scaffold(topBar = {
-        CenteredTopBar("Settings")
+        CenteredTopBar(stringResource(Res.string.settings))
     }) {
         Column(
             modifier = Modifier
@@ -55,10 +62,10 @@ fun SettingsScreenContent(
                     color = MaterialTheme.colorScheme.primary
                 )
             }
-            SettingsGroup("General") {
+            SettingsGroup(stringResource(Res.string.general)) {
                 AddCategory(onClick = vm::onClickAddCategory)
             }
-            SettingsGroup("Backup") {
+            SettingsGroup(stringResource(Res.string.data)) {
                 Restore(onClick = vm::onClickRestore)
             }
         }
@@ -70,7 +77,7 @@ private fun Restore(onClick: () -> Unit) {
     SettingsEntry(
         onClick,
         leftContent = {
-            SettingsLabel(Icons.Default.Restore, "Restore")
+            SettingsLabel(Icons.Default.ArrowCircleDown, stringResource(Res.string.import))
         }
     )
 }
@@ -80,7 +87,7 @@ private fun AddCategory(onClick: () -> Unit) {
     SettingsEntry(
         onClick,
         leftContent = {
-            SettingsLabel(Icons.Default.Tag, "Add Category")
+            SettingsLabel(Icons.Default.Category, stringResource(Res.string.categories))
         },
         rightContent = {
             Icon(Icons.Default.ChevronRight, null)

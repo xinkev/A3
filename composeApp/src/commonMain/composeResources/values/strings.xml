@@ -10,4 +10,8 @@
     <string name="select_category">Select Category</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="categories">Categories</string>
+    <string name="data">Data</string>
+    <string name="import">Import</string>
+    <string name="general">General</string>
 </resources>
