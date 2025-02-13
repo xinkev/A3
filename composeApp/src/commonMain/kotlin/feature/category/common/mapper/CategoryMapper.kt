@@ -3,8 +3,8 @@ package feature.category.common.mapper
 import feature.category.common.domain.model.Category
 import feature.category.common.domain.model.CategoryIconName
 
-fun mapSqlResultToCategory(name: String, icon: String): Category {
-    return Category(name, mapIcon(icon))
+fun mapSqlResultToCategory(uuid: String, name: String, icon: String): Category {
+    return Category(uuid, name, mapIcon(icon))
 }
 
 private fun mapIcon(icon: String): CategoryIconName? {

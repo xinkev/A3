@@ -3,6 +3,7 @@ package feature.backup.data
 import com.xinkev.a3.sqldelight.A3Database
 import core.Outcome
 import core.database.DatabaseFactory
+import core.randomUUID
 import feature.backup.domain.adapter.RestoreAdapter
 import feature.backup.domain.models.Backup
 import feature.backup.domain.models.BackupError
@@ -43,6 +44,7 @@ class A3BackupManager(
     private fun writeCategories(data: List<Backup.Category>) {
         for (category in data) {
             categoryQueries.insert(
+                uuid = randomUUID(),
                 name = category.name,
                 icon = category.icon
             )

@@ -4,6 +4,7 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.xinkev.a3.sqldelight.A3Database
 import core.Dispatchers
+import core.randomUUID
 import feature.category.common.domain.model.Category
 import feature.category.common.mapper.mapSqlResultToCategory
 
@@ -21,6 +22,7 @@ class CategoryDataSource(
         name: String,
         iconName: String,
     ) = queries.insert(
+        uuid = randomUUID(),
         name = name,
         icon = iconName
     )

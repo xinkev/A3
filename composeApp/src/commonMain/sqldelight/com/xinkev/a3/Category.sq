@@ -1,23 +1,24 @@
 CREATE TABLE Category (
-    name TEXT PRIMARY KEY NOT NULL,
+    uuid TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL UNIQUE,
     icon TEXT NOT NULL
 );
 
 -- Insert data
 insert:
-INSERT OR IGNORE INTO Category (name, icon)
-VALUES (?, ?);
+INSERT OR IGNORE INTO Category (uuid, name, icon)
+VALUES (?, ?, ?);
 
 -- Update data
 update:
 UPDATE Category
 SET name = ?, icon = ?
-WHERE name = ?;
+WHERE uuid = ?;
 
 -- Delete
 delete:
 DELETE FROM Category
-WHERE name = ?;
+WHERE uuid = ?;
 
 -- Select All
 selectAll:

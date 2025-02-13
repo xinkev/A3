@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.window.Dialog
 import app.theme.Dimen
+import core.randomUUID
 import feature.category.categories.categoryIconMap
 import feature.category.common.domain.model.Category
 import feature.category.common.domain.model.CategoryIconName
@@ -167,7 +168,11 @@ private fun CategoryPickerDialogPreview() {
 private fun CategoryPickerPreview() {
     CompositionLocalProvider(LocalInspectionMode provides true) {
         CategoryPicker(
-            initialSelectedCategory = Category("Test", iconName = CategoryIconName.Car),
+            initialSelectedCategory = Category(
+                uuid = randomUUID(),
+                "Test",
+                iconName = CategoryIconName.Car
+            ),
             onSelected = {}
         )
     }
