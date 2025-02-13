@@ -16,4 +16,7 @@
     <string name="general">General</string>
     <string name="category_name">Category Name</string>
     <string name="new_category">New Category</string>
+    <string name="edit_category">Edit Category</string>
+    <string name="save">Save</string>
+    <string name="category_name_taken_error">This category name is already taken.</string>
 </resources>

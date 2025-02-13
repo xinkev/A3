@@ -12,11 +12,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import app.theme.Dimen
 import common.composables.TopBar
 import feature.category.categories.composables.Categories
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import app.theme.Dimen
 
 @Composable
 fun CategoriesScreen(
@@ -40,7 +40,7 @@ private fun CategoriesScreenContent(
             Categories(
                 modifier = Modifier.weight(1f),
                 selected = null,
-                onSelectionChange = {},
+                onSelectionChange = vm::onClickCategory,
             )
             Button(
                 onClick = vm::onClickAdd,

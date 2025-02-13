@@ -37,7 +37,7 @@ fun ColumnScope.CategoryIcons(
                 label = {
                     Icon(
                         imageVector = icon.second.vector(),
-                        contentDescription = icon.first.key
+                        contentDescription = icon.first.realName
                     )
                 }
             )

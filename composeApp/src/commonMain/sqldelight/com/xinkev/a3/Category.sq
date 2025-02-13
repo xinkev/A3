@@ -22,3 +22,8 @@ WHERE name = ?;
 -- Select All
 selectAll:
 SELECT * FROM Category;
+
+-- Check if name is already in the table
+selectByName:
+SELECT * FROM Category
+WHERE name = ?;

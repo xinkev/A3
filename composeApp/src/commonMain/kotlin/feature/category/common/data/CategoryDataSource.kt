@@ -4,7 +4,7 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.xinkev.a3.sqldelight.A3Database
 import core.Dispatchers
-import feature.category.common.domain.model.CategoryIconName
+import feature.category.common.domain.model.Category
 import feature.category.common.mapper.mapSqlResultToCategory
 
 class CategoryDataSource(
@@ -19,9 +19,19 @@ class CategoryDataSource(
 
     fun addCategory(
         name: String,
-        iconName: CategoryIconName,
+        iconName: String,
     ) = queries.insert(
         name = name,
-        icon = iconName.key
+        icon = iconName
     )
+
+    fun updateCategory(
+        originalName: String,
+        name: String,
+        iconName: String,
+    ) = queries.update(name, iconName, originalName)
+
+    fun selectCategoryBy(name: String): Category? =
+        queries.selectByName(name, ::mapSqlResultToCategory)
+            .executeAsOneOrNull()
 }

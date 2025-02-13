@@ -8,5 +8,5 @@ fun mapSqlResultToCategory(name: String, icon: String): Category {
 }
 
 private fun mapIcon(icon: String): CategoryIconName? {
-    return CategoryIconName.entries.firstOrNull { it.key == icon }
+    return CategoryIconName.entries.firstOrNull { it.realName == icon }
 }

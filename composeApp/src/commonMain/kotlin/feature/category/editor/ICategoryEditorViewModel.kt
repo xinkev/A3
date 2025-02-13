@@ -9,6 +9,12 @@ interface ICategoryEditorViewModel {
     val nameInputState: TextFieldState
     val selectedIconName: StateFlow<CategoryIconName?>
     val enableAddButton: StateFlow<Boolean>
+    val nameIsTaken: StateFlow<Boolean>
+
+    /**
+     * whether or not the editor is in edit mode
+     */
+    val isEdit: Boolean
     fun onIconClick(name: CategoryIconName)
     fun onClickAdd()
 }
@@ -20,6 +26,10 @@ object PreviewCategoryEditorViewModel : ICategoryEditorViewModel {
         get() = MutableStateFlow(null)
     override val enableAddButton: StateFlow<Boolean>
         get() = MutableStateFlow(false)
+    override val isEdit: Boolean
+        get() = false
+    override val nameIsTaken: StateFlow<Boolean>
+        get() = MutableStateFlow(true)
 
     override fun onIconClick(name: CategoryIconName) {
     }

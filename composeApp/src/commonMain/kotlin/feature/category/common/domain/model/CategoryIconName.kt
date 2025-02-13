@@ -1,6 +1,6 @@
 package feature.category.common.domain.model
 
-enum class CategoryIconName(val key: String) {
+enum class CategoryIconName(val realName: String) {
     Tag("tag"),
     Food("food"),
     Bus("bus"),

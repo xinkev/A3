@@ -13,11 +13,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import common.util.HandleEvents
 import core.event.NavigationEvent
-import feature.category.editor.CategoryEditorScreen
 import feature.category.categories.CategoriesScreen
+import feature.category.editor.CategoryEditorScreen
 import feature.expense.editor.presentation.ExpenseEditorScreen
 import feature.home.presentation.HomeScreen
 import feature.settings.SettingsScreen
+import navigation.type.categoryNavTypeMap
 
 @Composable
 fun AppNavGraph(
@@ -69,9 +70,12 @@ fun AppNavGraph(
             composable<Route.SettingsGraph.Categories> {
                 CategoriesScreen()
             }
-            composable<Route.SettingsGraph.CategoryEditor> {
+            composable<Route.SettingsGraph.CategoryEditor>(
+                typeMap = categoryNavTypeMap
+            ) {
                 CategoryEditorScreen()
             }
         }
     }
 }
+

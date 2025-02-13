@@ -1,5 +1,6 @@
 package navigation
 
+import feature.category.common.domain.model.Category
 import kotlinx.serialization.Serializable
 
 sealed interface Route {
@@ -21,7 +22,7 @@ sealed interface Route {
         data object Categories : Route
 
         @Serializable
-        data object CategoryEditor: Route
+        data class CategoryEditor(val category: Category? = null): Route
     }
 }
 
