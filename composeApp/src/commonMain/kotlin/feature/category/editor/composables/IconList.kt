@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import feature.category.common.domain.model.CategoryIconName
-import feature.category.categories.categoryIcons
+import feature.category.categories.categoryIconMap
 import app.theme.Dimen
 
 @Composable
@@ -30,7 +30,7 @@ fun ColumnScope.CategoryIcons(
         horizontalArrangement = Arrangement.spacedBy(Dimen.smallSize),
         verticalArrangement = Arrangement.spacedBy(Dimen.smallSize),
     ) {
-        items(categoryIcons.toList()) { icon ->
+        items(categoryIconMap.toList()) { icon ->
             FilterChip(
                 selected = selectedIconName == icon.first,
                 onClick = { onIconSelect(icon.first) },

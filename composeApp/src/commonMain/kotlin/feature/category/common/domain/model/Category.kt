@@ -1,8 +1,9 @@
 package feature.category.common.domain.model
 
-import common.domain.model.A3Icon
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Category(
     val name: String,
-    val icon: A3Icon?
+    val iconName: CategoryIconName?,
 )

@@ -1,4 +1,4 @@
-package common.domain.model
+package common
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

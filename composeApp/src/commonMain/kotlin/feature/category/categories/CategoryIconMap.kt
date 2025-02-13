@@ -32,10 +32,8 @@ import androidx.compose.material.icons.outlined.Theaters
 import androidx.compose.material.icons.outlined.Train
 import androidx.compose.material.icons.outlined.WbIridescent
 import androidx.compose.material.icons.outlined.Weekend
-import common.domain.model.A3Icon
-import common.domain.model.A3Icon.MaterialIcon
-import common.domain.model.A3Icon.ResourceIcon
-import feature.category.common.domain.model.CategoryIconName
+import common.A3Icon.MaterialIcon
+import common.A3Icon.ResourceIcon
 import feature.category.common.domain.model.CategoryIconName.Book
 import feature.category.common.domain.model.CategoryIconName.Bus
 import feature.category.common.domain.model.CategoryIconName.Car
@@ -67,9 +65,7 @@ import feature.category.common.domain.model.CategoryIconName.Tax
 import feature.category.common.domain.model.CategoryIconName.Transportation
 import feature.category.common.domain.model.CategoryIconName.Vacation
 
-typealias CategoryIcon = Pair<CategoryIconName, A3Icon>
-
-val categoryIcons = mapOf(
+val categoryIconMap = mapOf(
     Tag to MaterialIcon(Icons.Outlined.Tag),
     Food to MaterialIcon(Icons.Outlined.Fastfood),
     Bus to MaterialIcon(Icons.Outlined.DirectionsBus),

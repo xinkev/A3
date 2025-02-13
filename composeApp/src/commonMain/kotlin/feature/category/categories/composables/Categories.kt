@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Tag
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
@@ -21,11 +19,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
-import common.domain.model.A3Icon.MaterialIcon
+import app.theme.Dimen
+import feature.category.categories.categoryIconMap
 import feature.category.common.data.CategoryDataSource
 import feature.category.common.domain.model.Category
+import feature.category.common.domain.model.CategoryIconName
 import org.koin.compose.koinInject
-import app.theme.Dimen
 
 @Composable
 fun Categories(
@@ -38,14 +37,14 @@ fun Categories(
     if (isPreview) {
         PreviewableContent(modifier)
     } else {
-        Content(modifier, selected, hasBorder, onSelectionChange)
+        CategoriesContent(modifier, selected, hasBorder, onSelect = onSelectionChange)
     }
 }
 
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun Impl(
+private fun CategoriesImpl(
     modifier: Modifier = Modifier,
     categories: List<Category>,
     selected: Category?,
@@ -74,13 +73,14 @@ private fun Impl(
             horizontalArrangement = Arrangement.spacedBy(Dimen.smallSize)
         ) {
             categories.forEach { category ->
+                val icon = categoryIconMap[category.iconName]
                 FilterChip(
                     selected = selected == category,
                     onClick = { onSelect(if (category == selected) null else category) },
                     leadingIcon = {
-                        category.icon?.let {
+                        icon?.let {
                             Icon(
-                                imageVector = it.vector(),
+                                imageVector = icon.vector(),
                                 contentDescription = category.name
                             )
                         }
@@ -93,30 +93,36 @@ private fun Impl(
 }
 
 @Composable
-private fun PreviewableContent(modifier: Modifier = Modifier) {
-    val categories = listOf(
-        Category(name = "Category 1", icon = MaterialIcon(Icons.Outlined.Tag)),
-        Category(name = "Category 2", icon = null)
-    )
-    Impl(modifier = modifier, categories, onSelect = { _ -> }, hasBorder = true, selected = null)
-}
-
-@Composable
-private fun Content(
+private fun CategoriesContent(
     modifier: Modifier = Modifier,
     selected: Category?,
     hasBorder: Boolean,
+    dataSource: CategoryDataSource = koinInject(),
     onSelect: (Category?) -> Unit
 ) {
-    val ds = koinInject<CategoryDataSource>()
-    val categories by ds.getAllCategories().collectAsState(emptyList())
+    val categories by dataSource.getAllCategories().collectAsState(emptyList())
 
-    Impl(
+    CategoriesImpl(
         modifier = modifier,
         categories = categories,
         selected = selected,
         hasBorder = hasBorder,
         onSelect = onSelect,
+    )
+}
+
+@Composable
+private fun PreviewableContent(modifier: Modifier = Modifier) {
+    val categories = listOf(
+        Category(name = "Category 1", iconName = CategoryIconName.IPhone),
+        Category(name = "Category 2", iconName = CategoryIconName.Car)
+    )
+    CategoriesImpl(
+        modifier = modifier,
+        categories,
+        onSelect = { _ -> },
+        hasBorder = true,
+        selected = null
     )
 }
 

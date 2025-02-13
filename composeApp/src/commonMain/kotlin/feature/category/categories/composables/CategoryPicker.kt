@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -29,10 +27,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.window.Dialog
-import common.domain.model.A3Icon.MaterialIcon
-import feature.category.common.domain.model.Category
-import org.jetbrains.compose.resources.stringResource
 import app.theme.Dimen
+import feature.category.categories.categoryIconMap
+import feature.category.common.domain.model.Category
+import feature.category.common.domain.model.CategoryIconName
+import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
@@ -89,9 +88,10 @@ fun CategoryPickerButton(
                 horizontalArrangement = Arrangement.spacedBy(Dimen.xSmallPadding),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                if (selectedCategory.icon != null) {
+                val icon = remember { categoryIconMap[selectedCategory.iconName] }
+                if (icon != null) {
                     Icon(
-                        imageVector = selectedCategory.icon.vector(),
+                        imageVector = icon.vector(),
                         contentDescription = null
                     )
                 }
@@ -167,7 +167,7 @@ private fun CategoryPickerDialogPreview() {
 private fun CategoryPickerPreview() {
     CompositionLocalProvider(LocalInspectionMode provides true) {
         CategoryPicker(
-            initialSelectedCategory = Category("Test", icon = MaterialIcon(Icons.Default.Info)),
+            initialSelectedCategory = Category("Test", iconName = CategoryIconName.Car),
             onSelected = {}
         )
     }

@@ -30,13 +30,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import app.theme.A3Theme
+import app.theme.Dimen
 import common.composables.A3DatePicker
+import feature.category.categories.categoryIconMap
 import feature.category.common.domain.model.Category
 import feature.expense.common.domain.model.Expense
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import app.theme.A3Theme
-import app.theme.Dimen
 
 @Composable
 fun HomeScreen(
@@ -110,9 +111,11 @@ private fun TransactionItem(expense: Expense, categories: List<Category>) {
             horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
             modifier = Modifier.weight(0.7f),
         ) {
-            category?.icon?.let {
+            category?.let {
+                val icon = categoryIconMap[category.iconName] ?: return@let
+
                 Icon(
-                    imageVector = it.vector(),
+                    imageVector = icon.vector(),
                     contentDescription = category.name,
                     tint = MaterialTheme.colorScheme.primary
                 )
