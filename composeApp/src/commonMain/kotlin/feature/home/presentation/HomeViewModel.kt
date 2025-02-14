@@ -7,8 +7,10 @@ import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
 import common.util.now
 import core.event.EventBus
-import core.event.NavigationEvent
+import core.event.NavigationEvent.NavigateToExpenseEditor
+import feature.category.common.data.CategoryDataSource
 import feature.expense.common.data.ExpenseDataSource
+import feature.expense.common.domain.model.Expense
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -41,7 +43,13 @@ class HomeViewModel(
 
     override fun onClickAddExpense() {
         viewModelScope.launch {
-            eventBus.send(NavigationEvent.NavigateToExpenseEditor)
+            eventBus.send(NavigateToExpenseEditor())
+        }
+    }
+
+    override fun onClickTransaction(expense: Expense) {
+        viewModelScope.launch {
+            eventBus.send(NavigateToExpenseEditor(expense))
         }
     }
 }

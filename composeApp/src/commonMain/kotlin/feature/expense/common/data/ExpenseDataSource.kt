@@ -52,4 +52,20 @@ class ExpenseDataSource(
             )
         }
     }
+
+    fun update(
+        uuid: String,
+        amount: Double,
+        notes: String,
+        dateTime: String,
+        categoryId: String
+    ) {
+        queries.update(
+            uuid=  uuid,
+            cost = amount,
+            datetime = dateTime,
+            detail = notes,
+            categoryId = categoryId
+        )
+    }
 }

@@ -10,6 +10,7 @@ interface IExpenseEditorViewModel {
     val dateMillis: StateFlow<Long>
     val category: StateFlow<Category?>
     val enableAddButton: StateFlow<Boolean>
+    val isEdit: Boolean
 
     fun onDateChanged(dateMillis: Long)
     fun onCategoryChanged(category: Category?)
@@ -25,6 +26,8 @@ object ExpenseEditorPreviewViewModel : IExpenseEditorViewModel {
         get() = MutableStateFlow(false)
     override val keypadState: KeypadState
         get() = KeypadState()
+    override val isEdit: Boolean
+        get() = false
 
     override fun onDateChanged(dateMillis: Long) {
     }

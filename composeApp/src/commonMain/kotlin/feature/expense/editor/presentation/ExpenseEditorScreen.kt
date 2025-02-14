@@ -2,6 +2,9 @@ package feature.expense.editor.presentation
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.add
+import a3.composeapp.generated.resources.edit_expense
+import a3.composeapp.generated.resources.new_expense
+import a3.composeapp.generated.resources.save
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,15 +27,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
+import app.theme.Dimen
 import com.xinkev.keypad.Keypad
 import com.xinkev.keypad.KeypadInput
 import common.composables.A3DatePicker
 import common.composables.A3DatePickerButtonType
-import feature.category.categories.composables.CategoryPicker
 import common.composables.TopBar
+import feature.category.categories.composables.CategoryPicker
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import app.theme.Dimen
 
 @Composable
 fun ExpenseEditorScreen(
@@ -67,11 +70,12 @@ private fun ExpenseEditorScreenContent(
     Scaffold(
         topBar = {
             TopBar(
-                title = "New Expense",
+                title = stringResource(if (vm.isEdit) Res.string.edit_expense else Res.string.new_expense),
                 actions = {
                     AddButton(
                         enabled = enableAddButton,
-                        onClick = vm::onClickAdd
+                        onClick = vm::onClickAdd,
+                        isEdit = vm.isEdit,
                     )
                 }
             )
@@ -111,11 +115,12 @@ private fun ExpenseEditorScreenContent(
 @Composable
 private fun AddButton(
     enabled: Boolean,
+    isEdit: Boolean,
     onClick: () -> Unit
 ) {
     TextButton(
         content = {
-            Text(stringResource(Res.string.add))
+            Text(stringResource(if (isEdit) Res.string.save else Res.string.add))
         },
         onClick = onClick,
         enabled = enabled

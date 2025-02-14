@@ -30,7 +30,10 @@ ORDER BY datetime ASC ;
 -- Update data
 update:
 UPDATE Expenses
-SET detail = ?
+SET detail = ?, 
+    datetime = ?, 
+    categoryId = ?, 
+    cost = ?
 WHERE uuid = ?;
 
 -- Delete data

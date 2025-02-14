@@ -4,6 +4,7 @@ import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.add_expenses
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import app.theme.A3Theme
 import app.theme.Dimen
 import common.composables.A3DatePicker
+import common.util.toSmartString
 import feature.category.categories.categoryIconMap
 import feature.expense.common.domain.model.Expense
 import org.jetbrains.compose.resources.stringResource
@@ -75,7 +77,10 @@ private fun ColumnScope.ExpenseList(
 
     LazyColumn(modifier = Modifier.weight(1f)) {
         items(expenses) { expense ->
-            TransactionItem(expense)
+            TransactionItem(
+                expense = expense,
+                onClick = { vm.onClickTransaction(expense) }
+            )
 
             HorizontalDivider()
         }
@@ -97,9 +102,15 @@ private fun AddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-private fun TransactionItem(expense: Expense) {
+private fun TransactionItem(
+    expense: Expense,
+    onClick: () -> Unit,
+) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
@@ -121,7 +132,7 @@ private fun TransactionItem(expense: Expense) {
             )
         }
         Text(
-            text = "${expense.cost}",
+            text = expense.cost.toSmartString(),
             modifier = Modifier.weight(0.3f),
             textAlign = TextAlign.End
         )

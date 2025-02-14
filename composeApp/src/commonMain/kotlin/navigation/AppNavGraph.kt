@@ -18,7 +18,8 @@ import feature.category.editor.CategoryEditorScreen
 import feature.expense.editor.presentation.ExpenseEditorScreen
 import feature.home.presentation.HomeScreen
 import feature.settings.SettingsScreen
-import navigation.type.categoryNavTypeMap
+import navigation.types.categoryNavTypeMap
+import navigation.types.expenseTypeMap
 
 @Composable
 fun AppNavGraph(
@@ -58,7 +59,7 @@ fun AppNavGraph(
             composable<Route.HomeGraph.Home> {
                 HomeScreen()
             }
-            composable<Route.HomeGraph.ExpenseEditor> {
+            composable<Route.HomeGraph.ExpenseEditor>(typeMap = expenseTypeMap) {
                 ExpenseEditorScreen()
             }
         }

@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import navigation.Route.SettingsGraph.CategoryEditor
-import navigation.type.categoryNavTypeMap
+import navigation.types.categoryNavTypeMap
 
 class CategoryEditorViewModel(
     private val eventBus: EventBus,
