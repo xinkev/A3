@@ -23,17 +23,21 @@ class A3BackupManager(
     suspend fun restore(json: String): Outcome<BackupError, Unit> {
         val data = restoreAdapter.restore(json)
         db.transaction {
-            writeExpenses(data.expenses)
             writeCategories(data.categories)
+            writeExpenses(data.expenses)
         }
         return Outcome.Success(Unit)
     }
 
     private fun writeExpenses(data: List<Backup.Expense>) {
         for (expense in data) {
+            // find category
+            val category = categoryQueries
+                    .selectByName(expense.category)
+                    .executeAsOneOrNull() ?: continue
             expenseQueries.insert(
                 uuid = expense.uuid,
-                category = expense.category,
+                categoryId = category.uuid,
                 cost = expense.cost,
                 datetime = expense.datetimeISO8601,
                 detail = expense.detail

@@ -5,8 +5,8 @@ import app.cash.sqldelight.coroutines.mapToList
 import com.xinkev.logger.log
 import common.mapper.mapSqlResultToExpense
 import core.Dispatchers
-import core.randomUUID
 import core.database.DatabaseFactory
+import core.randomUUID
 import feature.expense.common.domain.model.Expense
 import kotlinx.coroutines.flow.Flow
 
@@ -39,7 +39,7 @@ class ExpenseDataSource(
         amount: Double,
         notes: String,
         dateTime: String,
-        category: String,
+        categoryId: String,
         uuid: String = randomUUID(),
     ) {
         db.transaction {
@@ -47,7 +47,7 @@ class ExpenseDataSource(
                 cost = amount,
                 detail = notes,
                 datetime = dateTime,
-                category = category,
+                categoryId = categoryId,
                 uuid = uuid
             )
         }

@@ -1,13 +1,13 @@
 package feature.home.presentation
 
 import feature.category.common.domain.model.Category
+import feature.category.common.domain.model.CategoryIconName
 import feature.expense.common.domain.model.Expense
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime
 
 interface IHomeViewModel {
-    val categories: StateFlow<List<Category>>
     val expenses: StateFlow<List<Expense>>
     val dateMillis: StateFlow<Long>
     fun setDate(dateMillis: Long)
@@ -15,8 +15,6 @@ interface IHomeViewModel {
 }
 
 internal data object PreviewHomeViewModel : IHomeViewModel {
-    override val categories: StateFlow<List<Category>>
-        get() = MutableStateFlow(emptyList())
     override val expenses: StateFlow<List<Expense>>
         get() = MutableStateFlow(
             listOf(
@@ -39,7 +37,11 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
     private fun previewExpense(detail: String, cost: Double): Expense {
         return Expense(
             uuid = "",
-            category = "",
+            category = Category(
+                uuid = "12",
+                name = "Bar",
+                iconName = CategoryIconName.IPhone
+            ),
             cost = cost,
             detail = detail,
             datetime = LocalDateTime(2024, 5, 5, 16, 27, 30),

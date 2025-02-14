@@ -23,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,7 +33,6 @@ import app.theme.A3Theme
 import app.theme.Dimen
 import common.composables.A3DatePicker
 import feature.category.categories.categoryIconMap
-import feature.category.common.domain.model.Category
 import feature.expense.common.domain.model.Expense
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -74,11 +72,10 @@ private fun ColumnScope.ExpenseList(
     vm: IHomeViewModel
 ) {
     val expenses by vm.expenses.collectAsState()
-    val categories by vm.categories.collectAsState()
 
     LazyColumn(modifier = Modifier.weight(1f)) {
         items(expenses) { expense ->
-            TransactionItem(expense, categories)
+            TransactionItem(expense)
 
             HorizontalDivider()
         }
@@ -100,8 +97,7 @@ private fun AddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-private fun TransactionItem(expense: Expense, categories: List<Category>) {
-    val category = remember { categories.firstOrNull { it.name == expense.category } }
+private fun TransactionItem(expense: Expense) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -111,12 +107,10 @@ private fun TransactionItem(expense: Expense, categories: List<Category>) {
             horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
             modifier = Modifier.weight(0.7f),
         ) {
-            category?.let {
-                val icon = categoryIconMap[category.iconName] ?: return@let
-
+            categoryIconMap[expense.category.iconName]?.let {
                 Icon(
-                    imageVector = icon.vector(),
-                    contentDescription = category.name,
+                    imageVector = it.vector(),
+                    contentDescription = expense.category.name,
                     tint = MaterialTheme.colorScheme.primary
                 )
             }

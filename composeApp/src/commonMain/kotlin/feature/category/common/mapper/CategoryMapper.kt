@@ -4,9 +4,9 @@ import feature.category.common.domain.model.Category
 import feature.category.common.domain.model.CategoryIconName
 
 fun mapSqlResultToCategory(uuid: String, name: String, icon: String): Category {
-    return Category(uuid, name, mapIcon(icon))
+    return Category(uuid, name, mapCategoryIcon(icon))
 }
 
-private fun mapIcon(icon: String): CategoryIconName? {
+fun mapCategoryIcon(icon: String): CategoryIconName? {
     return CategoryIconName.entries.firstOrNull { it.realName == icon }
 }

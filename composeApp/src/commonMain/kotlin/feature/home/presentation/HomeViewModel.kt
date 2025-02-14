@@ -3,7 +3,6 @@ package feature.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xinkev.logger.log
-import feature.category.common.data.CategoryDataSource
 import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
 import common.util.now
@@ -20,7 +19,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     expenseDataSource: ExpenseDataSource,
-    categoryDataSource: CategoryDataSource,
     private val eventBus: EventBus
 ) : ViewModel(), IHomeViewModel {
     private val _dateMillis = MutableStateFlow(now.toEpochMilliseconds())
@@ -36,12 +34,6 @@ class HomeViewModel(
             started = SharingStarted.Lazily,
             initialValue = emptyList()
         )
-
-    override val categories = categoryDataSource.getAllCategories().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Lazily,
-        initialValue = emptyList()
-    )
 
     override fun setDate(dateMillis: Long) {
         _dateMillis.value = dateMillis

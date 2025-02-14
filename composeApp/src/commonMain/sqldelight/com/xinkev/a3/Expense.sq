@@ -3,24 +3,26 @@ CREATE TABLE Expenses (
     uuid TEXT PRIMARY KEY NOT NULL,
     detail TEXT NOT NULL,
     datetime TEXT NOT NULL, -- ISO 8601
-    category TEXT NOT NULL,
+    categoryId TEXT NOT NULL REFERENCES Category(uuid) ON DELETE CASCADE,
     cost REAL NOT NULL
 );
 
 -- Insert data
 insert:
-INSERT OR IGNORE INTO Expenses (uuid, detail, datetime, category, cost)
+INSERT OR IGNORE INTO Expenses (uuid, detail, datetime, categoryId, cost)
 VALUES (?, ?, ?, ?, ?);
 
 -- Read data
 selectAll:
-SELECT *
+SELECT Expenses.*, Category.name categoryName, Category.icon categoryIcon
 FROM Expenses
-ORDER BY datetime ASC ;
+INNER JOIN Category ON Expenses.categoryId = Category.uuid
+ORDER BY datetime ASC;
 
 selectByDateTime:
-SELECT *
+SELECT Expenses.*, Category.name categoryName, Category.icon categoryIcon
 FROM Expenses
+JOIN Category ON Expenses.categoryId = Category.uuid
 WHERE
     date(datetime) = date(?)
 ORDER BY datetime ASC ;

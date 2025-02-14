@@ -48,7 +48,7 @@ class ExpenseEditorViewModel(
             amount = amountInDouble,
             notes = keypadState.note.text.toString(),
             dateTime = date,
-            category = _category.value!!.name
+            categoryId = _category.value!!.uuid
         )
 
         resetState()
