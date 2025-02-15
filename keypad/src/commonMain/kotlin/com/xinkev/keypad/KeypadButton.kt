@@ -43,9 +43,14 @@ fun RowScope.KeypadButton(
     backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     onClick: () -> Unit
 ) {
+    val hapticFeedback = rememberHapticFeedback()
+
     KeypadButton(
         backgroundColor = backgroundColor,
-        onClick = onClick,
+        onClick = {
+            hapticFeedback.vibrate()
+            onClick.invoke()
+        },
     ) {
         Text(
             text = text,

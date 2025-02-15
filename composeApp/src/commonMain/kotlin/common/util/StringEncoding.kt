@@ -25,7 +25,7 @@ fun String.encoded(): String {
             // Space character gets special treatment
             ' ' -> "+"
             // All other characters are percent-encoded
-            else -> String.format("%%%02X", byte.toUByte().toInt())
+            else -> "%${byte.toUByte().toString(16).padStart(2, '0').uppercase()}"
         }
     }
 }
