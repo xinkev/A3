@@ -10,7 +10,11 @@ sealed class NavigationEvent(
     data object NavigateUp : NavigationEvent(null)
     data class ChangeBottomTab(val route: Route) : NavigationEvent(route)
     data object NavigateToCategories : NavigationEvent(Route.SettingsGraph.Categories)
-    data class NavigateToExpenseEditor(val expense: Expense? = null) : NavigationEvent(Route.HomeGraph.ExpenseEditor(expense))
+    data class NavigateToExpenseEditor(
+        val expense: Expense? = null,
+        val initialDate: Long? = null
+    ) : NavigationEvent(Route.HomeGraph.ExpenseEditor(expense, initialDate))
+
     data class NavigateToCategoryEditor(val category: Category?) :
         NavigationEvent(Route.SettingsGraph.CategoryEditor(category))
 }

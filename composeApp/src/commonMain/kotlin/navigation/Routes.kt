@@ -11,7 +11,10 @@ sealed interface Route {
         data object Home : Route
 
         @Serializable
-        data class ExpenseEditor(val expense: Expense? = null) : Route
+        data class ExpenseEditor(
+            val expense: Expense? = null,
+            val initialDate: Long? = null,
+        ) : Route
     }
 
     @Serializable

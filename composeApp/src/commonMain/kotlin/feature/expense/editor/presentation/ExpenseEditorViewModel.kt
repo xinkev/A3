@@ -29,15 +29,19 @@ class ExpenseEditorViewModel(
     private val eventBus: EventBus,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(), IExpenseEditorViewModel {
-    private val selectedExpense = savedStateHandle
+    private val navArgs = savedStateHandle
         .toRoute<ExpenseEditor>(expenseTypeMap)
-        .expense
+
+    private val selectedExpense = navArgs.expense
     override val keypadState = KeypadState(
         amount = TextFieldState(selectedExpense?.cost?.toSmartString() ?: ""),
         note = TextFieldState(selectedExpense?.detail ?: "")
     )
     override val isEdit: Boolean = selectedExpense != null
-    private val _dateMillis = MutableStateFlow(Clock.System.now().toEpochMilliseconds())
+    private val _dateMillis = MutableStateFlow(
+        navArgs.initialDate ?: Clock.System.now().toEpochMilliseconds()
+    )
+
     override val dateMillis = _dateMillis.asStateFlow()
     private val _category = MutableStateFlow(selectedExpense?.category)
     override val category = _category.asStateFlow()

@@ -2,7 +2,6 @@ package feature.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xinkev.logger.log
 import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
 import common.util.now
@@ -27,7 +26,6 @@ class HomeViewModel(
         get() = _dateMillis.asStateFlow()
 
     override val expenses = _dateMillis.flatMapLatest {
-        log.i { "dateMillis: $it" }
         expenseDataSource.getByDateTime(dateTimeMilliToString(it, A3DateFormat.ISO8601))
     }
         .stateIn(
@@ -38,13 +36,14 @@ class HomeViewModel(
 
     override fun setDate(dateMillis: Long) {
         println(
-            dateTimeMilliToString(dateMillis, A3DateFormat.DisplayDateTime))
+            dateTimeMilliToString(dateMillis, A3DateFormat.DisplayDateTime)
+        )
         _dateMillis.value = dateMillis
     }
 
     override fun onClickAddExpense() {
         viewModelScope.launch {
-            eventBus.send(NavigateToExpenseEditor())
+            eventBus.send(NavigateToExpenseEditor(initialDate = dateMillis.value))
         }
     }
 
