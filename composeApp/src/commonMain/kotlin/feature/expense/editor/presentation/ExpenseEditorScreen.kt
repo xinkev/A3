@@ -1,10 +1,5 @@
 package feature.expense.editor.presentation
 
-import a3.composeapp.generated.resources.Res
-import a3.composeapp.generated.resources.add
-import a3.composeapp.generated.resources.edit_expense
-import a3.composeapp.generated.resources.new_expense
-import a3.composeapp.generated.resources.save
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,8 +11,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -30,11 +23,9 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import app.theme.Dimen
 import com.xinkev.keypad.Keypad
 import com.xinkev.keypad.KeypadInput
-import common.composables.A3DatePicker
-import common.composables.A3DatePickerButtonType
-import common.composables.TopBar
 import feature.category.categories.composables.CategoryPicker
-import org.jetbrains.compose.resources.stringResource
+import feature.expense.editor.presentation.composables.DatePickerButton
+import feature.expense.editor.presentation.composables.TopBar
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -70,14 +61,9 @@ private fun ExpenseEditorScreenContent(
     Scaffold(
         topBar = {
             TopBar(
-                title = stringResource(if (vm.isEdit) Res.string.edit_expense else Res.string.new_expense),
-                actions = {
-                    AddButton(
-                        enabled = enableAddButton,
-                        onClick = vm::onClickAdd,
-                        isEdit = vm.isEdit,
-                    )
-                }
+                enabled = enableAddButton,
+                isEdit = vm.isEdit,
+                onClick = vm::onClickAdd
             )
         },
     ) {
@@ -90,16 +76,19 @@ private fun ExpenseEditorScreenContent(
         ) {
             KeypadInput(
                 keypadState = vm.keypadState,
-                modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth()
+                modifier = Modifier
+                    .padding(horizontal = Dimen.largePadding)
+                    .fillMaxWidth()
             )
             Row(
-                modifier = Modifier.padding(horizontal = Dimen.largePadding).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = Dimen.largePadding)
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                A3DatePicker(
-                    value = dateMillis,
+                DatePickerButton(
+                    initialDate = dateMillis,
                     onDateSelected = vm::onDateChanged,
-                    buttonType = A3DatePickerButtonType.Text
                 )
                 CategoryPicker(
                     initialSelectedCategory = category,
@@ -110,21 +99,6 @@ private fun ExpenseEditorScreenContent(
             Keypad(vm.keypadState)
         }
     }
-}
-
-@Composable
-private fun AddButton(
-    enabled: Boolean,
-    isEdit: Boolean,
-    onClick: () -> Unit
-) {
-    TextButton(
-        content = {
-            Text(stringResource(if (isEdit) Res.string.save else Res.string.add))
-        },
-        onClick = onClick,
-        enabled = enabled
-    )
 }
 
 @Preview

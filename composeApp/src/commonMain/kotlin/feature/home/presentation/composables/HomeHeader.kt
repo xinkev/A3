@@ -24,7 +24,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import app.theme.Dimen
-import common.composables.DatePickerDialog
+import common.composables.A3DatePickerDialog
 import common.util.A3DateFormat
 import common.util.dateTimeToDisplay
 import kotlinx.datetime.DateTimePeriod
@@ -48,7 +48,7 @@ fun HomeHeader(
         plusOrMinusMonth(initialDate, 1)
     }
 
-    DatePickerDialog(
+    A3DatePickerDialog(
         opened = openDialog,
         value = initialDate,
         onDateSelected = onDateSelected
