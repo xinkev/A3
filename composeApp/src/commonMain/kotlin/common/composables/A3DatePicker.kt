@@ -72,10 +72,9 @@ fun A3DatePicker(
 
 @ExperimentalMaterial3Api
 @Composable
-private fun DatePickerDialog(
+fun DatePickerDialog(
     opened: MutableState<Boolean>,
-    value: Long,
-    onDateSelected: (Long) -> Unit
+    value: Long, onDateSelected: (Long) -> Unit
 ) {
     val datePickerState = rememberDatePickerState(initialSelectedDateMillis = value)
     val confirmEnabled = remember {

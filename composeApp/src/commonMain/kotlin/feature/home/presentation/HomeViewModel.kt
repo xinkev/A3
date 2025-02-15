@@ -8,7 +8,6 @@ import common.util.dateTimeMilliToString
 import common.util.now
 import core.event.EventBus
 import core.event.NavigationEvent.NavigateToExpenseEditor
-import feature.category.common.data.CategoryDataSource
 import feature.expense.common.data.ExpenseDataSource
 import feature.expense.common.domain.model.Expense
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,6 +37,8 @@ class HomeViewModel(
         )
 
     override fun setDate(dateMillis: Long) {
+        println(
+            dateTimeMilliToString(dateMillis, A3DateFormat.DisplayDateTime))
         _dateMillis.value = dateMillis
     }
 

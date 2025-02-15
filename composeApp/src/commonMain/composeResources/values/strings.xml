@@ -21,4 +21,6 @@
     <string name="category_name_taken_error">This category name is already taken.</string>
     <string name="edit_expense">Edit Expense</string>
     <string name="new_expense">New Expense</string>
+    <string name="next_month">Next Month</string>
+    <string name="prev_month">Previous Month</string>
 </resources>
