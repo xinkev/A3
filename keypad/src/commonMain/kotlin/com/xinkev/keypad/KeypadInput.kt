@@ -2,12 +2,10 @@
 
 package com.xinkev.keypad
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.core.EaseInOutCubic
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,9 +21,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.InterceptPlatformTextInput
@@ -44,6 +44,17 @@ fun KeypadInput(
     amountTextStyle: TextStyle = MaterialTheme.typography.displayMedium,
     noteTextStyle: TextStyle = MaterialTheme.typography.titleMedium,
 ) {
+    val showError by animateFloatAsState(
+        targetValue = if (keypadState.amountEvalError.isEmpty()) {
+            0f
+        } else {
+            1f
+        },
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = EaseInOutCubic,
+        ),
+    )
     Column(
         modifier = modifier
             .then(
@@ -58,19 +69,15 @@ fun KeypadInput(
                 state = keypadState.amount,
                 textStyle = amountTextStyle
             )
-            AnimatedVisibility(
-                visible = keypadState.amountEvalError.isNotEmpty(),
-                enter = slideInVertically { it } + fadeIn(),
-                exit = slideOutVertically { it } + fadeOut(),
-                modifier = Modifier.padding(KeypadDimens.errorPadding)
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                Text(
-                    keypadState.amountEvalError,
-                    color = Color.Red,
-                    style = MaterialTheme.typography.labelSmall,
-                )
-            }
+            Text(
+                keypadState.amountEvalError,
+                color = Color.Red,
+                style = MaterialTheme.typography.labelSmall,
+                modifier = Modifier
+                    .padding(horizontal = KeypadDimens.errorPadding)
+                    .padding(bottom = KeypadDimens.errorPadding)
+                    .alpha(showError)
+            )
         }
         NoteInput(
             state = keypadState.note,
@@ -104,8 +111,8 @@ private fun AmountInput(
                 .background(MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp))
                 .padding(
                     horizontal = KeypadDimens.keypadInputHorizontalPadding,
-                    vertical = KeypadDimens.keypadInputVerticalPadding,
                 )
+                .padding(top = KeypadDimens.keypadInputVerticalPadding)
                 .fillMaxWidth(),
         )
     }
