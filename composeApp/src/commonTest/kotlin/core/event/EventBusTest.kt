@@ -9,6 +9,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
 
+class TestEvent(val id: Int) : A3Event
+
 class EventBusTest {
     private lateinit var eventBus: EventBus
 
