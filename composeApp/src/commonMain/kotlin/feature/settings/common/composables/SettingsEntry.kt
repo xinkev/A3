@@ -1,4 +1,4 @@
-package feature.settings.composables
+package feature.settings.common.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +18,7 @@ import app.theme.Dimen
 @Composable
 fun SettingsEntry(
     onClick: () -> Unit,
+    enabled: Boolean = true,
     modifier: Modifier = Modifier,
     leftContent: @Composable RowScope.() -> Unit,
     rightContent: @Composable RowScope.() -> Unit = {}
@@ -25,7 +26,7 @@ fun SettingsEntry(
     Box(
         modifier = Modifier
             .height(56.dp)
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick, enabled = enabled)
             .then(modifier)
     ) {
         Row(

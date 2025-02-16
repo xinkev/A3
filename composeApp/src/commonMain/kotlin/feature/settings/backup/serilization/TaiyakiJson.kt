@@ -1,9 +1,7 @@
-package feature.backup.data
+package feature.settings.backup.serilization
 
 import common.util.A3DateFormat
 import common.util.parseDateTime
-import feature.backup.domain.adapter.RestoreAdapter
-import feature.backup.domain.models.Backup
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -28,16 +26,10 @@ private object TaiyakiLocalDateTimeCustomSerializer : KSerializer<LocalDateTime>
 
 }
 
-class ExpenseTaiyakiRestoreAdapter : RestoreAdapter {
-    private val json: Json = Json {
-        ignoreUnknownKeys = true
-        explicitNulls = false
-        serializersModule = SerializersModule {
-            contextual(LocalDateTime::class, TaiyakiLocalDateTimeCustomSerializer)
-        }
-    }
-
-    override suspend fun restore(json: String): Backup {
-        return this.json.decodeFromString<Backup>(json)
+val taiyakiJson: Json = Json {
+    ignoreUnknownKeys = true
+    explicitNulls = false
+    serializersModule = SerializersModule {
+        contextual(LocalDateTime::class, TaiyakiLocalDateTimeCustomSerializer)
     }
 }

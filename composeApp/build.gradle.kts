@@ -90,6 +90,10 @@ kotlin {
                 implementation(projects.xinkevLogger)
                 implementation(projects.keypad)
                 implementation(projects.kmpComposePreview)
+
+                // file management
+                implementation(libs.fileKit.core)
+                implementation(libs.fileKit.compose)
             }
         }
 
@@ -191,6 +195,9 @@ compose.desktop {
                 proguard {
                     configurationFiles.from("desktop.pro")
                 }
+            }
+            linux {
+                modules("jdk.security.auth")
             }
         }
     }

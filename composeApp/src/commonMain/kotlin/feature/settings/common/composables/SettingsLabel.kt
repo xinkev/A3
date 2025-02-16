@@ -1,4 +1,4 @@
-package feature.settings.composables
+package feature.settings.common.composables
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope

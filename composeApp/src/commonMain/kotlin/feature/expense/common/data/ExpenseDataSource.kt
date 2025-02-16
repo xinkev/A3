@@ -7,12 +7,14 @@ import common.mapper.mapSqlResultToExpense
 import core.Dispatchers
 import core.database.DatabaseFactory
 import core.randomUUID
+import feature.category.common.domain.model.Category
 import feature.expense.common.domain.model.Expense
+import feature.settings.backup.domain.model.TaiyakiData
 import kotlinx.coroutines.flow.Flow
 
 class ExpenseDataSource(
     dbFactory: DatabaseFactory,
-    private val dispatchers: Dispatchers
+    private val dispatchers: Dispatchers,
 ) {
     private val db = dbFactory.create()
     private val queries = db.expenseQueries
@@ -61,11 +63,30 @@ class ExpenseDataSource(
         categoryId: String
     ) {
         queries.update(
-            uuid=  uuid,
+            uuid = uuid,
             cost = amount,
             datetime = dateTime,
             detail = notes,
             categoryId = categoryId
         )
     }
+
+    fun insertList(
+        data: List<TaiyakiData.Expense>,
+        findCategory: (name: String) -> Category?
+    ) {
+        for (expense in data) {
+            val category = findCategory(expense.category)
+            if (category != null) {
+                insert(
+                    uuid = expense.uuid,
+                    categoryId = category.uuid,
+                    amount = expense.cost,
+                    dateTime = expense.datetimeISO8601,
+                    notes = expense.detail
+                )
+            }
+        }
+    }
+
 }

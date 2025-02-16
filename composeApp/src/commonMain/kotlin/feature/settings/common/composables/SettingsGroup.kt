@@ -1,4 +1,4 @@
-package feature.settings.composables
+package feature.settings.common.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

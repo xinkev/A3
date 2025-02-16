@@ -1,4 +1,4 @@
-package feature.backup.domain.models
+package feature.settings.backup.domain.model
 
 import common.util.A3DateFormat
 import common.util.localDateTimeToString
@@ -7,7 +7,7 @@ import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Backup(
+data class TaiyakiData(
     /**
      * The version of the app that created this backup.
      * This value is only needed for backup purposes and is not need to be provided during restoration.

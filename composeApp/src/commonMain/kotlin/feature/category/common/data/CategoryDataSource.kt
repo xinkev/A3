@@ -7,6 +7,7 @@ import core.Dispatchers
 import core.randomUUID
 import feature.category.common.domain.model.Category
 import feature.category.common.mapper.mapSqlResultToCategory
+import feature.settings.backup.domain.model.TaiyakiData
 
 class CategoryDataSource(
     db: A3Database,
@@ -21,8 +22,9 @@ class CategoryDataSource(
     fun addCategory(
         name: String,
         iconName: String,
+        uuid: String = randomUUID(),
     ) = queries.insert(
-        uuid = randomUUID(),
+        uuid = uuid,
         name = name,
         icon = iconName
     )
@@ -36,4 +38,14 @@ class CategoryDataSource(
     fun selectCategoryBy(name: String): Category? =
         queries.selectByName(name, ::mapSqlResultToCategory)
             .executeAsOneOrNull()
+
+    fun addList(data: List<TaiyakiData.Category>) {
+        for (category in data) {
+            addCategory(
+                uuid = randomUUID(),
+                name = category.name,
+                iconName = category.icon,
+            )
+        }
+    }
 }

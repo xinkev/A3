@@ -1,8 +1,9 @@
-package feature.backup.data
+package feature.settings.backup
 
-import feature.backup.domain.models.Backup
-import feature.backup.domain.models.Backup.Category
-import feature.backup.domain.models.Backup.Expense
+import feature.settings.backup.domain.model.TaiyakiData
+import feature.settings.backup.domain.model.TaiyakiData.Category
+import feature.settings.backup.domain.model.TaiyakiData.Expense
+import feature.settings.backup.serilization.taiyakiJson
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerializationException
@@ -10,9 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class ExpenseTaiyakiRestoreAdapterTest {
-    private val adapter = ExpenseTaiyakiRestoreAdapter()
-
+class TaiyakiDataSerializationTest {
     @Test
     fun restore_validJson_returnsBackupObject() = runTest {
         // Arrange
@@ -40,7 +39,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
                 ]
             }
         """
-        val expected = Backup(
+        val expected = TaiyakiData(
             appVersion = "1.0.0", categories = listOf(
                 Category(name = "Groceries", icon = "cart"),
                 Category(name = "Eating Out", icon = "restaurant")
@@ -53,7 +52,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
             )
         )
         // Act
-        val result = adapter.restore(json)
+        val result = taiyakiJson.decodeFromString<TaiyakiData>(json)
         // Assert
         assertEquals(result, expected)
     }
@@ -65,7 +64,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
 
         // Act & Assert
         assertFailsWith(SerializationException::class) {
-            adapter.restore(emptyJson)
+            taiyakiJson.decodeFromString<TaiyakiData>(emptyJson)
         }
     }
 
@@ -93,7 +92,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
                 "extraField": "extraValue"
             }
         """
-        val expected = Backup(
+        val expected = TaiyakiData(
             appVersion = "1.0.0",
             categories = listOf(
                 Category(name = "Groceries", icon = "cart")
@@ -107,7 +106,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
             )
         )
         // Act
-        val result = adapter.restore(json)
+        val result = taiyakiJson.decodeFromString<TaiyakiData>(json)
         // Assert
         assertEquals(result, expected)
     }
@@ -137,7 +136,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
         """
         // Act & Assert
         assertFailsWith(SerializationException::class) {
-            adapter.restore(json)
+            taiyakiJson.decodeFromString<TaiyakiData>(json)
         }
     }
 
@@ -156,7 +155,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
                 "expenses": []
             }
         """
-        val expected = Backup(
+        val expected = TaiyakiData(
             appVersion = "1.0.0",
             categories = listOf(
                 Category(name = "Groceries", icon = "cart")
@@ -164,7 +163,7 @@ class ExpenseTaiyakiRestoreAdapterTest {
             expenses = emptyList()
         )
         // Act
-        val result = adapter.restore(json)
+        val result = taiyakiJson.decodeFromString<TaiyakiData>(json)
         // Assert
         assertEquals(result, expected)
     }
@@ -179,13 +178,13 @@ class ExpenseTaiyakiRestoreAdapterTest {
             "expenses": []
         }
     """
-        val expected = Backup(
+        val expected = TaiyakiData(
             appVersion = "1.0.0",
             categories = emptyList(),
             expenses = emptyList()
         )
         // Act
-        val result = adapter.restore(json)
+        val result = taiyakiJson.decodeFromString<TaiyakiData>(json)
         // Assert
         assertEquals(result, expected)
     }
@@ -199,13 +198,13 @@ class ExpenseTaiyakiRestoreAdapterTest {
             "expenses": []
         }
     """
-        val expected = Backup(
+        val expected = TaiyakiData(
             appVersion = null, // appVersion is missing in JSON, so it should be null
             categories = emptyList(),
             expenses = emptyList()
         )
         // Act
-        val result = adapter.restore(json)
+        val result = taiyakiJson.decodeFromString<TaiyakiData>(json)
         // Assert
         assertEquals(result, expected)
     }

@@ -27,6 +27,7 @@ kermit = "2.0.5"
 jetbrainsKotlinJvm = "2.1.10"
 jetbrainsNavigationCompose = "2.8.0-alpha10"
 turbine = "1.2.0"
+fileKit = "0.8.8"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -57,6 +58,8 @@ mpSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-corouti
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 jetbrainsNavigationCompose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigationCompose" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+fileKit-core = { module = "io.github.vinceglb:filekit-core", version.ref = "fileKit" }
+fileKit-compose = { module = "io.github.vinceglb:filekit-compose", version.ref = "fileKit" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
