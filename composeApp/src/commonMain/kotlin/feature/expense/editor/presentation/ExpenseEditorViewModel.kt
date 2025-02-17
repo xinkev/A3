@@ -8,6 +8,7 @@ import androidx.navigation.toRoute
 import com.xinkev.keypad.KeypadState
 import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
+import common.util.localDateTimeToMillis
 import common.util.toSmartString
 import core.event.EventBus
 import core.event.NavigationEvent
@@ -39,7 +40,9 @@ class ExpenseEditorViewModel(
     )
     override val isEdit: Boolean = selectedExpense != null
     private val _dateMillis = MutableStateFlow(
-        navArgs.initialDate ?: Clock.System.now().toEpochMilliseconds()
+        navArgs.initialDate
+            ?: selectedExpense?.datetime?.let(::localDateTimeToMillis)
+            ?: Clock.System.now().toEpochMilliseconds()
     )
 
     override val dateMillis = _dateMillis.asStateFlow()
