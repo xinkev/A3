@@ -8,6 +8,7 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
+import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 
@@ -46,4 +47,11 @@ fun dateTimeMilliToString(value: Long, format: A3DateFormat): String {
 
 fun localDateTimeToString(value: LocalDateTime, format: A3DateFormat): String {
     return value.format(format.value)
+}
+
+fun localDateTimeToMillis(
+    value: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Long {
+    return value.toInstant(timeZone).toEpochMilliseconds()
 }
