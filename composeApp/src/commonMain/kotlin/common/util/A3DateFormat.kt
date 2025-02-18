@@ -82,5 +82,16 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
             char(':')
             minute()
         }
+    ),
+
+    FileName(
+        LocalDateTime.Format {
+            year()
+            monthNumber()
+            dayOfMonth()
+            hour()
+            minute()
+            second()
+        }
     )
 }

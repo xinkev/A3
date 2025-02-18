@@ -101,7 +101,7 @@ private fun CategoriesContent(
     dataSource: CategoryDataSource = koinInject(),
     onSelect: (Category?) -> Unit
 ) {
-    val categories by dataSource.getAllCategories().collectAsState(emptyList())
+    val categories by dataSource.getAllCategoriesAsFlow().collectAsState(emptyList())
 
     CategoriesImpl(
         modifier = modifier,

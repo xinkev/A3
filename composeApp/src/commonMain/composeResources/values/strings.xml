@@ -27,4 +27,15 @@
     <string name="restore_success">Data restored successfully.</string>
     <string name="restore_failed">Restore Failed</string>
     <string name="restore_unsupported_file_error">We could not recognize the selected file. Please ensure it is in a supported format.</string>
+    <string name="select_directory_to_export_title">Select Directory to Export</string>
+    <string name="file_overwrite_warning">This will overwrite any existing file. Do you want to continue?</string>
+    <string name="export_success">Data exported successfully.</string>
+    <string name="export_failed">Data export failed.</string>
+    <string name="export_json">Export to JSON</string>
+    <string name="folder_write_access_denied_error">Access denied to write to the folder.</string>
+    <string name="directory_creation_failed_error">Failed to create directory.</string>
+    <string name="file_write_failed_error">File write failed.</string>
+    <string name="file_create_failed_error">File creation failed.</string>
+    <string name="storage_space_insufficient_error">Insufficient storage space.</string>
+    <string name="export_unknown_error">Unknown export error occurred.</string>
 </resources>

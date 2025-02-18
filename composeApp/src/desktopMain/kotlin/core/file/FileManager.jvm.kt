@@ -1,17 +1,16 @@
-package core
+package core.file
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import com.xinkev.logger.log
+import core.Outcome
 import io.github.vinceglb.filekit.core.PlatformDirectory
-import java.io.FileNotFoundException
+import java.io.IOException
 
-actual class FileManager {
+actual object FileManager {
     actual fun writeFile(
         data: ByteArray,
         directory: PlatformDirectory,
         fileName: String,
-    ): Boolean {
+    ): Outcome<FileWriteError, Unit> {
         try {
             val filePath = directory.file.resolve(fileName)
             // Find existing file or create a new one
@@ -23,15 +22,13 @@ actual class FileManager {
             }
             // Write data to the file
             file.writeBytes(data)
-            return true
-        } catch (e: FileNotFoundException) {
+            return Outcome.Success(Unit)
+        } catch (e: IOException) {
             log.w { "Failed to write file: ${e.localizedMessage}" }
-            return false
+            return Outcome.Error(FileWriteError.FileWriteFailed)
+        } catch (e: SecurityException) {
+            log.w { "Failed to write file: ${e.localizedMessage}" }
+            return Outcome.Error(FileWriteError.AccessDenied)
         }
     }
-}
-
-@Composable
-actual fun rememberFileManager(): FileManager {
-    return remember { FileManager() }
 }

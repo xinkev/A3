@@ -6,8 +6,8 @@ import core.event.EventBus
 import core.onError
 import core.onSuccess
 import feature.settings.backup.domain.adapter.DataAdapterFactory
-import feature.settings.backup.domain.event.RestoreSuccess
 import feature.settings.backup.domain.model.ImportError
+import feature.settings.common.event.SettingsEvent.RestoreSuccess
 import io.github.vinceglb.filekit.core.PlatformFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

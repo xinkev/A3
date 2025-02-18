@@ -1,8 +1,7 @@
-package core
+package core.file
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import com.xinkev.logger.log
+import core.Outcome
 import io.github.vinceglb.filekit.core.PlatformDirectory
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -19,17 +18,20 @@ import platform.Foundation.NSFileCoordinatorWritingForReplacing
 import platform.Foundation.dataWithBytes
 import platform.Foundation.writeToURL
 
-actual class FileManager {
+actual object FileManager {
     @OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)
     actual fun writeFile(
         data: ByteArray,
         directory: PlatformDirectory,
         fileName: String,
-    ): Boolean {
+    ): Outcome<FileWriteError, Unit> {
         val url = directory.nsUrl
 
-        if (!url.startAccessingSecurityScopedResource()) return false
-        val outputUrl = url.URLByAppendingPathComponent(fileName, false) ?: return false
+        if (!url.startAccessingSecurityScopedResource()) {
+            return Outcome.Error(FileWriteError.AccessDenied)
+        }
+        val outputUrl = url.URLByAppendingPathComponent(fileName, false)
+            ?: return Outcome.Error(FileWriteError.DirectoryCreationFailed)
 
         try {
             memScoped {
@@ -48,27 +50,22 @@ actual class FileManager {
                 }
                 if (success) {
                     log.i { "File written successfully to ${outputUrl.path}" }
-                    return true
+                    return Outcome.Success(Unit)
                 } else {
                     log.w {
                         "Failed to write file to ${outputUrl.path}: ${error.value?.localizedDescription}"
                     }
-                    return false
+                    return Outcome.Error(FileWriteError.FileWriteFailed)
                 }
             }
         } catch (e: Exception) {
             log.w {
                 "Failed to write file to ${outputUrl.path}: ${e.message}"
             }
-            return false
+            return Outcome.Error(FileWriteError.Unknown)
         } finally {
             url.stopAccessingSecurityScopedResource()
         }
         // TODO: Bookmark URL for future access
     }
-}
-
-@Composable
-actual fun rememberFileManager(): FileManager {
-    return remember { FileManager() }
 }

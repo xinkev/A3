@@ -19,7 +19,7 @@ import io.github.vinceglb.filekit.core.PlatformFile
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun ErrorDialog(
+fun ImportErrorDialog(
     error: ImportError?,
     clearError: () -> Unit,
     file: PlatformFile?,

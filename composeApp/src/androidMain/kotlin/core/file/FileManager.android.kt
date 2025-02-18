@@ -1,13 +1,12 @@
-package core
+package core.file
 
+import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.provider.DocumentsContract
 import android.webkit.MimeTypeMap
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import com.xinkev.logger.log
+import core.Outcome
 import io.github.vinceglb.filekit.core.PlatformDirectory
 import java.io.IOException
 
@@ -15,9 +14,12 @@ import java.io.IOException
  * Android-specific implementation of FileManager that handles file operations
  * using Android's Storage Access Framework (SAF).
  */
-actual class FileManager(context: Context) {
-    private val contentResolver = context.contentResolver
+actual object FileManager {
+    private lateinit var contentResolver: ContentResolver
 
+    fun init(context: Context) {
+        contentResolver = context.contentResolver
+    }
     /**
      * Writes a file to the specified directory using Android's Storage Access Framework.
      * If file exists, it will be overwritten. If not, a new file will be created.
@@ -26,12 +28,21 @@ actual class FileManager(context: Context) {
         data: ByteArray,
         directory: PlatformDirectory,
         fileName: String,
-    ): Boolean {
-        // Get or create the file URI, handling existence check
-        val fileUri = getOrCreateFile(directory, fileName) ?: return false
+    ): Outcome<FileWriteError, Unit> {
+        try {
+            // Get or create file URI
+            val fileUri = getOrCreateFile(directory, fileName) ?: 
+                return Outcome.Error(FileWriteError.FileCreateFailed)
 
-        // Write the data to the file using "wt" mode (write + truncate)
-        return writeDataToFile(fileUri, data)
+            // Write data to file
+            return writeDataToFile(fileUri, data)
+        } catch (e: SecurityException) {
+            log.w { "Access denied: ${e.localizedMessage}" }
+            return Outcome.Error(FileWriteError.AccessDenied)
+        } catch (e: Exception) {
+            log.w { "Unknown error: ${e.localizedMessage}" }
+            return Outcome.Error(FileWriteError.Unknown)
+        }
     }
 
     /**
@@ -42,16 +53,21 @@ actual class FileManager(context: Context) {
         directory: PlatformDirectory,
         fileName: String
     ): Uri? {
-        // Get the URI for the parent directory
-        // - directory.uri points to a directory user granted access to via SAF
-        // - getTreeDocumentId extracts the document ID from the tree URI
-        // - buildDocumentUriUsingTree combines them to get the actual directory URI
-        val parentUri = DocumentsContract.buildDocumentUriUsingTree(
-            directory.uri,
-            DocumentsContract.getTreeDocumentId(directory.uri)
-        )
+        try {
+            // Get the URI for the parent directory
+            // - directory.uri points to a directory user granted access to via SAF
+            // - getTreeDocumentId extracts the document ID from the tree URI
+            // - buildDocumentUriUsingTree combines them to get the actual directory URI
+            val parentUri = DocumentsContract.buildDocumentUriUsingTree(
+                directory.uri,
+                DocumentsContract.getTreeDocumentId(directory.uri)
+            )
 
-        return findExistingFile(parentUri, fileName) ?: createNewFile(parentUri, fileName)
+            return findExistingFile(parentUri, fileName) ?: createNewFile(parentUri, fileName)
+        } catch (e: Exception) {
+            log.w { "Failed to access/create file: ${e.localizedMessage}" }
+            return null
+        }
     }
 
     /**
@@ -113,16 +129,21 @@ actual class FileManager(context: Context) {
      * - 'w' means write mode
      * - 't' means truncate (overwrite existing content)
      */
-    private fun writeDataToFile(fileUri: Uri, data: ByteArray): Boolean {
+    private fun writeDataToFile(fileUri: Uri, data: ByteArray): Outcome<FileWriteError, Unit> {
         return try {
             contentResolver.openOutputStream(fileUri, "wt")?.use {
                 it.write(data)
-            }
+            } ?: return Outcome.Error(FileWriteError.AccessDenied)
+            
             log.i { "File written successfully to ${fileUri.path}" }
-            true
+            Outcome.Success(Unit)
         } catch (e: IOException) {
             log.w { "Failed to write file: ${e.localizedMessage}" }
-            false
+            when {
+                e.message?.contains("No space") == true -> 
+                    Outcome.Error(FileWriteError.StorageSpaceInsufficient)
+                else -> Outcome.Error(FileWriteError.FileWriteFailed)
+            }
         }
     }
 }
@@ -136,10 +157,4 @@ actual class FileManager(context: Context) {
 private fun getMimeTypeFromFileName(fileName: String): String? {
     val extension = fileName.substringAfterLast('.', "").lowercase()
     return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
-}
-
-@Composable
-actual fun rememberFileManager(): FileManager {
-    val context = LocalContext.current
-    return remember { FileManager(context) }
 }

@@ -1,7 +1,8 @@
 package feature.settings.backup.presentation
 
 import a3.composeapp.generated.resources.Res
-import a3.composeapp.generated.resources.import_json
+import a3.composeapp.generated.resources.export_json
+import a3.composeapp.generated.resources.select_directory_to_export_title
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleDown
@@ -16,46 +17,53 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalInspectionMode
 import app.theme.Dimen
-import feature.settings.backup.presentation.composables.ImportErrorDialog
+import feature.settings.backup.presentation.composables.ExportConfirmationDialog
+import feature.settings.backup.presentation.composables.ExportErrorDialog
 import feature.settings.common.composables.SettingsEntry
 import feature.settings.common.composables.SettingsLabel
-import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher
-import io.github.vinceglb.filekit.core.PickerMode
-import io.github.vinceglb.filekit.core.PickerType
-import io.github.vinceglb.filekit.core.PlatformFile
+import io.github.vinceglb.filekit.compose.rememberDirectoryPickerLauncher
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-
 @Composable
-fun SettingsImport(
-    vm: ISettingsRestoreViewModel = settingsRestoreVM(),
+fun SettingsExport(
+    vm: ISettingsExportViewModel = settingsExportVM(),
 ) {
-    var selectedFile by remember { mutableStateOf<PlatformFile?>(null) }
-
     val error by vm.error.collectAsState()
     val inProgress by vm.inProgress.collectAsState()
+    var showConfirmationDialog by remember { mutableStateOf(false) }
     val progressVisibility = remember(inProgress) {
         if (inProgress) 1f else 0f
     }
 
-    val launcher = rememberFilePickerLauncher(
-        type = PickerType.File(vm.supportedFormats.toList()),
-        mode = PickerMode.Single,
+    val launcher = rememberDirectoryPickerLauncher(
+        title = stringResource(Res.string.select_directory_to_export_title),
     ) {
         it?.let {
-            vm.onFilePicked(it)
-            selectedFile = it
+            vm.onDirectoryChosen(it)
+            showConfirmationDialog = true
         }
     }
 
-    ImportErrorDialog(error, vm::clearError, selectedFile)
+    ExportConfirmationDialog(
+        show = showConfirmationDialog,
+        onCancel = {
+            showConfirmationDialog = false
+            vm.onCancel()
+        },
+        onOk = {
+            showConfirmationDialog = false
+            vm.onConfirmation()
+        },
+        onDismiss = { showConfirmationDialog = false }
+    )
+    ExportErrorDialog(error, vm::clearError)
     SettingsEntry(
         onClick = {
             launcher.launch()
         },
         leftContent = {
-            SettingsLabel(Icons.Default.ArrowCircleDown, stringResource(Res.string.import_json))
+            SettingsLabel(Icons.Default.ArrowCircleDown, stringResource(Res.string.export_json))
         },
         rightContent = {
             CircularProgressIndicator(
@@ -69,10 +77,10 @@ fun SettingsImport(
 }
 
 @Composable
-private fun settingsRestoreVM(): ISettingsRestoreViewModel {
+private fun settingsExportVM(): ISettingsExportViewModel {
     return if (LocalInspectionMode.current) {
-        PreviewSettingsRestoreViewModel
+        PreviewSettingsExportViewModel
     } else {
-        koinViewModel<SettingsRestoreViewModel>()
+        koinViewModel<SettingsExportViewModel>()
     }
 }

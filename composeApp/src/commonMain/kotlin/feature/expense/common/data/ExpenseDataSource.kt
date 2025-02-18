@@ -17,10 +17,15 @@ class ExpenseDataSource(
     private val db = dbFactory.create()
     private val queries = db.expenseQueries
 
-    fun getAll(): Flow<List<Expense>> {
+    fun getAllAsFlow(): Flow<List<Expense>> {
         return queries.selectAll(mapper = ::mapSqlResultToExpense)
             .asFlow()
             .mapToList(dispatchers.io)
+    }
+
+    fun getAll(): List<Expense> {
+        return queries.selectAll(mapper = ::mapSqlResultToExpense)
+            .executeAsList()
     }
 
     fun getByDateTime(

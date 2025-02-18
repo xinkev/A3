@@ -9,7 +9,7 @@ data class TaiyakiData(
      * This value is only needed for backup purposes and is not need to be provided during restoration.
      * However, it can be used by the adapter to convert the backup to the current app compatible version.
      */
-    val appVersion: String?,
+    val version: String?,
     val categories: List<Category>,
     val expenses: List<Expense>
 ) {
@@ -19,7 +19,7 @@ data class TaiyakiData(
         val detail: String,
         val datetime: String,
         val category: String,
-        val cost: Double,
+        val cost: String,
         val timezone: String,
     )
 

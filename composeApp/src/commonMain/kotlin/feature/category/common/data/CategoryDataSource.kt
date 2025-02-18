@@ -15,9 +15,12 @@ class CategoryDataSource(
 ) {
     private val queries = db.categoryQueries
 
-    fun getAllCategories() = queries.selectAll(mapper = ::mapSqlResultToCategory)
+    fun getAllCategoriesAsFlow() = queries.selectAll(mapper = ::mapSqlResultToCategory)
         .asFlow()
         .mapToList(dispatchers.io)
+
+    fun getAllCategories() = queries.selectAll(mapper = ::mapSqlResultToCategory)
+        .executeAsList()
 
     fun addCategory(
         name: String,

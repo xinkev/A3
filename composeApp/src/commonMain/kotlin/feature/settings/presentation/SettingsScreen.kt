@@ -3,6 +3,7 @@ package feature.settings.presentation
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.categories
 import a3.composeapp.generated.resources.data
+import a3.composeapp.generated.resources.export_success
 import a3.composeapp.generated.resources.general
 import a3.composeapp.generated.resources.restore_success
 import a3.composeapp.generated.resources.settings
@@ -30,11 +31,14 @@ import androidx.compose.ui.Modifier
 import common.composables.CenteredTopBar
 import common.util.HandleEvents
 import common.util.preview
-import feature.settings.backup.domain.event.RestoreSuccess
+import feature.settings.backup.presentation.SettingsExport
 import feature.settings.backup.presentation.SettingsImport
 import feature.settings.common.composables.SettingsEntry
 import feature.settings.common.composables.SettingsGroup
 import feature.settings.common.composables.SettingsLabel
+import feature.settings.common.event.SettingsEvent
+import feature.settings.common.event.SettingsEvent.ExportSuccess
+import feature.settings.common.event.SettingsEvent.RestoreSuccess
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -55,9 +59,12 @@ fun SettingsScreenContent(
     val loading by vm.loading.collectAsState()
     val snackbarState = remember { SnackbarHostState() }
     val restoreSuccessMsg = stringResource(Res.string.restore_success)
-
-    HandleEvents<RestoreSuccess> {
-        snackbarState.showSnackbar(message = restoreSuccessMsg)
+    val exportSuccessMsg = stringResource(Res.string.export_success)
+    HandleEvents<SettingsEvent> {
+        when(it) {
+            RestoreSuccess -> snackbarState.showSnackbar(message = restoreSuccessMsg)
+            ExportSuccess -> snackbarState.showSnackbar(message = exportSuccessMsg)
+        }
     }
 
     Scaffold(
@@ -84,6 +91,7 @@ fun SettingsScreenContent(
             }
             SettingsGroup(stringResource(Res.string.data)) {
                 SettingsImport()
+                SettingsExport()
             }
         }
     }

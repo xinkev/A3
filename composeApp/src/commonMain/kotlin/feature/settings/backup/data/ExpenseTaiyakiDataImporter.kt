@@ -84,7 +84,7 @@ private fun ExpenseDataSource.insertList(
             this.insert(
                 uuid = expense.uuid,
                 categoryId = category.uuid,
-                amount = expense.cost,
+                amount = expense.cost.toDouble(),
                 dateTime = localDateTimeToString(dateTime, A3DateFormat.ISO8601),
                 notes = expense.detail
             )

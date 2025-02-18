@@ -1,9 +1,9 @@
-package core
+package core.file
 
-import androidx.compose.runtime.Composable
+import core.Outcome
 import io.github.vinceglb.filekit.core.PlatformDirectory
 
-expect class FileManager {
+expect object FileManager {
     /**
      * Writes data to a file in the specified directory.
      * 
@@ -16,14 +16,7 @@ expect class FileManager {
         data: ByteArray,
         directory: PlatformDirectory,
         fileName: String,
-    ): Boolean
+    ): Outcome<FileWriteError, Unit>
 }
-
-/**
- * Composable function that provides a FileManager instance.
- * The instance is remembered across recompositions for efficiency.
- */
-@Composable
-expect fun rememberFileManager(): FileManager
 
 
