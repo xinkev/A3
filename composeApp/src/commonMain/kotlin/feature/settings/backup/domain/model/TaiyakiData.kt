@@ -1,9 +1,5 @@
 package feature.settings.backup.domain.model
 
-import common.util.A3DateFormat
-import common.util.localDateTimeToString
-import kotlinx.datetime.LocalDateTime
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -21,14 +17,11 @@ data class TaiyakiData(
     data class Expense(
         val uuid: String,
         val detail: String,
-        @Contextual
-        val datetime: LocalDateTime,
+        val datetime: String,
         val category: String,
-        val cost: Double
-    ) {
-        val datetimeISO8601: String
-            get() = localDateTimeToString(datetime, A3DateFormat.ISO8601)
-    }
+        val cost: Double,
+        val timezone: String,
+    )
 
     @Serializable
     data class Category(

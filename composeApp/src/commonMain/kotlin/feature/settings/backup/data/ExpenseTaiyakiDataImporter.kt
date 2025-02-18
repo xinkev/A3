@@ -1,9 +1,14 @@
 package feature.settings.backup.data
 
 import com.xinkev.a3.sqldelight.A3Database
+import com.xinkev.logger.log
+import common.util.A3DateFormat
+import common.util.localDateTimeToString
+import common.util.parseDateTime
 import core.Outcome
 import core.database.DatabaseFactory
 import feature.category.common.data.CategoryDataSource
+import feature.category.common.domain.model.Category
 import feature.expense.common.data.ExpenseDataSource
 import feature.settings.backup.domain.adapter.DataImporter
 import feature.settings.backup.domain.model.ImportError
@@ -13,6 +18,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.TimeZone
 import kotlinx.serialization.SerializationException
 
 /**
@@ -26,9 +32,6 @@ class ExpenseTaiyakiDataImporter(
     private val expenseDataSource: ExpenseDataSource,
 ) : DataImporter {
     private val db: A3Database = databaseFactory.create()
-    private val expenseQueries = db.expenseQueries
-    private val categoryQueries = db.categoryQueries
-
     override val format: String = "json"
     override val source: String = "taiyaki"
 
@@ -46,10 +49,13 @@ class ExpenseTaiyakiDataImporter(
                 }
                 Outcome.Success(Unit)
             } catch (e: SerializationException) {
+                log.w(throwable = e) { "import failed" }
                 Outcome.Error(ImportError.UnrecognizedFile)
             } catch (e: IllegalArgumentException) {
+                log.w(throwable = e) { "import failed" }
                 Outcome.Error(ImportError.UnrecognizedFile)
             } catch (e: Throwable) {
+                log.w(throwable = e) { "import failed" }
                 @Suppress("UNRESOLVED_REFERENCE")
                 when {
                     // "Unresolved reference: OutOfMemoryError" occurs maybe because it's not available in Kotlin Native.
@@ -60,6 +66,28 @@ class ExpenseTaiyakiDataImporter(
                     else -> Outcome.Error(ImportError.FileAccessError)
                 }
             }
+        }
+    }
+}
+
+private fun ExpenseDataSource.insertList(
+    data: List<TaiyakiData.Expense>,
+    findCategory: (name: String) -> Category?
+) {
+    for (expense in data) {
+        val category = findCategory(expense.category)
+        if (category != null) {
+            val dateTime = parseDateTime(
+                expense.datetime,
+                timeZone = TimeZone.of(expense.timezone)
+            )
+            this.insert(
+                uuid = expense.uuid,
+                categoryId = category.uuid,
+                amount = expense.cost,
+                dateTime = localDateTimeToString(dateTime, A3DateFormat.ISO8601),
+                notes = expense.detail
+            )
         }
     }
 }
