@@ -1,12 +1,31 @@
 package common.util
 
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format.DateTimeComponents
 import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.format.char
 
+enum class A3DateFormatDateTimeComponents(val value: DateTimeFormat<DateTimeComponents>) {
+    TaiyakiDateTime(DateTimeComponents.Format {
+        year()
+        char('-')
+        monthNumber()
+        char('-')
+        dayOfMonth()
+        char(' ')
+        hour()
+        char(':')
+        minute()
+        char(':')
+        second()
+
+    })
+}
+
 enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
     DisplayDateTime(
-        LocalDateTime.Format {
+        LocalDateTime.Format
+        {
             year()
             char('-')
             monthNumber()
@@ -22,7 +41,8 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
     ),
 
     ISO8601(
-        LocalDateTime.Format {
+        LocalDateTime.Format
+        {
             year()
             char('-')
             monthNumber()
@@ -39,7 +59,8 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
     ),
 
     DisplayDate(
-        LocalDateTime.Format {
+        LocalDateTime.Format
+        {
             year()
             char('-')
             monthNumber()
@@ -49,7 +70,8 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
     ),
 
     DisplayDateTimeWithoutSeconds(
-        LocalDateTime.Format {
+        LocalDateTime.Format
+        {
             year()
             char('-')
             monthNumber()

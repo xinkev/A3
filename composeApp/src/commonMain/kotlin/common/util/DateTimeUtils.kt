@@ -17,12 +17,10 @@ val now: Instant
 
 fun parseDateTime(
     dateTime: String,
-    format: A3DateFormat = A3DateFormat.ISO8601
+    format: A3DateFormatDateTimeComponents = A3DateFormatDateTimeComponents.TaiyakiDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault(),
 ): LocalDateTime {
-    return LocalDateTime.parse(
-        dateTime,
-        format = format.value,
-    )
+    return Instant.parse(dateTime, format.value).toLocalDateTime(timeZone)
 }
 
 fun dateMillisToLocalDateTime(value: Long): LocalDateTime {
