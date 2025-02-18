@@ -42,10 +42,10 @@ fun HomeHeader(
 ) {
     val openDialog = rememberSaveable { mutableStateOf(false) }
     val prevMonth= remember(initialDate) {
-        plusOrMinusMonth(initialDate, -1)
+        plusOrMinusDay(initialDate, -1)
     }
     val nextMonth = remember(initialDate) {
-        plusOrMinusMonth(initialDate, 1)
+        plusOrMinusDay(initialDate, 1)
     }
 
     A3DatePickerDialog(
@@ -87,15 +87,15 @@ fun HomeHeader(
     }
 }
 
-private fun plusOrMinusMonth(
+private fun plusOrMinusDay(
     currentDate: Long,
     count: Int,
 ): Long {
     var instant = Instant.fromEpochMilliseconds(currentDate)
     instant = if (count > 0) {
-        instant.plus(DateTimePeriod(months = 1), TimeZone.currentSystemDefault())
+        instant.plus(DateTimePeriod(days = 1), TimeZone.currentSystemDefault())
     } else {
-        instant.minus(DateTimePeriod(months = 1), TimeZone.currentSystemDefault())
+        instant.minus(DateTimePeriod(days = 1), TimeZone.currentSystemDefault())
     }
     return instant.toEpochMilliseconds()
 }
