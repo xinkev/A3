@@ -17,3 +17,7 @@
     public static ** INSTANCE;
 }
 -keep @kotlinx.serialization.Serializable class * {*;}
+
+
+# Android
+-dontwarn androidx.test.platform.app.InstrumentationRegistry

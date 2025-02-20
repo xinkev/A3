@@ -169,7 +169,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles("desktop.pro")
+            proguardFiles("rules.pro")
         }
     }
     compileOptions {
@@ -193,7 +193,7 @@ compose.desktop {
 
             buildTypes.release {
                 proguard {
-                    configurationFiles.from("desktop.pro")
+                    configurationFiles.from("rules.pro")
                 }
             }
             linux {
@@ -218,6 +218,5 @@ buildConfig {
     buildConfigField("appName", appName)
     buildConfigField("dbName", "$appName.db")
     buildConfigField("isDebug", true)
-
 }
 
