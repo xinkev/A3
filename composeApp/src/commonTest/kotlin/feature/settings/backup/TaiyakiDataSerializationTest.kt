@@ -40,14 +40,17 @@ class TaiyakiDataSerializationTest {
             }
         """
         val expected = TaiyakiData(
-            appVersion = "1.0.0", categories = listOf(
+            version = "1.0.0", categories = listOf(
                 Category(name = "Groceries", icon = "cart"),
                 Category(name = "Eating Out", icon = "restaurant")
             ), expenses = listOf(
                 Expense(
-                    uuid = "12345", detail = "Groceries", datetime = LocalDateTime(
-                        year = 2023, monthNumber = 1, dayOfMonth = 1, hour = 0, minute = 0
-                    ), category = "Groceries", cost = 10.0
+                    uuid = "12345",
+                    detail = "Groceries",
+                    datetime = "2023-01-01 00:00:00",
+                    category = "Groceries",
+                    cost = "10.0",
+                    timezone = "Asia/Tokyo"
                 )
             )
         )

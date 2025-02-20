@@ -9,6 +9,7 @@ import com.xinkev.keypad.KeypadState
 import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
 import common.util.localDateTimeToMillis
+import common.util.now
 import common.util.toSmartString
 import core.event.EventBus
 import core.event.NavigationEvent
@@ -42,7 +43,7 @@ class ExpenseEditorViewModel(
     private val _dateMillis = MutableStateFlow(
         navArgs.initialDate
             ?: selectedExpense?.datetime?.let(::localDateTimeToMillis)
-            ?: Clock.System.now().toEpochMilliseconds()
+            ?: now.toEpochMilliseconds()
     )
 
     override val dateMillis = _dateMillis.asStateFlow()

@@ -18,9 +18,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import app.theme.Dimen
@@ -40,7 +42,7 @@ fun HomeHeader(
     initialDate: Long,
     onDateSelected: (Long) -> Unit,
 ) {
-    val openDialog = rememberSaveable { mutableStateOf(false) }
+    var openDialog by rememberSaveable { mutableStateOf(false) }
     val prevMonth= remember(initialDate) {
         plusOrMinusDay(initialDate, -1)
     }
@@ -48,11 +50,13 @@ fun HomeHeader(
         plusOrMinusDay(initialDate, 1)
     }
 
-    A3DatePickerDialog(
-        opened = openDialog,
-        value = initialDate,
-        onDateSelected = onDateSelected
-    )
+    if (openDialog) {
+        A3DatePickerDialog(
+            onDismiss = { openDialog = false },
+            value = initialDate,
+            onDateSelected = onDateSelected
+        )
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -69,7 +73,7 @@ fun HomeHeader(
             )
         }
 
-        TextButton(onClick = { openDialog.value = true }) {
+        TextButton(onClick = { openDialog = true }) {
             Text(
                 dateTimeToDisplay(initialDate, A3DateFormat.DisplayDate),
                 style = MaterialTheme.typography.titleLarge
@@ -93,9 +97,9 @@ private fun plusOrMinusDay(
 ): Long {
     var instant = Instant.fromEpochMilliseconds(currentDate)
     instant = if (count > 0) {
-        instant.plus(DateTimePeriod(days = 1), TimeZone.currentSystemDefault())
+        instant.plus(DateTimePeriod(days = 1), TimeZone.UTC)
     } else {
-        instant.minus(DateTimePeriod(days = 1), TimeZone.currentSystemDefault())
+        instant.minus(DateTimePeriod(days = 1), TimeZone.UTC)
     }
     return instant.toEpochMilliseconds()
 }

@@ -73,7 +73,7 @@ class ExpenseTaiyakiDataExporter(
                             ),
                             category = expense.category.name,
                             cost = expense.cost.toString(),
-                            timezone = TimeZone.currentSystemDefault().id,
+                            timezone = TimeZone.UTC.id,
                         )
                     }
                 )

@@ -13,22 +13,25 @@ import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 
 val now: Instant
-    get() = Clock.System.now()
+    get() =  Clock.System.now()
 
 fun parseDateTime(
     dateTime: String,
     format: A3DateFormatDateTimeComponents = A3DateFormatDateTimeComponents.TaiyakiDateTime,
-    timeZone: TimeZone = TimeZone.currentSystemDefault(),
+    timeZone: TimeZone = TimeZone.UTC,
 ): LocalDateTime {
     return Instant.parse(dateTime, format.value).toLocalDateTime(timeZone)
 }
 
-fun dateMillisToLocalDateTime(value: Long): LocalDateTime {
+fun dateMillisToLocalDateTime(
+    value: Long,
+    timeZone: TimeZone = TimeZone.UTC
+): LocalDateTime {
     val instant = Instant.fromEpochMilliseconds(value)
-    return instant.toLocalDateTime(TimeZone.currentSystemDefault())
+    return instant.toLocalDateTime(timeZone)
 }
 
-fun isToday(value: Long, timeZone: TimeZone = TimeZone.currentSystemDefault()): Boolean {
+fun isToday(value: Long, timeZone: TimeZone = TimeZone.UTC): Boolean {
     val instant = Instant.fromEpochMilliseconds(value)
     return instant.toLocalDateTime(timeZone).date == now.toLocalDateTime(timeZone).date
 }
@@ -36,7 +39,8 @@ fun isToday(value: Long, timeZone: TimeZone = TimeZone.currentSystemDefault()): 
 @Composable
 fun dateTimeToDisplay(value: Long, format: A3DateFormat): String {
     if (isToday(value)) return stringResource(Res.string.today)
-    return dateMillisToLocalDateTime(value).format(format.value)
+    // Use the default system timezone for displaying the date
+    return dateMillisToLocalDateTime(value, TimeZone.currentSystemDefault()).format(format.value)
 }
 
 fun dateTimeMilliToString(value: Long, format: A3DateFormat): String {
@@ -49,7 +53,7 @@ fun localDateTimeToString(value: LocalDateTime, format: A3DateFormat): String {
 
 fun localDateTimeToMillis(
     value: LocalDateTime,
-    timeZone: TimeZone = TimeZone.currentSystemDefault()
+    timeZone: TimeZone = TimeZone.UTC
 ): Long {
     return value.toInstant(timeZone).toEpochMilliseconds()
 }
