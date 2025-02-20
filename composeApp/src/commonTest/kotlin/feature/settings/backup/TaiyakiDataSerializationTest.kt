@@ -5,7 +5,6 @@ import feature.settings.backup.domain.model.TaiyakiData.Category
 import feature.settings.backup.domain.model.TaiyakiData.Expense
 import feature.settings.backup.serilization.taiyakiJson
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerializationException
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +16,7 @@ class TaiyakiDataSerializationTest {
         // Arrange
         val json = """
             {
-                "appVersion": "1.0.0",
+                "version": "1.0.0",
                 "categories": [
                     {
                         "name": "Groceries",
@@ -34,7 +33,8 @@ class TaiyakiDataSerializationTest {
                         "detail": "Groceries",
                         "datetime": "2023-01-01 00:00:00",
                         "category": "Groceries",
-                        "cost": 10.0
+                        "cost": "10.0",
+                         "timezone": "Asia/Tokyo"
                     }
                 ]
             }
@@ -76,7 +76,7 @@ class TaiyakiDataSerializationTest {
         // Arrange
         val json = """
             {
-                "appVersion": "1.0.0",
+                "version": "1.0.0",
                 "categories": [
                     {
                         "name": "Groceries",
@@ -89,22 +89,26 @@ class TaiyakiDataSerializationTest {
                         "detail": "Groceries",
                         "datetime": "2023-01-01 00:00:00",
                         "category": "Groceries",
-                        "cost": 10.0
+                        "cost": "10.0",
+                        "timezone": "Asia/Tokyo"
                     }
                 ],
                 "extraField": "extraValue"
             }
         """
         val expected = TaiyakiData(
-            appVersion = "1.0.0",
+            version = "1.0.0",
             categories = listOf(
                 Category(name = "Groceries", icon = "cart")
             ),
             expenses = listOf(
                 Expense(
-                    uuid = "12345", detail = "Groceries", datetime = LocalDateTime(
-                        year = 2023, monthNumber = 1, dayOfMonth = 1, hour = 0, minute = 0
-                    ), category = "Groceries", cost = 10.0
+                    uuid = "12345",
+                    detail = "Groceries",
+                    datetime = "2023-01-01 00:00:00",
+                    category = "Groceries",
+                    cost = "10.0",
+                    timezone = "Asia/Tokyo"
                 )
             )
         )
@@ -119,7 +123,7 @@ class TaiyakiDataSerializationTest {
         // Arrange
         val json = """
             {
-                "appVersion": 1,
+                "version": 1,
                 "categories": [
                     {
                         "name": "Groceries",
@@ -132,7 +136,8 @@ class TaiyakiDataSerializationTest {
                         "detail": "Groceries",
                         "datetime": "2023-01-01 00:00:00",
                         "category": "Groceries",
-                        "cost": "ten dollars"
+                        "cost": "ten dollars",
+                         "timezone": "Asia/Tokyo",
                     }
                 ]
             }
@@ -148,7 +153,7 @@ class TaiyakiDataSerializationTest {
         // Arrange
         val json = """
             {
-                "appVersion": "1.0.0",
+                "version": "1.0.0",
                 "categories": [
                     {
                         "name": "Groceries",
@@ -159,7 +164,7 @@ class TaiyakiDataSerializationTest {
             }
         """
         val expected = TaiyakiData(
-            appVersion = "1.0.0",
+            version = "1.0.0",
             categories = listOf(
                 Category(name = "Groceries", icon = "cart")
             ),
@@ -176,13 +181,13 @@ class TaiyakiDataSerializationTest {
         // Arrange
         val json = """
         {
-            "appVersion": "1.0.0",
+            "version": "1.0.0",
             "categories": [],
             "expenses": []
         }
     """
         val expected = TaiyakiData(
-            appVersion = "1.0.0",
+            version = "1.0.0",
             categories = emptyList(),
             expenses = emptyList()
         )
@@ -193,7 +198,7 @@ class TaiyakiDataSerializationTest {
     }
 
     @Test
-    fun restore_missingAppVersion_returnsBackupWithNullAppVersion() = runTest {
+    fun restore_missingVersion_returnsBackupWithNullVersion() = runTest {
         // Arrange
         val json = """
         {
@@ -202,7 +207,7 @@ class TaiyakiDataSerializationTest {
         }
     """
         val expected = TaiyakiData(
-            appVersion = null, // appVersion is missing in JSON, so it should be null
+            version = null, // version is missing in JSON, so it should be null
             categories = emptyList(),
             expenses = emptyList()
         )
