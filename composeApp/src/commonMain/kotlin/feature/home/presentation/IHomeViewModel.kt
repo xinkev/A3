@@ -13,6 +13,7 @@ interface IHomeViewModel {
     fun setDate(dateMillis: Long)
     fun onClickAddExpense()
     fun onClickTransaction(expense: Expense)
+    fun onDeleteConfirmed(expense: Expense)
 }
 
 internal data object PreviewHomeViewModel : IHomeViewModel {
@@ -36,6 +37,9 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
     }
 
     override fun onClickTransaction(expense: Expense) {
+    }
+
+    override fun onDeleteConfirmed(expense: Expense) {
     }
 
     private fun previewExpense(detail: String, cost: Double): Expense {

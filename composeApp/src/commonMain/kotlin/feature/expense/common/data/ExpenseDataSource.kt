@@ -73,4 +73,8 @@ class ExpenseDataSource(
             categoryId = categoryId
         )
     }
+
+    fun delete(uuid: String) {
+        queries.delete(uuid)
+    }
 }

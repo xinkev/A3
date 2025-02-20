@@ -1,20 +1,35 @@
 package feature.home.presentation.composables
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,6 +40,8 @@ import feature.category.categories.categoryIconMap
 import feature.category.common.domain.model.Category
 import feature.category.common.domain.model.CategoryIconName
 import feature.expense.common.domain.model.Expense
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -38,26 +55,84 @@ private val lineHeightStyle = LineHeightStyle(
 fun TransactionItem(
     expense: Expense,
     onClick: () -> Unit,
+    onDeleteConfirmed: () -> Unit,
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+    val scope = rememberCoroutineScope { Dispatchers.Main.immediate }
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
+    val swipeToDismissState = rememberSwipeToDismissBoxState(
+        confirmValueChange = {
+            if (it == SwipeToDismissBoxValue.EndToStart) {
+                showDeleteConfirmation = true
+                true
+            } else {
+                false
+            }
+        },
+        positionalThreshold = { totalDistance ->
+            totalDistance * 0.5f
+        }
+    )
+
+    if (showDeleteConfirmation) {
+        DeleteConfirmationDialog(
+            onYes = onDeleteConfirmed,
+            onDismiss = {
+                scope.launch { swipeToDismissState.reset() }
+                showDeleteConfirmation = false
+            },
+        )
+    }
+
+    LaunchedEffect(swipeToDismissState) {
+        if (swipeToDismissState.currentValue != SwipeToDismissBoxValue.Settled) {
+            swipeToDismissState.reset()
+        }
+    }
+
+    SwipeToDismissBox(
+        enableDismissFromStartToEnd = false,
+        state = swipeToDismissState,
+        backgroundContent = { SwipeToDeleteBackground() },
     ) {
         Row(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+                .fillMaxWidth()
+                .clickable(onClick = onClick)
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
-            modifier = Modifier.weight(0.7f),
         ) {
-            LeadingIcon(expense.category)
-            Detail(expense.detail)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(Dimen.smallPadding),
+                modifier = Modifier.weight(0.7f),
+            ) {
+                LeadingIcon(expense.category)
+                Detail(expense.detail)
+            }
+            Amount(expense.cost.toSmartString())
         }
-        Amount(expense.cost.toSmartString())
     }
 }
+
+@Composable
+private fun SwipeToDeleteBackground() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Red)
+            .padding(horizontal = 20.dp),
+        contentAlignment = Alignment.CenterEnd
+    ) {
+        Icon(
+            imageVector = Icons.Default.Delete,
+            contentDescription = null,
+            tint = Color.White,
+        )
+    }
+}
+
 
 @Composable
 private fun LeadingIcon(
@@ -123,6 +198,7 @@ private fun Preview() {
             ),
             cost = 123.0
         ),
-        onClick = {}
+        onClick = {},
+        onDeleteConfirmed = {}
     )
 }

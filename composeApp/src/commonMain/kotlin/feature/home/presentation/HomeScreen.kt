@@ -55,7 +55,8 @@ private fun ColumnScope.ExpenseList(
         items(expenses) { expense ->
             TransactionItem(
                 expense = expense,
-                onClick = { vm.onClickTransaction(expense) }
+                onClick = { vm.onClickTransaction(expense) },
+                onDeleteConfirmed = { vm.onDeleteConfirmed(expense) }
             )
         }
     }

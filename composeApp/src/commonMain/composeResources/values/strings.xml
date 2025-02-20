@@ -38,4 +38,6 @@
     <string name="file_create_failed_error">File creation failed.</string>
     <string name="storage_space_insufficient_error">Insufficient storage space.</string>
     <string name="export_unknown_error">Unknown export error occurred.</string>
+    <string name="delete_expense_warning">Are you sure you want to delete this expense?</string>
+    <string name="yes">Yes</string>
 </resources>

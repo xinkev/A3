@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    expenseDataSource: ExpenseDataSource,
+    private val expenseDataSource: ExpenseDataSource,
     private val eventBus: EventBus
 ) : ViewModel(), IHomeViewModel {
     private val _dateMillis = MutableStateFlow(now.toEpochMilliseconds())
@@ -51,5 +51,9 @@ class HomeViewModel(
         viewModelScope.launch {
             eventBus.send(NavigateToExpenseEditor(expense))
         }
+    }
+
+    override fun onDeleteConfirmed(expense: Expense) {
+        expenseDataSource.delete(expense.uuid)
     }
 }
