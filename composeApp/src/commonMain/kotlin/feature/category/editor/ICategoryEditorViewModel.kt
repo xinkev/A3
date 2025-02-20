@@ -17,6 +17,7 @@ interface ICategoryEditorViewModel {
     val isEdit: Boolean
     fun onIconClick(name: CategoryIconName)
     fun onClickAdd()
+    fun onDeleteConfirmed()
 }
 
 object PreviewCategoryEditorViewModel : ICategoryEditorViewModel {
@@ -34,5 +35,8 @@ object PreviewCategoryEditorViewModel : ICategoryEditorViewModel {
     override fun onIconClick(name: CategoryIconName) {
     }
     override fun onClickAdd() {
+    }
+
+    override fun onDeleteConfirmed() {
     }
 }

@@ -51,4 +51,8 @@ class CategoryDataSource(
             )
         }
     }
+
+    fun delete(uuid: String) {
+        queries.delete(uuid)
+    }
 }

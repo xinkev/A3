@@ -1,15 +1,20 @@
 package feature.category.editor
 
 import a3.composeapp.generated.resources.Res
+import a3.composeapp.generated.resources.add
 import a3.composeapp.generated.resources.category_name
 import a3.composeapp.generated.resources.category_name_taken_error
+import a3.composeapp.generated.resources.save
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,7 +45,7 @@ private fun CategoryEditorScreenContent(
         CategoryEditorScreenTopBar(
             isEdit = vm.isEdit,
             addButtonEnabled = enableAddButton,
-            onClickAdd = vm::onClickAdd,
+            onDeleteConfirmed = vm::onDeleteConfirmed,
         )
         Column(
             modifier = Modifier
@@ -59,6 +64,12 @@ private fun CategoryEditorScreenContent(
                 selectedIconName = selectedIconName,
                 onIconSelect = vm::onIconClick
             )
+            Button(
+                onClick = vm::onClickAdd,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(if (vm.isEdit) Res.string.save else Res.string.add))
+            }
         }
     }
 }

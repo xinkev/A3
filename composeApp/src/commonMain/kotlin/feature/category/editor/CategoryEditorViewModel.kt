@@ -36,6 +36,7 @@ class CategoryEditorViewModel(
     override val nameInputState = TextFieldState(selectedCategory?.name ?: "")
     private val _selectedIconName = MutableStateFlow(selectedCategory?.iconName)
     override val selectedIconName = _selectedIconName.asStateFlow()
+
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     override val nameIsTaken: StateFlow<Boolean> = nameInputState
         .textAsFlow()
@@ -79,6 +80,15 @@ class CategoryEditorViewModel(
                 )
             }
             eventBus.send(NavigationEvent.NavigateUp)
+        }
+    }
+
+    override fun onDeleteConfirmed() {
+        selectedCategory?.let {
+            viewModelScope.launch {
+                categoryDataSource.delete(it.uuid)
+                eventBus.send(NavigationEvent.NavigateUp)
+            }
         }
     }
 }
