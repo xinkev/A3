@@ -3,6 +3,7 @@ package common.util
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.today
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
@@ -40,7 +41,9 @@ fun isToday(value: Long, timeZone: TimeZone = TimeZone.UTC): Boolean {
 fun dateTimeToDisplay(value: Long, format: A3DateFormat): String {
     if (isToday(value)) return stringResource(Res.string.today)
     // Use the default system timezone for displaying the date
-    return dateMillisToLocalDateTime(value, TimeZone.currentSystemDefault()).format(format.value)
+    return remember {
+        dateMillisToLocalDateTime(value, TimeZone.currentSystemDefault()).format(format.value)
+    }
 }
 
 fun dateTimeMilliToString(value: Long, format: A3DateFormat): String {
