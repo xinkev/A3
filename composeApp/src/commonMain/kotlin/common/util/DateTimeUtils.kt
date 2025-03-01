@@ -41,7 +41,7 @@ fun isToday(value: Long, timeZone: TimeZone = TimeZone.UTC): Boolean {
 fun dateTimeToDisplay(value: Long, format: A3DateFormat): String {
     if (isToday(value)) return stringResource(Res.string.today)
     // Use the default system timezone for displaying the date
-    return remember {
+    return remember(value) {
         dateMillisToLocalDateTime(value, TimeZone.currentSystemDefault()).format(format.value)
     }
 }
