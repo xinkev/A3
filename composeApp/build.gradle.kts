@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val bundleName = "com.xinkev.a3"
-val bundleVersion = "1.0.0"
+val bundleVersion = "0.0.1"
 val buildNumber = 1
 val appName = "a3"
 
@@ -187,9 +187,9 @@ compose.desktop {
 
         nativeDistributions {
             includeAllModules = true
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi)
             packageName = bundleName
-            packageVersion = bundleVersion
+            packageVersion = "1.0.0"
 
             buildTypes.release {
                 proguard {
