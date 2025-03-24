@@ -27,6 +27,17 @@ WHERE
     date(datetime) = date(?)
 ORDER BY datetime ASC ;
 
+getMonthlyTotalExpense:
+SELECT sum(cost) totalAmount
+FROM Expenses
+WHERE strftime('%Y-%m', datetime) = strftime('%Y-%m', ?);
+
+getDailyTotalExpense:
+SELECT sum(cost) totalAmount
+FROM Expenses
+WHERE strftime('%Y-%m-%d', datetime) = strftime('%Y-%m-%d', ?);
+
+
 -- Update data
 update:
 UPDATE Expenses

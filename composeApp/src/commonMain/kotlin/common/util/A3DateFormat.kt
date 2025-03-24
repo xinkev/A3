@@ -3,6 +3,7 @@ package common.util
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.format.DateTimeComponents
 import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.char
 
 enum class A3DateFormatDateTimeComponents(val value: DateTimeFormat<DateTimeComponents>) {
@@ -92,6 +93,12 @@ enum class A3DateFormat(val value: DateTimeFormat<LocalDateTime>) {
             hour()
             minute()
             second()
+        }
+    ),
+
+    MonthFullName(
+        LocalDateTime.Format {
+            monthName(MonthNames.ENGLISH_FULL)
         }
     )
 }

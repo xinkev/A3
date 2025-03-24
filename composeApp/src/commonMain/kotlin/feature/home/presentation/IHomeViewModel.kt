@@ -10,6 +10,8 @@ import kotlinx.datetime.LocalDateTime
 interface IHomeViewModel {
     val expenses: StateFlow<List<Expense>>
     val dateMillis: StateFlow<Long>
+    val currentDateTotal: StateFlow<Double>
+    val currentMonthTotal: StateFlow<Double>
     fun setDate(dateMillis: Long)
     fun onClickAddExpense()
     fun onClickTransaction(expense: Expense)
@@ -29,6 +31,10 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
 
     override val dateMillis: StateFlow<Long>
         get() = MutableStateFlow(0L)
+    override val currentDateTotal: StateFlow<Double>
+        get() = MutableStateFlow(0.0)
+    override val currentMonthTotal: StateFlow<Double>
+        get() = MutableStateFlow(0.0)
 
     override fun setDate(dateMillis: Long) {
     }

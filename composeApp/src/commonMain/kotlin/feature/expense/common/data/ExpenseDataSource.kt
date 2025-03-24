@@ -2,6 +2,7 @@ package feature.expense.common.data
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import com.xinkev.logger.log
 import common.mapper.mapSqlResultToExpense
 import core.Dispatchers
@@ -76,5 +77,14 @@ class ExpenseDataSource(
 
     fun delete(uuid: String) {
         queries.delete(uuid)
+    }
+
+    fun getTotalExpense(dateTime: String, monthly: Boolean): Flow<Double> {
+        val totalQuery = if (monthly) {
+            queries.getMonthlyTotalExpense(dateTime) { it ?: 0.0 }
+        } else {
+            queries.getDailyTotalExpense(dateTime) { it ?: 0.0 }
+        }
+        return totalQuery.asFlow().mapToOne(dispatchers.io)
     }
 }
