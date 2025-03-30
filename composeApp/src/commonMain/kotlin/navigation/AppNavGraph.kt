@@ -15,7 +15,7 @@ import common.util.HandleEvents
 import core.event.NavigationEvent
 import feature.category.categories.CategoriesScreen
 import feature.category.editor.CategoryEditorScreen
-import feature.expense.editor.presentation.ExpenseEditorScreen
+import feature.expense.expense_editor.presentation.ExpenseEditorScreen
 import feature.home.presentation.HomeScreen
 import feature.settings.presentation.SettingsScreen
 import navigation.types.categoryNavTypeMap

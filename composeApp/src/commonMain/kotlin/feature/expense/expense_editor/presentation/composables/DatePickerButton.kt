@@ -1,4 +1,4 @@
-package feature.expense.editor.presentation.composables
+package feature.expense.expense_editor.presentation.composables
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton

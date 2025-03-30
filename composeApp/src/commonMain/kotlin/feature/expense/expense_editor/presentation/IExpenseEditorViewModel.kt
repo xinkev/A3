@@ -1,4 +1,4 @@
-package feature.expense.editor.presentation
+package feature.expense.expense_editor.presentation
 
 import com.xinkev.keypad.KeypadState
 import feature.category.common.domain.model.Category
