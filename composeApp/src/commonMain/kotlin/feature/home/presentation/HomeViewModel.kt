@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -42,16 +43,24 @@ class HomeViewModel(
         )
 
     override val currentMonthTotal: StateFlow<Double>
-        get() = currentDateTimeStringFlow.flatMapLatest {
-            expenseDataSource.getTotalExpense(
-                dateTimeMilliToString(_dateMillis.value, ISO8601),
-                monthly = true
+        get() = _dateMillis
+            .mapLatest { milli ->
+                // Extract the year and month from the current date
+                val currentMonth = dateTimeMilliToString(milli, ISO8601)
+                currentMonth
+            }
+            .distinctUntilChanged() // Trigger only when the month changes
+            .flatMapLatest { monthString ->
+                expenseDataSource.getTotalExpense(
+                    dateTime = monthString,
+                    monthly = true
+                )
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(3_000),
+                initialValue = 0.0
             )
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(3_000),
-            initialValue = 0.0
-        )
 
     override val currentDateTotal: StateFlow<Double>
         get() = currentDateTimeStringFlow.flatMapLatest {
