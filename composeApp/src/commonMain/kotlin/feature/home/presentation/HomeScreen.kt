@@ -3,11 +3,8 @@ package feature.home.presentation
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -21,9 +18,9 @@ import app.theme.Dimen
 import common.util.A3DateFormat
 import common.util.dateTimeToDisplay
 import common.util.toSmartString
+import feature.expense.expense_list.presentation.ExpenseList
 import feature.home.presentation.composables.HomeFab
 import feature.home.presentation.composables.HomeHeader
-import feature.home.presentation.composables.TransactionItem
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -71,24 +68,10 @@ fun HomeScreenContent(
                     }
                 }
             }
-            ExpenseList(vm)
-        }
-    }
-}
-
-
-@Composable
-private fun ColumnScope.ExpenseList(
-    vm: IHomeViewModel
-) {
-    val expenses by vm.expenses.collectAsState()
-
-    LazyColumn(modifier = Modifier.weight(1f)) {
-        items(expenses) { expense ->
-            TransactionItem(
-                expense = expense,
-                onClick = { vm.onClickTransaction(expense) },
-                onDeleteConfirmed = { vm.onDeleteConfirmed(expense) }
+            ExpenseList(
+                expenses = vm.expenses,
+                onDeleteConfirmed = vm::onDeleteConfirmed,
+                onClickItem = vm::onClickExpense
             )
         }
     }

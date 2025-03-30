@@ -14,7 +14,7 @@ interface IHomeViewModel {
     val currentMonthTotal: StateFlow<Double>
     fun setDate(dateMillis: Long)
     fun onClickAddExpense()
-    fun onClickTransaction(expense: Expense)
+    fun onClickExpense(expense: Expense)
     fun onDeleteConfirmed(expense: Expense)
 }
 
@@ -42,7 +42,7 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
     override fun onClickAddExpense() {
     }
 
-    override fun onClickTransaction(expense: Expense) {
+    override fun onClickExpense(expense: Expense) {
     }
 
     override fun onDeleteConfirmed(expense: Expense) {
