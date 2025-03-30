@@ -1,4 +1,4 @@
-package feature.expense.editor.presentation
+package feature.expense.expense_editor.presentation
 
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.lifecycle.SavedStateHandle

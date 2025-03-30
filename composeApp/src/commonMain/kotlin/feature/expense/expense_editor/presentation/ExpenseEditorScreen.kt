@@ -1,4 +1,4 @@
-package feature.expense.editor.presentation
+package feature.expense.expense_editor.presentation
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
@@ -24,8 +24,8 @@ import app.theme.Dimen
 import com.xinkev.keypad.Keypad
 import com.xinkev.keypad.KeypadInput
 import feature.category.categories.composables.CategoryPicker
-import feature.expense.editor.presentation.composables.DatePickerButton
-import feature.expense.editor.presentation.composables.TopBar
+import feature.expense.expense_editor.presentation.composables.DatePickerButton
+import feature.expense.expense_editor.presentation.composables.TopBar
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
