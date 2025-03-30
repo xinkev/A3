@@ -6,7 +6,7 @@ import androidx.compose.ui.window.rememberWindowState
 import app.App
 import com.xinkev.a3.BuildConfig
 import di.desktopModules
-import di.startKoin
+import common.di.startKoin
 
 fun main() = application {
     Window(

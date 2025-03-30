@@ -1,4 +1,4 @@
-package di
+package common.di
 
 import androidx.compose.runtime.Composable
 import org.koin.compose.KoinApplication

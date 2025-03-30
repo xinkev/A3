@@ -1,4 +1,4 @@
-package di
+package common.di
 
 import feature.expense.common.data.ExpenseDataSource
 import org.koin.dsl.module

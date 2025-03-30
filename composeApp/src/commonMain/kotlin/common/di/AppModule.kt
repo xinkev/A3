@@ -1,4 +1,4 @@
-package di
+package common.di
 
 import common.data.KVStorage
 import common.data.KVStorageImpl

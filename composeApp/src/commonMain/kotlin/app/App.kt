@@ -11,8 +11,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import app.theme.A3Theme
 import core.database.previewDatabaseFactory
-import di.commonModule
-import di.startKoin
+import common.di.commonModule
+import common.di.startKoin
 import navigation.AppNavGraph
 import org.koin.dsl.module
 

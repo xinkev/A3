@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import app.App
 import com.xinkev.a3.di.androidModules
 import core.file.FileManager
-import di.startKoin
+import common.di.startKoin
 import io.github.vinceglb.filekit.core.FileKit
 import org.koin.android.ext.koin.androidContext
 
