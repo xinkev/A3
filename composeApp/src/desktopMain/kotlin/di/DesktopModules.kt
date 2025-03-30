@@ -1,5 +1,6 @@
 package di
 
+import common.di.commonModule
 import core.database.DatabaseFactory
 import core.database.DatabaseFactoryImpl
 import database.DesktopDriverFactory

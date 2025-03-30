@@ -1,4 +1,4 @@
-package feature.category.di
+package feature.category.common.di
 
 import feature.category.categories.CategoriesViewModel
 import feature.category.editor.CategoryEditorViewModel

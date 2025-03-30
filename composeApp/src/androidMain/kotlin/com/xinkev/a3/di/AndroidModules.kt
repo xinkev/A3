@@ -3,7 +3,7 @@ package com.xinkev.a3.di
 import database.AndroidDriverFactory
 import core.database.DatabaseFactory
 import core.database.DatabaseFactoryImpl
-import di.commonModule
+import common.di.commonModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
