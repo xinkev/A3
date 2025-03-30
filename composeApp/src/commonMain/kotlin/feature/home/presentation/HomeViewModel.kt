@@ -78,7 +78,7 @@ class HomeViewModel(
         }
     }
 
-    override fun onClickTransaction(expense: Expense) {
+    override fun onClickExpense(expense: Expense) {
         viewModelScope.launch {
             eventBus.send(NavigateToExpenseEditor(expense))
         }

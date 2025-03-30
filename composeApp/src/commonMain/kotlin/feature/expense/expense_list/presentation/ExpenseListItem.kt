@@ -1,4 +1,4 @@
-package feature.home.presentation.composables
+package feature.expense.expense_list.presentation
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
@@ -40,6 +40,7 @@ import feature.category.categories.categoryIconMap
 import feature.category.common.domain.model.Category
 import feature.category.common.domain.model.CategoryIconName
 import feature.expense.common.domain.model.Expense
+import feature.home.presentation.composables.DeleteConfirmationDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
@@ -52,7 +53,7 @@ private val lineHeightStyle = LineHeightStyle(
 )
 
 @Composable
-fun TransactionItem(
+fun ExpenseListItem(
     expense: Expense,
     onClick: () -> Unit,
     onDeleteConfirmed: () -> Unit,
@@ -186,7 +187,7 @@ private fun RowScope.Amount(
 @Preview
 @Composable
 private fun Preview() {
-    TransactionItem(
+    ExpenseListItem(
         expense = Expense(
             uuid = "23",
             detail = "Costco",
