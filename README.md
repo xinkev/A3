@@ -6,7 +6,8 @@ A very simple multiplatform expense tracking application built with Kotlin Multi
 ## Screenshots
 
 <p>
-    <img src="./screenshots/home.png" alt="home" width="30%"></img>
+    <img src="./screenshots/home_daily.png" alt="home" width="30%"></img>
+    <img src="./screenshots/home_monthly.png " alt="home monthly" width="30%"></img>
     <img src="./screenshots/edit_expense.png" alt="edit expense" width="30%"></img>
 </p>
 
@@ -14,6 +15,7 @@ A very simple multiplatform expense tracking application built with Kotlin Multi
 
 - Track expenses with categories and details
 - View expenses by date 
+- View expenses by category for selected month
 - Export/import data in JSON format
 - Cross-platform support (Android, iOS, Desktop)
 - Material 3 design
