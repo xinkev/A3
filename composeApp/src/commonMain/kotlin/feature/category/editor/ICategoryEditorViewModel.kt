@@ -1,13 +1,13 @@
 package feature.category.editor
 
 import androidx.compose.foundation.text.input.TextFieldState
-import feature.category.common.domain.model.CategoryIconName
+import common.domain.model.IconName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 interface ICategoryEditorViewModel {
     val nameInputState: TextFieldState
-    val selectedIconName: StateFlow<CategoryIconName?>
+    val selectedIconName: StateFlow<IconName?>
     val enableAddButton: StateFlow<Boolean>
     val nameIsTaken: StateFlow<Boolean>
 
@@ -15,7 +15,7 @@ interface ICategoryEditorViewModel {
      * whether or not the editor is in edit mode
      */
     val isEdit: Boolean
-    fun onIconClick(name: CategoryIconName)
+    fun onIconClick(name: IconName)
     fun onClickAdd()
     fun onDeleteConfirmed()
 }
@@ -23,7 +23,7 @@ interface ICategoryEditorViewModel {
 object PreviewCategoryEditorViewModel : ICategoryEditorViewModel {
     override val nameInputState: TextFieldState
         get() = TextFieldState()
-    override val selectedIconName: StateFlow<CategoryIconName?>
+    override val selectedIconName: StateFlow<IconName?>
         get() = MutableStateFlow(null)
     override val enableAddButton: StateFlow<Boolean>
         get() = MutableStateFlow(false)
@@ -32,7 +32,7 @@ object PreviewCategoryEditorViewModel : ICategoryEditorViewModel {
     override val nameIsTaken: StateFlow<Boolean>
         get() = MutableStateFlow(true)
 
-    override fun onIconClick(name: CategoryIconName) {
+    override fun onIconClick(name: IconName) {
     }
     override fun onClickAdd() {
     }

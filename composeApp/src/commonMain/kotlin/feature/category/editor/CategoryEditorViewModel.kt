@@ -9,7 +9,7 @@ import common.util.textAsFlow
 import core.event.EventBus
 import core.event.NavigationEvent
 import feature.category.common.data.CategoryDataSource
-import feature.category.common.domain.model.CategoryIconName
+import common.domain.model.IconName
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,7 +58,7 @@ class CategoryEditorViewModel(
         println(savedStateHandle)
     }
 
-    override fun onIconClick(name: CategoryIconName) {
+    override fun onIconClick(name: IconName) {
         _selectedIconName.update {
             if (it == name) null else name
         }

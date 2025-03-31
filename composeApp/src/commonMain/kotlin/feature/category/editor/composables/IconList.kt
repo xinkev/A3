@@ -11,15 +11,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.category.common.domain.model.CategoryIconName
-import feature.category.categories.categoryIconMap
 import app.theme.Dimen
+import common.domain.model.IconName
+import common.mapper.categoryIconMap
 
 @Composable
 fun ColumnScope.CategoryIcons(
-    selectedIconName: CategoryIconName?,
+    selectedIconName: IconName?,
     modifier: Modifier = Modifier,
-    onIconSelect: (CategoryIconName) -> Unit,
+    onIconSelect: (IconName) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(48.dp),

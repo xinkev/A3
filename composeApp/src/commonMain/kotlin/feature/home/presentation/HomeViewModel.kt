@@ -10,6 +10,7 @@ import core.event.EventBus
 import core.event.NavigationEvent.NavigateToExpenseEditor
 import feature.expense.common.data.ExpenseDataSource
 import feature.expense.common.domain.model.Expense
+import feature.expense.common.domain.model.TotalExpensePerCategory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,6 +29,14 @@ class HomeViewModel(
     private val _dateMillis = MutableStateFlow(now.toEpochMilliseconds())
     override val dateMillis: StateFlow<Long>
         get() = _dateMillis.asStateFlow()
+    private val currentMonthFlow: Flow<String>
+        get() = _dateMillis
+            .mapLatest { milli ->
+                // Extract the year and month from the current date
+                val currentMonth = dateTimeMilliToString(milli, ISO8601)
+                currentMonth
+            }
+            .distinctUntilChanged() // Trigger only when the month changes
     private val currentDateTimeStringFlow: Flow<String>
         get() = _dateMillis.mapLatest {
             dateTimeMilliToString(it, ISO8601)
@@ -43,13 +52,7 @@ class HomeViewModel(
         )
 
     override val currentMonthTotal: StateFlow<Double>
-        get() = _dateMillis
-            .mapLatest { milli ->
-                // Extract the year and month from the current date
-                val currentMonth = dateTimeMilliToString(milli, ISO8601)
-                currentMonth
-            }
-            .distinctUntilChanged() // Trigger only when the month changes
+        get() = currentMonthFlow
             .flatMapLatest { monthString ->
                 expenseDataSource.getTotalExpense(
                     dateTime = monthString,
@@ -72,6 +75,15 @@ class HomeViewModel(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(3_000),
             initialValue = 0.0
+        )
+
+    override val totalExpensePerCategory: StateFlow<List<TotalExpensePerCategory>>
+        get() = currentMonthFlow.flatMapLatest { month->
+            expenseDataSource.getTotalExpensePerCategory(month)
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(3_000),
+            initialValue = emptyList()
         )
 
     override fun setDate(dateMillis: Long) {

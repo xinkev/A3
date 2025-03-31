@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
 import app.theme.Dimen
 import core.randomUUID
-import feature.category.categories.categoryIconMap
+import common.mapper.categoryIconMap
 import feature.category.common.data.CategoryDataSource
 import feature.category.common.domain.model.Category
-import feature.category.common.domain.model.CategoryIconName
+import common.domain.model.IconName
 import org.koin.compose.koinInject
 
 @Composable
@@ -115,8 +115,8 @@ private fun CategoriesContent(
 @Composable
 private fun PreviewableContent(modifier: Modifier = Modifier) {
     val categories = listOf(
-        Category(uuid = randomUUID(), name = "Category 1", iconName = CategoryIconName.IPhone),
-        Category(uuid = randomUUID(), name = "Category 2", iconName = CategoryIconName.Car)
+        Category(uuid = randomUUID(), name = "Category 1", iconName = IconName.IPhone),
+        Category(uuid = randomUUID(), name = "Category 2", iconName = IconName.Car)
     )
     CategoriesImpl(
         modifier = modifier,

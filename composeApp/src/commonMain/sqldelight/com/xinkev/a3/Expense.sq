@@ -37,6 +37,16 @@ SELECT sum(cost) totalAmount
 FROM Expenses
 WHERE strftime('%Y-%m-%d', datetime) = strftime('%Y-%m-%d', ?);
 
+getTotalExpensePerCategoryForMonth:
+SELECT
+    Category.name category,
+    Category.icon categoryIcon,
+    sum(Expenses.cost) totalAmount
+FROM Expenses
+JOIN Category ON Expenses.categoryId = Category.uuid
+WHERE strftime('%Y-%m', datetime) = strftime('%Y-%m', ?)
+GROUP BY category
+ORDER BY category DESC;
 
 -- Update data
 update:
