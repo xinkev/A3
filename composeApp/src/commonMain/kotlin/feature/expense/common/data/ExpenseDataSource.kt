@@ -4,11 +4,13 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import com.xinkev.logger.log
-import common.mapper.mapSqlResultToExpense
 import core.Dispatchers
 import core.database.DatabaseFactory
 import core.randomUUID
 import feature.expense.common.domain.model.Expense
+import feature.expense.common.domain.model.TotalExpensePerCategory
+import feature.expense.common.mapper.mapSqlResultToExpense
+import feature.expense.common.mapper.totalExpensePerCategoryMapper
 import kotlinx.coroutines.flow.Flow
 
 class ExpenseDataSource(
@@ -86,5 +88,11 @@ class ExpenseDataSource(
             queries.getDailyTotalExpense(dateTime) { it ?: 0.0 }
         }
         return totalQuery.asFlow().mapToOne(dispatchers.io)
+    }
+
+    fun getTotalExpensePerCategory(monthOfYear: String): Flow<List<TotalExpensePerCategory>> {
+        return queries.getTotalExpensePerCategoryForMonth(monthOfYear, ::totalExpensePerCategoryMapper)
+            .asFlow()
+            .mapToList(dispatchers.io)
     }
 }

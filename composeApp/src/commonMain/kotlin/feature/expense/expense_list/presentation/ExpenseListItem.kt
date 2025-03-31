@@ -35,10 +35,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.theme.Dimen
+import common.domain.model.IconName
+import common.mapper.categoryIconMap
 import common.util.toSmartString
-import feature.category.categories.categoryIconMap
 import feature.category.common.domain.model.Category
-import feature.category.common.domain.model.CategoryIconName
 import feature.expense.common.domain.model.Expense
 import feature.home.presentation.composables.DeleteConfirmationDialog
 import kotlinx.coroutines.Dispatchers
@@ -195,7 +195,7 @@ private fun Preview() {
             category = Category(
                 uuid = "213",
                 name = "Grocery",
-                iconName = CategoryIconName.Grocery,
+                iconName = IconName.Grocery,
             ),
             cost = 123.0
         ),

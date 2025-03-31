@@ -1,4 +1,4 @@
-package feature.category.categories
+package common.mapper
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.apparel
@@ -34,36 +34,37 @@ import androidx.compose.material.icons.outlined.WbIridescent
 import androidx.compose.material.icons.outlined.Weekend
 import common.A3Icon.MaterialIcon
 import common.A3Icon.ResourceIcon
-import feature.category.common.domain.model.CategoryIconName.Book
-import feature.category.common.domain.model.CategoryIconName.Bus
-import feature.category.common.domain.model.CategoryIconName.Car
-import feature.category.common.domain.model.CategoryIconName.Charity
-import feature.category.common.domain.model.CategoryIconName.Coffee
-import feature.category.common.domain.model.CategoryIconName.CreditCard
-import feature.category.common.domain.model.CategoryIconName.Electricity
-import feature.category.common.domain.model.CategoryIconName.Entertainment
-import feature.category.common.domain.model.CategoryIconName.Food
-import feature.category.common.domain.model.CategoryIconName.Gift
-import feature.category.common.domain.model.CategoryIconName.Grocery
-import feature.category.common.domain.model.CategoryIconName.Gym
-import feature.category.common.domain.model.CategoryIconName.House
-import feature.category.common.domain.model.CategoryIconName.IPhone
-import feature.category.common.domain.model.CategoryIconName.Insurance
-import feature.category.common.domain.model.CategoryIconName.Loan
-import feature.category.common.domain.model.CategoryIconName.Map
-import feature.category.common.domain.model.CategoryIconName.Medical
-import feature.category.common.domain.model.CategoryIconName.MortarBoard
-import feature.category.common.domain.model.CategoryIconName.OfficeChair
-import feature.category.common.domain.model.CategoryIconName.Rent
-import feature.category.common.domain.model.CategoryIconName.Salary
-import feature.category.common.domain.model.CategoryIconName.Shopping
-import feature.category.common.domain.model.CategoryIconName.Stroller
-import feature.category.common.domain.model.CategoryIconName.Subscription
-import feature.category.common.domain.model.CategoryIconName.TShirt
-import feature.category.common.domain.model.CategoryIconName.Tag
-import feature.category.common.domain.model.CategoryIconName.Tax
-import feature.category.common.domain.model.CategoryIconName.Transportation
-import feature.category.common.domain.model.CategoryIconName.Vacation
+import common.domain.model.IconName
+import common.domain.model.IconName.Book
+import common.domain.model.IconName.Bus
+import common.domain.model.IconName.Car
+import common.domain.model.IconName.Charity
+import common.domain.model.IconName.Coffee
+import common.domain.model.IconName.CreditCard
+import common.domain.model.IconName.Electricity
+import common.domain.model.IconName.Entertainment
+import common.domain.model.IconName.Food
+import common.domain.model.IconName.Gift
+import common.domain.model.IconName.Grocery
+import common.domain.model.IconName.Gym
+import common.domain.model.IconName.House
+import common.domain.model.IconName.IPhone
+import common.domain.model.IconName.Insurance
+import common.domain.model.IconName.Loan
+import common.domain.model.IconName.Map
+import common.domain.model.IconName.Medical
+import common.domain.model.IconName.MortarBoard
+import common.domain.model.IconName.OfficeChair
+import common.domain.model.IconName.Rent
+import common.domain.model.IconName.Salary
+import common.domain.model.IconName.Shopping
+import common.domain.model.IconName.Stroller
+import common.domain.model.IconName.Subscription
+import common.domain.model.IconName.TShirt
+import common.domain.model.IconName.Tag
+import common.domain.model.IconName.Tax
+import common.domain.model.IconName.Transportation
+import common.domain.model.IconName.Vacation
 
 val categoryIconMap = mapOf(
     Tag to MaterialIcon(Icons.Outlined.Tag),
@@ -97,3 +98,7 @@ val categoryIconMap = mapOf(
     Charity to MaterialIcon(Icons.Outlined.Favorite),
     Tax to MaterialIcon(Icons.Outlined.Assessment)
 )
+
+fun stringToIconName(icon: String): IconName? {
+    return IconName.entries.firstOrNull { it.realName == icon }
+}

@@ -1,8 +1,9 @@
 package feature.home.presentation
 
+import common.domain.model.IconName
 import feature.category.common.domain.model.Category
-import feature.category.common.domain.model.CategoryIconName
 import feature.expense.common.domain.model.Expense
+import feature.expense.common.domain.model.TotalExpensePerCategory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime
@@ -12,6 +13,7 @@ interface IHomeViewModel {
     val dateMillis: StateFlow<Long>
     val currentDateTotal: StateFlow<Double>
     val currentMonthTotal: StateFlow<Double>
+    val totalExpensePerCategory: StateFlow<List<TotalExpensePerCategory>>
     fun setDate(dateMillis: Long)
     fun onClickAddExpense()
     fun onClickExpense(expense: Expense)
@@ -35,6 +37,16 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
         get() = MutableStateFlow(0.0)
     override val currentMonthTotal: StateFlow<Double>
         get() = MutableStateFlow(0.0)
+    override val totalExpensePerCategory: StateFlow<List<TotalExpensePerCategory>>
+        get() = MutableStateFlow(
+            listOf(
+                TotalExpensePerCategory(
+                    category = "Food",
+                    categoryIcon = IconName.Food,
+                    totalAmount = 12.0
+                )
+            )
+        )
 
     override fun setDate(dateMillis: Long) {
     }
@@ -54,7 +66,7 @@ internal data object PreviewHomeViewModel : IHomeViewModel {
             category = Category(
                 uuid = "12",
                 name = "Bar",
-                iconName = CategoryIconName.IPhone
+                iconName = IconName.IPhone
             ),
             cost = cost,
             detail = detail,

@@ -1,12 +1,8 @@
 package feature.category.common.mapper
 
+import common.mapper.stringToIconName
 import feature.category.common.domain.model.Category
-import feature.category.common.domain.model.CategoryIconName
 
 fun mapSqlResultToCategory(uuid: String, name: String, icon: String): Category {
-    return Category(uuid, name, mapCategoryIcon(icon))
-}
-
-fun mapCategoryIcon(icon: String): CategoryIconName? {
-    return CategoryIconName.entries.firstOrNull { it.realName == icon }
+    return Category(uuid, name, stringToIconName(icon))
 }

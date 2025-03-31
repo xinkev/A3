@@ -29,9 +29,9 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.window.Dialog
 import app.theme.Dimen
 import core.randomUUID
-import feature.category.categories.categoryIconMap
+import common.mapper.categoryIconMap
 import feature.category.common.domain.model.Category
-import feature.category.common.domain.model.CategoryIconName
+import common.domain.model.IconName
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -171,7 +171,7 @@ private fun CategoryPickerPreview() {
             initialSelectedCategory = Category(
                 uuid = randomUUID(),
                 "Test",
-                iconName = CategoryIconName.Car
+                iconName = IconName.Car
             ),
             onSelected = {}
         )
