@@ -16,12 +16,8 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.theme.Dimen
+import common.composables.SwipeToDismiss
+import common.composables.SwipeToDismissState
+import common.composables.rememberSwipeToDismissState
 import common.domain.model.IconName
 import common.mapper.categoryIconMap
 import common.util.toSmartString
@@ -42,7 +41,6 @@ import feature.category.common.domain.model.Category
 import feature.expense.common.domain.model.Expense
 import feature.home.presentation.composables.DeleteConfirmationDialog
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -58,42 +56,26 @@ fun ExpenseListItem(
     onClick: () -> Unit,
     onDeleteConfirmed: () -> Unit,
 ) {
-    val scope = rememberCoroutineScope { Dispatchers.Main.immediate }
     var showDeleteConfirmation by remember { mutableStateOf(false) }
-    val swipeToDismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = {
-            if (it == SwipeToDismissBoxValue.EndToStart) {
-                showDeleteConfirmation = true
-                true
-            } else {
-                false
-            }
-        },
-        positionalThreshold = { totalDistance ->
-            totalDistance * 0.5f
-        }
-    )
+    val swipeToDismissState = rememberSwipeToDismissState()
 
     if (showDeleteConfirmation) {
         DeleteConfirmationDialog(
             onYes = onDeleteConfirmed,
             onDismiss = {
-                scope.launch { swipeToDismissState.reset() }
+                swipeToDismissState.value = SwipeToDismissState.Rest
                 showDeleteConfirmation = false
             },
         )
     }
 
-    LaunchedEffect(swipeToDismissState) {
-        if (swipeToDismissState.currentValue != SwipeToDismissBoxValue.Settled) {
-            swipeToDismissState.reset()
-        }
-    }
 
-    SwipeToDismissBox(
-        enableDismissFromStartToEnd = false,
+    SwipeToDismiss(
         state = swipeToDismissState,
         backgroundContent = { SwipeToDeleteBackground() },
+        onDismissed = {
+            showDeleteConfirmation = true
+        }
     ) {
         Row(
             modifier = Modifier
