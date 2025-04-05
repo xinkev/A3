@@ -31,8 +31,8 @@ import androidx.compose.ui.Modifier
 import common.composables.CenteredTopBar
 import common.util.HandleEvents
 import common.util.preview
-import feature.settings.backup.presentation.SettingsExport
-import feature.settings.backup.presentation.SettingsImport
+import feature.settings.backup.exporting.presentation.SettingsExport
+import feature.settings.backup.importing.presentation.SettingsImport
 import feature.settings.common.composables.SettingsEntry
 import feature.settings.common.composables.SettingsGroup
 import feature.settings.common.composables.SettingsLabel

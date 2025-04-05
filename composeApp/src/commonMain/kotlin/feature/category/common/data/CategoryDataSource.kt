@@ -7,7 +7,7 @@ import core.Dispatchers
 import core.randomUUID
 import feature.category.common.domain.model.Category
 import feature.category.common.mapper.mapSqlResultToCategory
-import feature.settings.backup.domain.model.TaiyakiData
+import feature.settings.backup.common.domain.model.TaiyakiData
 
 class CategoryDataSource(
     db: A3Database,

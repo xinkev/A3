@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import app.theme.A3Theme
-import feature.expense.expense_list.presentation.ExpenseList
-import feature.expense.monthly_expense_list.MonthlyExpenseList
+import feature.expense.expenseList.ExpenseList
+import feature.expense.monthlyExpenseList.MonthlyExpenseList
 import feature.home.presentation.composables.HomeFab
 import feature.home.presentation.composables.HomeHeader
 import feature.home.presentation.composables.HomeTab.Daily
