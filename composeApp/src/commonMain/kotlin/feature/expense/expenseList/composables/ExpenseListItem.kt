@@ -1,4 +1,4 @@
-package feature.expense.expenseList
+package feature.expense.expenseList.composables
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
@@ -38,7 +38,6 @@ import common.mapper.categoryIconMap
 import common.util.toSmartString
 import feature.category.common.domain.model.Category
 import feature.expense.common.domain.model.Expense
-import feature.home.presentation.composables.DeleteConfirmationDialog
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime

@@ -9,7 +9,6 @@ import core.event.EventBus
 import core.file.FileManager
 import feature.category.common.di.categoriesModule
 import feature.expense.common.di.expenseModule
-import feature.home.di.homeModule
 import feature.settings.common.di.settingsModule
 import org.koin.dsl.module
 
@@ -20,7 +19,6 @@ val appModule = module {
     single { EventBus() }
     factory { FileManager }
 } + listOf(
-    homeModule,
     categoriesModule,
     expenseModule,
 ) + settingsModule

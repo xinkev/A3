@@ -1,4 +1,4 @@
-package feature.home.presentation
+package feature.expense.expenseList
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -7,40 +7,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import app.theme.A3Theme
-import feature.expense.expenseList.ExpenseList
+import feature.expense.expenseList.composables.ExpenseList
+import feature.expense.expenseList.composables.ExpenseListFab
+import feature.expense.expenseList.composables.ExpenseListScreenHeader
+import feature.expense.expenseList.composables.ExpenseListScreenTab.Daily
+import feature.expense.expenseList.composables.ExpenseListScreenTab.Monthly
+import feature.expense.expenseList.composables.ExpenseListScreenTabs
 import feature.expense.monthlyExpenseList.MonthlyExpenseList
-import feature.home.presentation.composables.HomeFab
-import feature.home.presentation.composables.HomeHeader
-import feature.home.presentation.composables.HomeTab.Daily
-import feature.home.presentation.composables.HomeTab.Monthly
-import feature.home.presentation.composables.HomeTabs
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun HomeScreen(
-    vm: HomeViewModel = koinViewModel(),
+fun ExpenseListScreen(
+    vm: ExpenseListViewModel = koinViewModel(),
 ) {
-    HomeScreenContent(vm = vm)
+    ExpenseListScreenContent(vm = vm)
 }
 
 @Composable
-fun HomeScreenContent(
-    vm: IHomeViewModel,
+fun ExpenseListScreenContent(
+    vm: IExpenseListViewModel,
 ) {
     val dateMilli by vm.dateMillis.collectAsState()
     val expensePerCategory by vm.totalExpensePerCategory.collectAsState()
 
     Scaffold(
         floatingActionButton = {
-            HomeFab(onClick = vm::onClickAddExpense)
+            ExpenseListFab(onClick = vm::onClickAddExpense)
         }
     ) {
         Column {
-            HomeHeader(
+            ExpenseListScreenHeader(
                 initialDate = dateMilli,
                 onDateSelected = vm::setDate
             )
-            HomeTabs(
+            ExpenseListScreenTabs(
                 dateMilli = dateMilli,
                 dailyTotal = vm.currentDateTotal,
                 monthlyTotal = vm.currentMonthTotal,
@@ -65,10 +65,10 @@ fun HomeScreenContent(
 
 @Preview
 @Composable
-private fun PreviewHomeScreen() {
+private fun Preview() {
     A3Theme {
-        HomeScreenContent(
-            vm = PreviewHomeViewModel
+        ExpenseListScreenContent(
+            vm = PreviewExpenseListViewModel
         )
     }
 }

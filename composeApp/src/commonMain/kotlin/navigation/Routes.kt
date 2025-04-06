@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 
 sealed interface Route {
     @Serializable
-    data object HomeGraph : Route {
+    data object ExpenseGraph : Route {
         @Serializable
-        data object Home : Route
+        data object ExpenseList : Route
 
         @Serializable
         data class ExpenseEditor(

@@ -1,4 +1,4 @@
-package feature.home.presentation.composables
+package feature.expense.expenseList.composables
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.cancel

@@ -13,7 +13,7 @@ sealed class NavigationEvent(
     data class NavigateToExpenseEditor(
         val expense: Expense? = null,
         val initialDate: Long? = null
-    ) : NavigationEvent(Route.HomeGraph.ExpenseEditor(expense, initialDate))
+    ) : NavigationEvent(Route.ExpenseGraph.ExpenseEditor(expense, initialDate))
 
     data class NavigateToCategoryEditor(val category: Category?) :
         NavigationEvent(Route.SettingsGraph.CategoryEditor(category))

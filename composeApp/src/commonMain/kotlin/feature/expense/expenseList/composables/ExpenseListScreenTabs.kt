@@ -1,4 +1,4 @@
-package feature.home.presentation.composables
+package feature.expense.expenseList.composables
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -31,20 +31,20 @@ import common.util.A3DateFormat
 import common.util.dateTimeMilliToString
 import common.util.dateTimeToDisplay
 import common.util.toSmartString
-import feature.home.presentation.composables.HomeTab.Daily
-import feature.home.presentation.composables.HomeTab.Monthly
+import feature.expense.expenseList.composables.ExpenseListScreenTab.Daily
+import feature.expense.expenseList.composables.ExpenseListScreenTab.Monthly
 import kotlinx.coroutines.flow.StateFlow
 
-enum class HomeTab {
+enum class ExpenseListScreenTab {
     Daily, Monthly
 }
 
 @Composable
-fun ColumnScope.HomeTabs(
+fun ColumnScope.ExpenseListScreenTabs(
     dateMilli: Long,
     monthlyTotal: StateFlow<Double>,
     dailyTotal: StateFlow<Double>,
-    content: @Composable (HomeTab) -> Unit,
+    content: @Composable (ExpenseListScreenTab) -> Unit,
 ) {
     val currentDate = dateTimeToDisplay(dateMilli, A3DateFormat.DisplayDate)
     val currentMonth by

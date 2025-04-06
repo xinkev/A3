@@ -1,4 +1,4 @@
-package feature.home.presentation
+package feature.expense.expenseList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,10 +22,10 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
+class ExpenseListViewModel(
     private val expenseDataSource: ExpenseDataSource,
     private val eventBus: EventBus
-) : ViewModel(), IHomeViewModel {
+) : ViewModel(), IExpenseListViewModel {
     private val _dateMillis = MutableStateFlow(now.toEpochMilliseconds())
     override val dateMillis: StateFlow<Long>
         get() = _dateMillis.asStateFlow()

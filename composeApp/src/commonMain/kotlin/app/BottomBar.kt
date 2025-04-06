@@ -1,7 +1,7 @@
 package app
 
 import a3.composeapp.generated.resources.Res
-import a3.composeapp.generated.resources.home
+import a3.composeapp.generated.resources.expense_list_bottom_tab
 import a3.composeapp.generated.resources.settings
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
@@ -34,7 +34,7 @@ fun BottomBar(
     visible: Boolean,
 ) {
     val coroutineScope = rememberCoroutineScope()
-    var selectedItem by rememberSaveable { mutableStateOf(BottomBarItem.Home) }
+    var selectedItem by rememberSaveable { mutableStateOf(BottomBarItem.ExpenseList) }
 
     AnimatedVisibility(
         visible = visible,
@@ -71,10 +71,10 @@ fun BottomBar(
 enum class BottomBarItem(
     val label: StringResource, val icon: ImageVector, val route: Route
 ) {
-    Home(
-        label = Res.string.home,
+    ExpenseList(
+        label = Res.string.expense_list_bottom_tab,
         icon = Icons.Filled.Home,
-        route = Route.HomeGraph.Home
+        route = Route.ExpenseGraph.ExpenseList
     ),
     Settings(
         label = Res.string.settings,

@@ -1,4 +1,4 @@
-package feature.home.presentation
+package feature.expense.expenseList
 
 import common.domain.model.IconName
 import feature.category.common.domain.model.Category
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime
 
-interface IHomeViewModel {
+interface IExpenseListViewModel {
     val expenses: StateFlow<List<Expense>>
     val dateMillis: StateFlow<Long>
     val currentDateTotal: StateFlow<Double>
@@ -20,7 +20,7 @@ interface IHomeViewModel {
     fun onDeleteConfirmed(expense: Expense)
 }
 
-internal data object PreviewHomeViewModel : IHomeViewModel {
+internal data object PreviewExpenseListViewModel : IExpenseListViewModel {
     override val expenses: StateFlow<List<Expense>>
         get() = MutableStateFlow(
             listOf(

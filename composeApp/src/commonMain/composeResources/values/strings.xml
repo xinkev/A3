@@ -1,5 +1,5 @@
 <resources>
-    <string name="home">Home</string>
+    <string name="expense_list_bottom_tab">Expenses</string>
     <string name="settings">Settings</string>
     <string name="add_expenses">Add Expenses</string>
     <string name="expense_editor">Expense Editor</string>

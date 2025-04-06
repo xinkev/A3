@@ -1,4 +1,4 @@
-package feature.home.presentation.composables
+package feature.expense.expenseList.composables
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.next_month
@@ -38,7 +38,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeHeader(
+fun ExpenseListScreenHeader(
     initialDate: Long,
     onDateSelected: (Long) -> Unit,
 ) {
@@ -107,7 +107,7 @@ private fun plusOrMinusDay(
 @Preview
 @Composable
 private fun Preview() {
-    HomeHeader(
+    ExpenseListScreenHeader(
         initialDate = 1L,
         onDateSelected = {}
     )

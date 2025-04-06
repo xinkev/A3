@@ -1,4 +1,4 @@
-package feature.expense.expenseList
+package feature.expense.expenseList.composables
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.lazy.LazyColumn

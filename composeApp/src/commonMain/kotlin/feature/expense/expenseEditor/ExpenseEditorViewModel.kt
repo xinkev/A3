@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
-import navigation.Route.HomeGraph.ExpenseEditor
+import navigation.Route.ExpenseGraph.ExpenseEditor
 import navigation.types.expenseTypeMap
 
 class ExpenseEditorViewModel(

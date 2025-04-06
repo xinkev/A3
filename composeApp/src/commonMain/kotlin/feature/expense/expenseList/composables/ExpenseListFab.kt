@@ -1,4 +1,4 @@
-package feature.home.presentation.composables
+package feature.expense.expenseList.composables
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.add_expenses
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun HomeFab(
+fun ExpenseListFab(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {

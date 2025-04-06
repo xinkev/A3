@@ -13,10 +13,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import common.util.HandleEvents
 import core.event.NavigationEvent
-import feature.category.categoryList.CategoriesScreen
 import feature.category.categoryEditor.CategoryEditorScreen
+import feature.category.categoryList.CategoriesScreen
 import feature.expense.expenseEditor.ExpenseEditorScreen
-import feature.home.presentation.HomeScreen
+import feature.expense.expenseList.ExpenseListScreen
 import feature.settings.presentation.SettingsScreen
 import navigation.types.categoryNavTypeMap
 import navigation.types.expenseTypeMap
@@ -50,16 +50,16 @@ fun AppNavGraph(
 
     NavHost(
         navController,
-        startDestination = Route.HomeGraph,
+        startDestination = Route.ExpenseGraph,
         modifier = Modifier.fillMaxSize()
             .padding(scaffoldPaddings)
             .consumeWindowInsets(scaffoldPaddings)
     ) {
-        navigation<Route.HomeGraph>(startDestination = Route.HomeGraph.Home) {
-            composable<Route.HomeGraph.Home> {
-                HomeScreen()
+        navigation<Route.ExpenseGraph>(startDestination = Route.ExpenseGraph.ExpenseList) {
+            composable<Route.ExpenseGraph.ExpenseList> {
+                ExpenseListScreen()
             }
-            composable<Route.HomeGraph.ExpenseEditor>(typeMap = expenseTypeMap) {
+            composable<Route.ExpenseGraph.ExpenseEditor>(typeMap = expenseTypeMap) {
                 ExpenseEditorScreen()
             }
         }
