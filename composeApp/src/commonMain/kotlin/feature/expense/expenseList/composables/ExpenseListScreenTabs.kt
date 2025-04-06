@@ -48,7 +48,7 @@ fun ColumnScope.ExpenseListScreenTabs(
 ) {
     val currentDate = dateTimeToDisplay(dateMilli, A3DateFormat.DisplayDate)
     val currentMonth by
-    remember { derivedStateOf { dateTimeMilliToString(dateMilli, A3DateFormat.MonthFullName) } }
+    remember(dateMilli) { derivedStateOf { dateTimeMilliToString(dateMilli, A3DateFormat.MonthFullName) } }
     val currentDateTotal by dailyTotal.collectAsState()
     val currentMonthTotal by monthlyTotal.collectAsState()
 
