@@ -2,17 +2,18 @@ package feature.category.common.data
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
-import com.xinkev.a3.sqldelight.A3Database
 import core.Dispatchers
+import core.database.DatabaseFactory
 import core.randomUUID
 import feature.category.common.domain.model.Category
 import feature.category.common.mapper.mapSqlResultToCategory
 import feature.settings.backup.common.domain.model.TaiyakiData
 
 class CategoryDataSource(
-    db: A3Database,
+    databaseFactory: DatabaseFactory,
     private val dispatchers: Dispatchers
 ) {
+    private val db = databaseFactory.create()
     private val queries = db.categoryQueries
 
     fun getAllCategoriesAsFlow() = queries.selectAll(mapper = ::mapSqlResultToCategory)

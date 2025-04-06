@@ -5,25 +5,24 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import app.App
-import com.xinkev.a3.di.androidModules
+import common.di.appModule
 import core.file.FileManager
-import common.di.startKoin
 import io.github.vinceglb.filekit.core.FileKit
 import org.koin.android.ext.koin.androidContext
+import org.koin.compose.KoinApplication
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FileKit.init(this)
         FileManager.init(this)
         enableEdgeToEdge()
         setContent {
-            startKoin(
-                appDeclaration = {
-                    androidContext(this@MainActivity)
-                },
-                modules = androidModules
+            KoinApplication(
+                application = {
+                    modules(appModule)
+                    androidContext(applicationContext)
+                }
             ) {
                 App()
             }

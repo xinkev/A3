@@ -7,14 +7,20 @@ import core.DispatchersImpl
 import core.database.DatabaseFactory
 import core.event.EventBus
 import core.file.FileManager
-import feature.category.common.data.CategoryDataSource
+import feature.category.common.di.categoriesModule
+import feature.expense.common.di.expenseModule
+import feature.home.di.homeModule
+import feature.settings.common.di.settingsModule
 import org.koin.dsl.module
 
 val appModule = module {
     single<KVStorage> { KVStorageImpl() }
     factory<Dispatchers> { DispatchersImpl() }
-    single { get<DatabaseFactory>().create() }
-    factory { CategoryDataSource(get(), get()) }
+    single { DatabaseFactory() }
     single { EventBus() }
     factory { FileManager }
-}
+} + listOf(
+    homeModule,
+    categoriesModule,
+    expenseModule,
+) + settingsModule

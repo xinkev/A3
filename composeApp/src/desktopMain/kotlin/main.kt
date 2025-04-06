@@ -1,3 +1,4 @@
+
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -5,8 +6,9 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import app.App
 import com.xinkev.a3.BuildConfig
-import di.desktopModules
-import common.di.startKoin
+import common.di.appModule
+import org.koin.compose.KoinApplication
+
 
 fun main() = application {
     Window(
@@ -16,8 +18,13 @@ fun main() = application {
             size = DpSize(350.dp, 700.dp)
         )
     ) {
-        startKoin(modules = desktopModules) {
-            App()
-        }
+        KoinApplication(
+            application = {
+                modules(appModule)
+            },
+            content = {
+                App()
+            }
+        )
     }
 }

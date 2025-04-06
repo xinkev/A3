@@ -2,6 +2,6 @@ package core.database
 
 import app.cash.sqldelight.db.SqlDriver
 
-interface DriverFactory {
+expect object DriverFactory {
     fun create(): SqlDriver
 }

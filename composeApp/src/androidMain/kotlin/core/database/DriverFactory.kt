@@ -1,4 +1,4 @@
-package database
+package core.database
 
 import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -6,10 +6,13 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.xinkev.a3.BuildConfig
 import com.xinkev.a3.sqldelight.A3Database
-import core.database.DriverFactory
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class AndroidDriverFactory(private val context: Context): DriverFactory {
-    override fun create(): SqlDriver = AndroidSqliteDriver(
+actual object DriverFactory : KoinComponent {
+    private val context: Context by inject()
+
+    actual fun create(): SqlDriver = AndroidSqliteDriver(
         A3Database.Schema,
         context,
         BuildConfig.dbName,

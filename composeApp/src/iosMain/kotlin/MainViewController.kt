@@ -1,10 +1,15 @@
+
 import androidx.compose.ui.window.ComposeUIViewController
 import app.App
-import di.iosModules
-import common.di.startKoin
+import common.di.appModule
+import org.koin.compose.KoinApplication
 
 fun MainViewController() = ComposeUIViewController {
-    startKoin(modules = iosModules) {
+    KoinApplication(
+        application = {
+            modules(appModule)
+        }
+    ) {
         App()
     }
 }
