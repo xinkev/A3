@@ -22,10 +22,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import navigation.Route.ExpenseGraph.ExpenseEditor
 import navigation.types.expenseTypeMap
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 class ExpenseEditorViewModel(
     private val dataSource: ExpenseDataSource,
     private val eventBus: EventBus,

@@ -69,7 +69,8 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.components.resources)
 
-                implementation(libs.jetbrainsNavigationCompose)
+                implementation(libs.jetbrains.navigationCompose)
+                implementation(libs.jetbrains.lifecycle.compose)
 
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.serilization.json)
@@ -94,6 +95,8 @@ kotlin {
                 // file management
                 implementation(libs.fileKit.core)
                 implementation(libs.fileKit.compose)
+
+                implementation(libs.androidx.lifecycle.viewmodel)
             }
         }
 

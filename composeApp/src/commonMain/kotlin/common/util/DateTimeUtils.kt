@@ -1,17 +1,21 @@
+@file:OptIn(ExperimentalTime::class)
+
 package common.util
 
 import a3.composeapp.generated.resources.Res
 import a3.composeapp.generated.resources.today
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
+import kotlinx.datetime.parse
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 val now: Instant
     get() =  Clock.System.now()

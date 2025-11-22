@@ -30,11 +30,12 @@ import common.composables.A3DatePickerDialog
 import common.util.A3DateFormat
 import common.util.dateTimeToDisplay
 import kotlinx.datetime.DateTimePeriod
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import org.jetbrains.compose.resources.stringResource
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,6 +92,7 @@ fun ExpenseListScreenHeader(
     }
 }
 
+@OptIn(ExperimentalTime::class)
 private fun plusOrMinusDay(
     currentDate: Long,
     count: Int,

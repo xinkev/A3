@@ -1,32 +1,33 @@
 [versions]
 agp = "8.11.1"
-android-compileSdk = "35"
+android-compileSdk = "36"
 android-minSdk = "24"
-android-targetSdk = "34"
-androidx-activityCompose = "1.10.0"
-androidx-appcompat = "1.7.0"
+android-targetSdk = "36"
+androidx-activityCompose = "1.10.1"
+androidx-appcompat = "1.7.1"
+androidx-lifecycle = "2.9.1"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
-compose = "1.7.7"
-compose-plugin = "1.7.3"
+compose = "1.8.3"
+compose-plugin = "1.8.2"
 junit = "4.13.2"
-kotlin = "2.1.10"
-kotlinx-datetime = "0.6.1"
-kotlinx-coroutines = "1.10.1"
-kotlinx-serialization = "1.8.0"
+kotlin = "2.2.0"
+kotlinx-datetime = "0.7.1-0.6.x-compat" # until libraries are up-to-date with >0.7.x
+kotlinx-coroutines = "1.10.2"
+kotlinx-serialization = "1.9.0"
 ksp = "2.1.0-1.0.29"
-sqldelight = "2.0.2"
-koin-bom = "4.0.2"
+sqldelight = "2.1.0"
+koin-bom = "4.1.0"
 #koinComposeMultiplatform = "1.2.0-Beta4"
 mpsettings = "1.3.0"
-buildconfig = "5.5.1"
-kermit = "2.0.5"
-jetbrainsKotlinJvm = "2.1.10"
-jetbrainsNavigationCompose = "2.8.0-alpha10"
-turbine = "1.2.0"
+buildconfig = "5.6.7"
+kermit = "2.0.6"
+jetbrainsKotlinJvm = "2.2.0"
+jetbrainsNavigationCompose = "2.9.0-beta03"
+turbine = "1.2.1"
 fileKit = "0.8.8"
 
 [libraries]
@@ -34,6 +35,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
@@ -56,7 +58,8 @@ koin-compose-vm = { module = "io.insert-koin:koin-compose-viewmodel" }
 mpSettings-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "mpsettings" }
 mpSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "mpsettings" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
-jetbrainsNavigationCompose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigationCompose" }
+jetbrains-navigationCompose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigationCompose" }
+jetbrains-lifecycle-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 fileKit-core = { module = "io.github.vinceglb:filekit-core", version.ref = "fileKit" }
 fileKit-compose = { module = "io.github.vinceglb:filekit-compose", version.ref = "fileKit" }

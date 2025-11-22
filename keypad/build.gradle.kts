@@ -35,6 +35,7 @@ kotlin {
         commonMain.dependencies {
             //put your multiplatform dependencies here
             implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
             implementation(projects.kmpComposePreview)
             implementation(projects.xinkevLogger)

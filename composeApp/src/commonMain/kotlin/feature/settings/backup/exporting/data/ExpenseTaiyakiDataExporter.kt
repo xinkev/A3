@@ -17,8 +17,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 private val availableCategoryIcons = listOf(
     "tag",
@@ -40,6 +41,7 @@ private val availableCategoryIcons = listOf(
     "stroller"
 )
 
+@OptIn(ExperimentalTime::class)
 class ExpenseTaiyakiDataExporter(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val fileManager: FileManager,
