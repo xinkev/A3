@@ -69,7 +69,7 @@ class CategoryEditorViewModel(
         viewModelScope.launch {
             if (isEdit) {
                 categoryDataSource.updateCategory(
-                    selectedCategory!!.name,
+                    selectedCategory!!.uuid,
                     nameInputState.text.toString(),
                     selectedIconName.value!!.realName,
                 )

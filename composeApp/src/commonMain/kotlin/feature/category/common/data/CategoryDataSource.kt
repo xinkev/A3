@@ -34,10 +34,10 @@ class CategoryDataSource(
     )
 
     fun updateCategory(
-        originalName: String,
+        uuid: String,
         name: String,
         iconName: String,
-    ) = queries.update(name, iconName, originalName)
+    ) = queries.update(name, iconName, uuid)
 
     fun selectCategoryBy(name: String): Category? =
         queries.selectByName(name, ::mapSqlResultToCategory)
