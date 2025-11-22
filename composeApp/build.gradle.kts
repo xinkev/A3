@@ -160,6 +160,7 @@ android {
     defaultConfig {
         applicationId = bundleName
         minSdk = libs.versions.android.minSdk.get().toInt()
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = buildNumber
         versionName = bundleVersion
